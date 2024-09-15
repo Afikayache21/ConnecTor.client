@@ -1,0 +1,21 @@
+/* fonts.scss */
+@font-face {
+    font-family: 'Regular';
+    font-style: normal;
+    font-weight: 400;
+    src: url('https://fonts.gstatic.com/s/opensans/v27/mem8YaGs126MiZpBA-U1UpcaXcl0Aw.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'SemiBold';
+    font-style: normal;
+    font-weight: 600;
+    src: url('https://fonts.gstatic.com/s/opensans/v27/mem5YaGs126MiZpBA-UNirkOX-hpKKSTj5PW.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bold';
+    font-style: normal;
+    font-weight: 700;
+    src: url('https://fonts.gstatic.com/s/opensans/v27/mem5YaGs126MiZpBA-UN7rgOX-hpKKSTj5PW.ttf') format('truetype');
+}

@@ -1,0 +1,532 @@
+{
+    "regions": [
+      { "RegionID": 1, "RegionDescription": "תל אביב והסביבה" },
+      { "RegionID": 2, "RegionDescription": "ירושלים והסביבה" },
+      { "RegionID": 3, "RegionDescription": "חיפה והסביבה" },
+      { "RegionID": 4, "RegionDescription": "באר שבע \\ נגב" },
+      { "RegionID": 5, "RegionDescription": "נתניה והשרון" },
+      { "RegionID": 6, "RegionDescription": "עפולה והעמק" },
+      { "RegionID": 7, "RegionDescription": "הגליל העליון" },
+      { "RegionID": 8, "RegionDescription": "הגליל התחתון" },
+      { "RegionID": 9, "RegionDescription": "אילת והערבה" },
+      { "RegionID": 10, "RegionDescription": "מישור החוף הדרומי" },
+      { "RegionID": 11, "RegionDescription": "מישור החוף הצפוני" },
+      { "RegionID": 12, "RegionDescription": "הנגב" },
+      { "RegionID": 13, "RegionDescription": "השרון" }
+    ],
+    "professions": [
+      { "ProfessionID": 1, "ProfessionDescription": "חשמלאי" },
+      { "ProfessionID": 2, "ProfessionDescription": "שרברב" },
+      { "ProfessionID": 3, "ProfessionDescription": "מהנדס בניין" }
+    ],
+    "project_fields": [
+      { "ProjectFieldID": 1, "ProjectFieldDescription": "בניית בתים" },
+      { "ProjectFieldID": 2, "ProjectFieldDescription": "שיפוצים" }
+    ],
+    "user_types": [
+      { "UserTypeID": 1, "UserTypeDescription": "קבלן" },
+      { "UserTypeID": 2, "UserTypeDescription": "לקוח" }
+    ],
+    "users": [
+      {
+        "UserID": 1,
+        "UserTypeID": 1,
+        "UserName": "yosiCohen123",
+        "UserPassword": "hashedpassword1",
+        "FirstName": "יוסי",
+        "LastName": "כהן",
+        "ActiveStatus": true,
+        "RegionID": 1,
+        "ProfessionID": 1,
+        "BusinessLicenseCode": "BL123456",
+        "UserImage": "https://img.freepik.com/free-photo/handsome-confident-smiling-man-with-hands-crossed-chest_176420-18743.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1725667200&semt=ais_hybrid",
+        "Email": "yossi@example.com",
+        "Telephone": "050-1234567",
+        "CreationDate": "2024-09-04T00:00:00"
+      },
+      {
+        "UserID": 2,
+        "UserTypeID": 2,
+        "UserName": "client456",
+        "UserPassword": "hashedpassword2",
+        "FirstName": "יעקב",
+        "LastName": "לוי",
+        "ActiveStatus": true,
+        "RegionID": 1,
+        "ProfessionID": null,
+        "BusinessLicenseCode": null,
+        "UserImage":"https://img.freepik.com/free-photo/handsome-confident-smiling-man-with-hands-crossed-chest_176420-18743.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1725667200&semt=ais_hybrid",
+        "Email": "yakov@example.com",
+        "Telephone": "052-7654321",
+        "CreationDate": "2024-09-04T00:00:00"
+      },
+      {
+        "UserID": 3,
+        "UserTypeID": 1,
+        "UserName": "EliCohen123",
+        "UserPassword": "hashedpassword1",
+        "FirstName": "אלי",
+        "LastName": "כהן",
+        "ActiveStatus": true,
+        "RegionID": 1,
+        "ProfessionID": 2,
+        "BusinessLicenseCode": "BL123477",
+        "UserImage": "https://img.freepik.com/free-photo/handsome-confident-smiling-man-with-hands-crossed-chest_176420-18743.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1725667200&semt=ais_hybrid",
+        "Email": "Eli@example.com",
+        "Telephone": "050-1234577",
+        "CreationDate": "2024-09-04T00:00:00"
+      },
+      {
+        "UserID": 4,
+        "UserTypeID": 2,
+        "UserName": "client456",
+        "UserPassword": "hashedpassword2",
+        "FirstName": "יעקב",
+        "LastName": "כהן",
+        "ActiveStatus": true,
+        "RegionID": 1,
+        "ProfessionID": null,
+        "BusinessLicenseCode": null,
+        "UserImage":"https://img.freepik.com/free-photo/handsome-confident-smiling-man-with-hands-crossed-chest_176420-18743.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1725667200&semt=ais_hybrid",
+        "Email": "yakovC@example.com",
+        "Telephone": "052-7654555",
+        "CreationDate": "2024-09-04T00:00:00"
+      }
+    ],
+    "projects": [
+    {
+      "ProjectID": 1,
+      "ClientID": 2,
+      "ProjectName": "בניית בית חדש",
+      "ProjectFieldID": 1,
+      "OpeningDate": "2024-01-01",
+      "Deadline": "2024-12-31",
+      "ProjectDescription": "פרויקט בניית בית בסטנדרט גבוה",
+      "RegionID": 1,
+      "ProjectQuantities": null,
+      "ConstructionPlans": null,
+      "ContractorID": 1,
+      "ActualStartDate": null,
+      "ActualEndDate": null,
+      "ActualPayment": null,
+      "ClientReview": null,
+      "ContractorReview": null
+    },
+    {
+      "ProjectID": 2,
+      "ClientID": 5,
+      "ProjectName": "שיפוץ דירה במרכז תל אביב",
+      "ProjectFieldID": 2,
+      "OpeningDate": "2024-03-15",
+      "Deadline": "2024-07-30",
+      "ProjectDescription": "שיפוץ כולל של דירת ארבעה חדרים עם דגש על מטבח פתוח ומודרני",
+      "RegionID": 2,
+      "ProjectQuantities": "3 חדרים, מטבח, סלון, אמבטיה",
+      "ConstructionPlans": "שיפוץ מלא",
+      "ContractorID": 3,
+      "ActualStartDate": "2024-03-20",
+      "ActualEndDate": null,
+      "ActualPayment": 150000,
+      "ClientReview": null,
+      "ContractorReview": null
+    },
+    {
+      "ProjectID": 3,
+      "ClientID": 3,
+      "ProjectName": "הקמת משרד במתחם עסקים",
+      "ProjectFieldID": 3,
+      "OpeningDate": "2024-02-01",
+      "Deadline": "2024-06-15",
+      "ProjectDescription": "הקמת משרד חדש בשטח 200 מ\"ר עם חללי עבודה וחדרי ישיבות",
+      "RegionID": 3,
+      "ProjectQuantities": "5 חדרי ישיבות, קבלה, חדרי עבודה",
+      "ConstructionPlans": "בניית משרדים",
+      "ContractorID": 2,
+      "ActualStartDate": "2024-02-10",
+      "ActualEndDate": null,
+      "ActualPayment": 300000,
+      "ClientReview": "תהליך בניה מקצועי מאוד",
+      "ContractorReview": "לקוח נהדר"
+    },
+    {
+      "ProjectID": 4,
+      "ClientID": 4,
+      "ProjectName": "שיפוץ מסעדה ישנה",
+      "ProjectFieldID": 2,
+      "OpeningDate": "2024-04-01",
+      "Deadline": "2024-07-31",
+      "ProjectDescription": "שיפוץ מסעדה ושדרוג המטבח והחלל הפנימי",
+      "RegionID": 4,
+      "ProjectQuantities": "מטבח, 2 חדרי שירותים, חלל לקוחות",
+      "ConstructionPlans": "שדרוג מבנה קיים",
+      "ContractorID": 4,
+      "ActualStartDate": "2024-04-10",
+      "ActualEndDate": null,
+      "ActualPayment": 200000,
+      "ClientReview": null,
+      "ContractorReview": null
+    },
+    {
+      "ProjectID": 5,
+      "ClientID": 6,
+      "ProjectName": "בניה קלה של יחידת דיור",
+      "ProjectFieldID": 1,
+      "OpeningDate": "2024-05-01",
+      "Deadline": "2024-09-30",
+      "ProjectDescription": "הקמת יחידת דיור מבניה קלה בסטנדרט ירוק",
+      "RegionID": 5,
+      "ProjectQuantities": "יחידת דיור אחת, 45 מ\"ר",
+      "ConstructionPlans": "בניה קלה",
+      "ContractorID": 5,
+      "ActualStartDate": null,
+      "ActualEndDate": null,
+      "ActualPayment": null,
+      "ClientReview": null,
+      "ContractorReview": null
+    },
+    {
+      "ProjectID": 6,
+      "ClientID": 7,
+      "ProjectName": "הקמת גינת נוי גדולה",
+      "ProjectFieldID": 4,
+      "OpeningDate": "2024-03-01",
+      "Deadline": "2024-06-30",
+      "ProjectDescription": "עיצוב והקמת גינה עם בריכה ואזורי ישיבה",
+      "RegionID": 6,
+      "ProjectQuantities": "בריכה, 3 אזורי ישיבה, צמחיה",
+      "ConstructionPlans": "עיצוב גינה",
+      "ContractorID": 6,
+      "ActualStartDate": "2024-03-05",
+      "ActualEndDate": null,
+      "ActualPayment": 100000,
+      "ClientReview": "הגינה נראית מדהים!",
+      "ContractorReview": "פרויקט מהנה מאוד"
+    },
+    {
+      "ProjectID": 7,
+      "ClientID": 8,
+      "ProjectName": "שיפוץ כללי לבית פרטי",
+      "ProjectFieldID": 2,
+      "OpeningDate": "2024-02-20",
+      "Deadline": "2024-08-01",
+      "ProjectDescription": "שיפוץ הבית כולל הרחבת מטבח והחלפת ריצוף",
+      "RegionID": 7,
+      "ProjectQuantities": "5 חדרים, מטבח, סלון",
+      "ConstructionPlans": "שיפוץ מבנה קיים",
+      "ContractorID": 1,
+      "ActualStartDate": "2024-02-25",
+      "ActualEndDate": null,
+      "ActualPayment": 180000,
+      "ClientReview": null,
+      "ContractorReview": null
+    },
+    {
+      "ProjectID": 8,
+      "ClientID": 9,
+      "ProjectName": "הרחבת מרפסת בדירה",
+      "ProjectFieldID": 2,
+      "OpeningDate": "2024-03-10",
+      "Deadline": "2024-05-20",
+      "ProjectDescription": "הרחבת מרפסת והוספת פרגולה",
+      "RegionID": 8,
+      "ProjectQuantities": "מרפסת 20 מ\"ר",
+      "ConstructionPlans": "הרחבת מבנה קיים",
+      "ContractorID": 3,
+      "ActualStartDate": "2024-03-15",
+      "ActualEndDate": null,
+      "ActualPayment": 70000,
+      "ClientReview": "המרפסת נראית נהדר!",
+      "ContractorReview": null
+    },
+    {
+      "ProjectID": 9,
+      "ClientID": 10,
+      "ProjectName": "התקנת מערכת סולארית",
+      "ProjectFieldID": 5,
+      "OpeningDate": "2024-06-01",
+      "Deadline": "2024-09-15",
+      "ProjectDescription": "התקנת מערכת סולארית על גג הבית הפרטי",
+      "RegionID": 9,
+      "ProjectQuantities": "50 פאנלים סולאריים",
+      "ConstructionPlans": "התקנת מערכות",
+      "ContractorID": 7,
+      "ActualStartDate": null,
+      "ActualEndDate": null,
+      "ActualPayment": null,
+      "ClientReview": null,
+      "ContractorReview": null
+    },
+    {
+      "ProjectID": 10,
+      "ClientID": 11,
+      "ProjectName": "בנייה של קוטג' דו משפחתי",
+      "ProjectFieldID": 1,
+      "OpeningDate": "2024-02-01",
+      "Deadline": "2025-01-31",
+      "ProjectDescription": "בנייה חדשה של קוטג'ים דו משפחתיים עם 2 קומות",
+      "RegionID": 10,
+      "ProjectQuantities": "2 יחידות דיור, כל אחת 150 מ\"ר",
+      "ConstructionPlans": "בניה חדשה",
+      "ContractorID": 8,
+      "ActualStartDate": null,
+      "ActualEndDate": null,
+      "ActualPayment": null,
+      "ClientReview": null,
+      "ContractorReview": null
+    },
+    {
+      "ProjectID": 11,
+      "ClientID": 12,
+      "ProjectName": "הקמת פרויקט משרדים במרכז העיר",
+      "ProjectFieldID": 3,
+      "OpeningDate": "2024-05-01",
+      "Deadline": "2025-02-28",
+      "ProjectDescription": "הקמת מבנה משרדים מודרני, 8 קומות",
+      "RegionID": 11,
+      "ProjectQuantities": "8 קומות, 16,000 מ\"ר שטח בנוי",
+      "ConstructionPlans": "בנייה מסחרית",
+      "ContractorID": 9,
+      "ActualStartDate": "2024-05-10",
+      "ActualEndDate": null,
+      "ActualPayment": null,
+      "ClientReview": null,
+      "ContractorReview": null
+    }
+  ],
+    "project_images": [
+      {
+        "ProjectID": 1,
+        "ImageID": 1,
+        "Image": null,
+        "UploadDate": "2024-09-04T00:00:00",
+        "ImageDescription": "תמונה של שלב הבנייה הראשון"
+      }
+    ],
+   "project_proposals": [
+  {
+    "ProjectID": 1,
+    "ProposalDate": "2024-09-01",
+    "ContractorID": 1,
+    "SuggestedStartDate": "2024-09-15",
+    "AcceptedStatus": true,
+    "ExpectedEndDate": "2024-12-15",
+    "Comments": "הצעת מחיר סופית",
+    "ProposalPrice": 150000.00
+  },
+  {
+    "ProjectID": 2,
+    "ProposalDate": "2024-09-05",
+    "ContractorID": 2,
+    "SuggestedStartDate": "2024-10-01",
+    "AcceptedStatus": false,
+    "ExpectedEndDate": "2025-01-01",
+    "Comments": "הצעה עם הנחה",
+    "ProposalPrice": 120000.00
+  },
+  {
+    "ProjectID": 1,
+    "ProposalDate": "2024-09-10",
+    "ContractorID": 3,
+    "SuggestedStartDate": "2024-11-01",
+    "AcceptedStatus": true,
+    "ExpectedEndDate": "2025-02-01",
+    "Comments": "כולל שירותים נוספים",
+    "ProposalPrice": 175000.00
+  },
+  {
+    "ProjectID": 1,
+    "ProposalDate": "2024-09-12",
+    "ContractorID": 4,
+    "SuggestedStartDate": "2024-09-20",
+    "AcceptedStatus": true,
+    "ExpectedEndDate": "2024-12-30",
+    "Comments": "הצעה מעודכנת",
+    "ProposalPrice": 130000.00
+  },
+  {
+    "ProjectID": 5,
+    "ProposalDate": "2024-09-15",
+    "ContractorID": 5,
+    "SuggestedStartDate": "2024-10-15",
+    "AcceptedStatus": false,
+    "ExpectedEndDate": "2025-01-15",
+    "Comments": "הצעה עם אורך פרויקט ארוך יותר",
+    "ProposalPrice": 140000.00
+  },
+  {
+    "ProjectID": 6,
+    "ProposalDate": "2024-09-20",
+    "ContractorID": 6,
+    "SuggestedStartDate": "2024-11-01",
+    "AcceptedStatus": true,
+    "ExpectedEndDate": "2025-03-01",
+    "Comments": "הצעה עם שירותים נוספים",
+    "ProposalPrice": 160000.00
+  },
+  {
+    "ProjectID": 7,
+    "ProposalDate": "2024-09-22",
+    "ContractorID": 7,
+    "SuggestedStartDate": "2024-10-20",
+    "AcceptedStatus": false,
+    "ExpectedEndDate": "2025-02-20",
+    "Comments": "הצעה עם הנחות",
+    "ProposalPrice": 110000.00
+  },
+  {
+    "ProjectID": 8,
+    "ProposalDate": "2024-09-25",
+    "ContractorID": 8,
+    "SuggestedStartDate": "2024-11-15",
+    "AcceptedStatus": true,
+    "ExpectedEndDate": "2025-04-01",
+    "Comments": "הצעה מותאמת לצרכים",
+    "ProposalPrice": 155000.00
+  },
+  {
+    "ProjectID": 9,
+    "ProposalDate": "2024-09-28",
+    "ContractorID": 9,
+    "SuggestedStartDate": "2024-10-25",
+    "AcceptedStatus": true,
+    "ExpectedEndDate": "2025-01-25",
+    "Comments": "הצעה עם כל הכלים הנדרשים",
+    "ProposalPrice": 145000.00
+  },
+  {
+    "ProjectID": 10,
+    "ProposalDate": "2024-10-01",
+    "ContractorID": 10,
+    "SuggestedStartDate": "2024-11-01",
+    "AcceptedStatus": false,
+    "ExpectedEndDate": "2025-02-01",
+    "Comments": "הצעה לוגיסטית",
+    "ProposalPrice": 125000.00
+  },
+  {
+    "ProjectID": 11,
+    "ProposalDate": "2024-10-05",
+    "ContractorID": 11,
+    "SuggestedStartDate": "2024-11-15",
+    "AcceptedStatus": true,
+    "ExpectedEndDate": "2025-03-15",
+    "Comments": "הצעה לחדשנות טכנולוגית",
+    "ProposalPrice": 170000.00
+  }
+],
+    "ratings": [
+      {
+        "RaterUserID": 2,
+        "RatedUserID": 1,
+        "RatingDate": "2024-09-01",
+        "RatingValue": 5,
+        "Comments": "שירות מעולה!"
+      }
+    ],
+    "log_table": [
+      {
+        "LogID": 1,
+        "LogMessage": "המשתמש יוסי כהן נרשם בהצלחה",
+        "LogDateTime": "2024-09-04T00:00:00"
+      }
+    ],
+   "messages": [
+    {
+      "Id": 1,
+      "Content": "שלום יוסי, מה מצב הפרויקט?",
+      "Timestamp": "2024-09-04T08:00:00",
+      "SenderId": 2,
+      "ReceiverId": 1,
+      "IsRead": false
+    },
+    {
+      "Id": 2,
+      "Content": "היי דני, אנחנו על המסלול עם הפרויקט.",
+      "Timestamp": "2024-09-04T09:15:00",
+      "SenderId": 1,
+      "ReceiverId": 2,
+      "IsRead": true
+    },
+    {
+      "Id": 3,
+      "Content": "יש לך עדכון על הצעת המחיר?",
+      "Timestamp": "2024-09-04T10:30:00",
+      "SenderId": 2,
+      "ReceiverId": 1,
+      "IsRead": false
+    },
+    {
+      "Id": 4,
+      "Content": "לא, אני עדיין מחכה לתשובה מהספק.",
+      "Timestamp": "2024-09-04T11:45:00",
+      "SenderId": 1,
+      "ReceiverId": 2,
+      "IsRead": false
+    },
+    {
+      "Id": 5,
+      "Content": "אוקי, תודה על העדכון.",
+      "Timestamp": "2024-09-04T12:00:00",
+      "SenderId": 2,
+      "ReceiverId": 1,
+      "IsRead": true
+    },
+    {
+      "Id": 6,
+      "Content": "מתי אנחנו מתכננים את הישיבה הבאה?",
+      "Timestamp": "2024-09-04T13:15:00",
+      "SenderId": 1,
+      "ReceiverId": 3,
+      "IsRead": false
+    },
+    {
+      "Id": 7,
+      "Content": "הישיבה הבאה מתוכננת ליום רביעי בשעה 15:00.",
+      "Timestamp": "2024-09-04T14:00:00",
+      "SenderId": 3,
+      "ReceiverId": 1,
+      "IsRead": true
+    },
+    {
+      "Id": 8,
+      "Content": "מעולה, אני אעדכן את לוח הזמנים שלי.",
+      "Timestamp": "2024-09-04T14:30:00",
+      "SenderId": 1,
+      "ReceiverId": 3,
+      "IsRead": false
+    },
+    {
+      "Id": 9,
+      "Content": "האם יש צורך לשלוח משהו לפני הישיבה?",
+      "Timestamp": "2024-09-04T15:00:00",
+      "SenderId": 3,
+      "ReceiverId": 1,
+      "IsRead": false
+    },
+    {
+      "Id": 10,
+      "Content": "כן, שלח לי את המסמכים הרלוונטיים.",
+      "Timestamp": "2024-09-04T15:30:00",
+      "SenderId": 1,
+      "ReceiverId": 3,
+      "IsRead": true
+    },
+    {
+      "Id": 11,
+      "Content": "אני שולח לך את המסמכים עכשיו.",
+      "Timestamp": "2024-09-04T16:00:00",
+      "SenderId": 3,
+      "ReceiverId": 1,
+      "IsRead": false
+    },
+    {
+      "Id": 12,
+      "Content": "תודה! אני אעבור עליהם הערב.",
+      "Timestamp": "2024-09-04T16:30:00",
+      "SenderId": 1,
+      "ReceiverId": 3,
+      "IsRead": false
+    }
+  ]
+  }
+  

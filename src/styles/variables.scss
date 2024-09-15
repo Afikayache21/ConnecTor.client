@@ -1,0 +1,34 @@
+// Colors
+
+// Background Colors
+$main-bg-color: #2a3447;      // Background color for the entire app
+$soft-bg-color: #384256;      // Soft background for borders and dividers
+$dark-bg-color: #222b3c;      // Dark background color
+
+// Text Colors
+$main-color: #ffffff;         // Main text color
+$primary-text-color: #1a1a1a; // Primary text color (bold elements)
+$secondary-text-color: #666666; // Secondary text color (descriptions)
+$soft-color: #ddd;            // Lighter text color for soft elements
+$dark-color: #2a3447;         // Dark text color (for contrast on lighter backgrounds)
+
+$box-h1-color: #fff;
+$box-text-color: #d3d3d3;
+
+// List & Item Colors
+$list-item-bg: transparent;       // Background color for items in lists
+$hover-bg-color: #384256;     // Hover background for list items
+
+// Miscellaneous Colors
+$timestamp-color: #999999;    // Timestamp text color
+$img-border-color: #cccccc;   // Border color for images
+$border-color: #dddddd;       // General border color
+$link-color: #0066cc;         // Link color
+$menu-bg-color: #ffffff;      // Menu background color
+
+// Scroll Colors$scrollbar-border-color
+$scrollbar-track-color: $soft-bg-color;         // Track matches soft background
+$scrollbar-thumb-color: $dark-bg-color;         // Thumb matches dark background
+$scrollbar-thumb-hover-color: $main-bg-color;   // Thumb changes to main background on hover
+$scrollbar-border-color: transparent;           // Transparent border for the scrollbar
+

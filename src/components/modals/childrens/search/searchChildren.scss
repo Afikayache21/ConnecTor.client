@@ -1,0 +1,42 @@
+.search-children {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds space between the input and button */
+
+    input {
+        padding: 10px 15px;
+        margin-right: 10px;
+        border: 1px solid #ddd;
+        border-radius: 20px; /* More rounded corners */
+        font-size: 16px;
+        width: 200px; /* Adjust width as needed */
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+        &:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+    }
+
+    button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 20px; /* Matching rounded corners */
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+
+        &:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        &:active {
+            background-color: #004080; /* Darker color when clicked */
+            transform: translateY(0); /* Remove lift effect */
+        }
+    }
+}

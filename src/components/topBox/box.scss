@@ -1,0 +1,94 @@
+@import "../../styles/variables.scss";
+
+
+.box-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* Ensure it takes up the full height available */
+
+  .box-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 2px solid $soft-bg-color;
+    margin-bottom: 10px;
+    /* Adjust spacing to separate header from content */
+
+    h1 {
+      font-size: 20px;
+    }
+
+    .box-icon {
+      width: 30px;
+      height: 30px;
+      color: rgb(255, 255, 255);
+
+      &:hover {
+        color: rgb(255, 255, 255);
+        transition: transform 0.3s ease;
+        transform: scale(1.35);
+      }
+    }
+  }
+
+  .content-container {
+    flex-grow: 1;
+    /* Allow it to take up the remaining space */
+    overflow-y: auto;
+    /* Enable vertical scrolling only */
+    overflow-x: hidden;
+    /* Prevent horizontal scrolling */
+    padding: 10px;
+
+
+    scrollbar-width: thin;
+    /* Firefox: Makes the scrollbar thinner */
+    scrollbar-color: $scrollbar-thumb-color $scrollbar-track-color;
+    /* Firefox: thumb and track colors */
+
+    /* Webkit browsers: custom scrollbar styling */
+    &::-webkit-scrollbar {
+      width: 5px;
+      /* Width of the scrollbar */
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $scrollbar-track-color;
+      /* Color of the track (background) */
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      border: 2px solid $scrollbar-border-color;
+      /* Optional: add a border */
+    }
+
+
+  }
+}
+
+
+// .chats-grid-layout{
+//     display: flex;
+//     .box-container{     
+//         display: flex;
+
+//         align-items: center;     
+//         gap: 10px;    
+//         h1{           
+//             justify-content: center;
+//             align-items: center;          
+//         }   
+//         .box-icon{
+
+//             &:hover{
+//                 transition: transform 0.3s ease;
+//                 transform: scale(1.35);
+//             }
+//         }
+//     }
+// }
