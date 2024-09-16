@@ -2,7 +2,7 @@ import { Project , getLastProjectsByUserId } from "./ProjectService";
 import {ProjectProposal} from "../types.ts";
 import dbMock from '../mockDB/mock.json'; // Import the JSON mock data
 
-export interface ProjectBid implements ProjectProposal {
+export interface ProjectBid extends ProjectProposal {
     ProjectID: number;
     ProposalDate: string;
     ContractorID: number;

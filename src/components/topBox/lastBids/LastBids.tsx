@@ -38,7 +38,7 @@ function MyProjects({ userId }: MyProjectsProps) {
       {displayedBids.length > 0 ? (
         displayedBids.map(bid => (
           <div className='list-item' key={`${bid.ProjectID}-${bid.ContractorID}`}>
-            <span className='project-name'>{bid.AcceptedStatus ? 'Accepted' : 'Panding'}</span>
+            <span className='project-name'>{bid.ProposalPrice} {bid.AcceptedStatus ? 'Accepted' : 'Panding'}</span>
             <div dir="rtl" className="project-details">           
               <div className="project-description">{bid.Comments}</div>
               <span className="project-dl">{formatDate(bid.ProposalDate)}</span>
