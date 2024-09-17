@@ -6,6 +6,7 @@ import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
 import './styles/global.scss'
 import Menu from './components/menu/Menu.tsx';
+import Login from './pages/login/Login.tsx';
 
 function App() {
   const Layout = () => {
@@ -17,7 +18,7 @@ function App() {
             <Menu />
           </div>
           <div className="app-layout-content">
-            <Outlet /> {/* This will render the nested routes */}
+            <Outlet /> 
           </div>
         </div>
         <Footer />
@@ -28,15 +29,12 @@ function App() {
   return (
     <>
       <Routes>
-        {/* Main layout route */}
         <Route path="/" element={<Layout />}>
-          {/* Nested routes without leading "/" */}
           <Route index element={<Home />} />
           <Route path="projects" element={<Projects />} />
           <Route path="users" element={<Users />} />
         </Route>
-
-        {/* 404 Not Found route */}
+        <Route path="/login" element={<Login/>} />
         <Route path="*" element={<h1>Not Found - 404</h1>} />
       </Routes>
     </>

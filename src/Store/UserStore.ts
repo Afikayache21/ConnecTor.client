@@ -16,8 +16,20 @@ interface IUser {
     Email: string;
     Telephone: string;
     CreationDate: Date;
+    token: string | null;
 }
-
+interface IUserType {
+    UserID: number | null;
+    UserTypeID: number | null;
+    UserName: string;
+    FirstName: string;
+    LastName: string;
+    ProfessionID: number | null;
+    UserImage: string | null;
+    Email: string;
+    Telephone: string;
+    token: string | null;
+}
 class User implements IUser {
     UserID: number | null = null;
     UserTypeID: number | null = null;
@@ -33,11 +45,13 @@ class User implements IUser {
     Email: string = "";
     Telephone: string = "";
     CreationDate: Date = new Date();
+    token: string | null = null;
 
     constructor() {
         makeAutoObservable(this);
     }
 
+    // User properties setters
     setUserID(id: number | null): void {
         this.UserID = id;
     }
@@ -90,39 +104,43 @@ class User implements IUser {
         this.Telephone = telephone;
     }
 
+    setToken(token: string | null): void {
+        this.token = token;
+    }
+
     setCreationDate(date: Date): void {
         this.CreationDate = date;
     }
 }
 
 class UserStore {
-    users: User[] = [];
+    currentUser: User | null = null; // Store only one user
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    addUser(user: User): void {
-        this.users.push(user);
-    }
-
-    removeUser(userID: number): void {
-        this.users = this.users.filter(user => user.UserID !== userID);
-    }
-
-    updateUser(userID: number, newUserData: Partial<IUser>): void {
-        const userIndex = this.users.findIndex(user => user.UserID === userID);
-        if (userIndex > -1) {
-            this.users[userIndex] = { ...this.users[userIndex], ...newUserData } as User;
+    // Method to set the current user
+    setCurrentUser(userData: Partial<IUser>): void {
+        if (!this.currentUser) {
+            this.currentUser = new User(); // Initialize currentUser if it doesn't exist
         }
+        Object.assign(this.currentUser, userData); // Update user data
     }
 
-    getUser(userID: number): User | undefined {
-        return this.users.find(user => user.UserID === userID);
+    // Method to clear the current user (e.g., on logout)
+    clearCurrentUser(): void {
+        this.currentUser = null;
     }
 
-    getAllUsers(): User[] {
-        return this.users;
+    // Get method to return the current user data
+    getCurrentUser(): User | null {
+        return this.currentUser;
+    }
+
+    // Check if a user is logged in
+    isAuthenticated(): boolean {
+        return this.currentUser !== null && this.currentUser.token !== null;
     }
 }
 

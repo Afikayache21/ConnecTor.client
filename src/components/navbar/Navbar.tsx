@@ -25,7 +25,7 @@ function Navbar() {
 
                 <div className="user">
                     <img src="https://caricom.org/wp-content/uploads/Floyd-Morris-Remake-1024x879-1.jpg" alt="user" />
-                    <span>jane</span>
+                    <span>Joney</span>
                 </div>
 
                 <img src="settings.svg" alt="settings" />
