@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { getLastBidsByUserId,ProjectBid} from "../../../services/bidsService";
+import { getUsers10LastProjectsBidsByUserId, ProjectBid } from "../../../services/bidsService";
 
 import './lastBids.scss';
-import { formatDate } from '../../../services/DateService';
+import { formatDateWithDateTime,formatDate } from '../../../services/DateService';
 
 type MyProjectsProps = {
   userId: number;
@@ -12,12 +12,16 @@ function MyProjects({ userId }: MyProjectsProps) {
   const [bids, setBids] = useState<ProjectBid[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
+  const onc = (bid: ProjectBid) => {
+    console.log(bid);
+  }
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const result = await getLastBidsByUserId(userId);
-        setBids(result);
+        const result = await getUsers10LastProjectsBidsByUserId(userId);
+        if (result) {
+          setBids(result);
+        }
       } catch (err) {
         setError('Failed to load projects.');
       } finally {
@@ -37,11 +41,11 @@ function MyProjects({ userId }: MyProjectsProps) {
     <div className='recent-projects-list'>
       {displayedBids.length > 0 ? (
         displayedBids.map(bid => (
-          <div className='list-item' key={`${bid.ProjectID}-${bid.ContractorID}`}>
-            <span className='project-name'>{bid.ProposalPrice} {bid.AcceptedStatus ? 'Accepted' : 'Panding'}</span>
-            <div dir="rtl" className="project-details">           
-              <div className="project-description">{bid.Comments}</div>
-              <span className="project-dl">{formatDate(bid.ProposalDate)}</span>
+          <div onClick={() => onc(bid)} className='list-item' key={`${bid.projectID}-${bid.contractorID}`}>
+            <span className='project-name'>{bid.projectName} {bid.acceptedStatus ? 'Accepted' : 'Panding'}</span>
+            <div dir="rtl" className="project-details">
+              <div className="project-description">{bid.comment}</div>
+              <span className="project-dl">{formatDate(bid.proposalDate)}</span>
             </div>
           </div>
         ))
