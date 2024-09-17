@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getLastProjectsByUserId, Project } from "../../../services/ProjectService";
+import { getLastProjectsByUserId, ProjectDto,getUsers10LastProjectsByUserId } from "../../../services/ProjectService";
 import './myProjects.scss';
 import { formatDate } from '../../../services/DateService';
 
@@ -8,14 +8,14 @@ type MyProjectsProps = {
 };
 
 function MyProjects({ userId }: MyProjectsProps) {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<ProjectDto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const result = await getLastProjectsByUserId(userId);
+        const result = await getUsers10LastProjectsByUserId(userId);
         setProjects(result);
       } catch (err) {
         setError('Failed to load projects.');
@@ -27,20 +27,19 @@ function MyProjects({ userId }: MyProjectsProps) {
     fetchProjects();
   }, [userId]);
 
-  const displayedProjects = projects.slice(0, 10);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div className='recent-projects-list'>
-      {displayedProjects.length > 0 ? (
-        displayedProjects.map(project => (
-          <div className='list-item' key={project.ProjectID}>
-            <span className='project-name'>{project.ProjectName}</span>
+      {projects.length > 0 ? (
+        projects.map(project => (
+          <div className='list-item' key={`${project.projectId}`}>
+            <span className='project-name'>{project.projectName}</span>
             <div dir="rtl" className="project-details">           
-              <div className="project-description">{project.ProjectDescription}</div>
-              <span className="project-dl">DL: {formatDate(project.Deadline)}</span>
+              <div className="project-description">{project.projectDescription}</div>
+              <span className="project-dl">DL: {formatDate(project.deadline)}</span>
             </div>
           </div>
         ))

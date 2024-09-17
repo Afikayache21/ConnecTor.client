@@ -19,10 +19,10 @@ export type Project = {
 }
 
 export interface ProjectDto {
-  
-  ProjectName: string;
-  ProjectDescription: string;
-  Deadline: string;
+  projectId: number;
+  projectName: string;
+  projectDescription: string;
+  deadline: string;
 }
 
 
@@ -41,6 +41,7 @@ export async function getUsers10LastProjectsByUserId(userId: number): Promise<Pr
     return [];
   }
 }
+
 export function getLastProjectsByUserId(userId: number): Project[] {
   const projects = dbMock.projects.filter((p: Project) =>
     p.ClientID === userId || p.ContractorID === userId
