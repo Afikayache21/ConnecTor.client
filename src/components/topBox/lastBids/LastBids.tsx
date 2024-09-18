@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getUsers10LastProjectsBidsByUserId, ProjectBid } from "../../../services/bidsService";
 
 import './lastBids.scss';
-import { formatDateWithDateTime,formatDate } from '../../../services/DateService';
+import {formatDate } from '../../../services/DateService';
 
 type MyProjectsProps = {
   userId: number;

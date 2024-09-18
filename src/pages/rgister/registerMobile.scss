@@ -1,0 +1,105 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* Prevent the page from scrolling */
+}
+
+@media screen and (max-width: 800px) {
+    .register {
+        height: 100vh;
+        width: 100vw;
+        background: url('public/blue-safety-construction-background-image_6234133.jpg!sw800') no-repeat center center / cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column-reverse;
+    
+
+    .tab-bar {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px; /* Add margin bottom for spacing */
+    }
+
+    .tab {
+        margin: 0 10px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #ffffff;
+        color: rgb(61, 51, 153);
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .tab.active {
+        background-color: rgb(61, 51, 153);
+        color: #ffffff;
+    }
+
+    .register-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 500px;
+        max-height: 600px;
+        padding: 20px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.8); /* Background for the container */
+        overflow: hidden;
+    }
+
+    h1 {
+        align-self: flex-start; /* Align to the left */
+        margin-left: 20px; /* Adjust margin for better alignment */
+    }
+
+    .right-side {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .inputs-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-height: 400px; /* Set a maximum height for the inputs area */
+        overflow-y: auto; /* Enable vertical scrolling within the inputs area */
+        padding: 10px; /* Add padding for better spacing */
+        border-radius: 8px; /* Rounded corners for inputs area */
+    }
+
+    .inputs-form input {
+        border: none;
+        background-color: rgba(255, 255, 255, 0.5) !important;
+        border-radius: 10px !important;
+        color: rgb(9, 8, 12);
+        font-weight: bold;
+        border: 1px solid rgb(0, 0, 0);
+        padding: 20px 10px;
+        width: 100%;
+    }
+
+    .inputs-form input::placeholder {
+        color: #030203;
+        font-style: italic;
+    }
+
+}
+.register-button {
+    width: 50%;
+    padding: 10px;
+    border: none;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-weight: bold;
+    
+}
+
+}

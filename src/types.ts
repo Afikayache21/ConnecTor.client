@@ -26,17 +26,16 @@ export type UserType = {
 export type User = {
     UserID: number;
     UserTypeID: number;
-    UserName: string;
-    UserPassword: string;
     FirstName: string;
     LastName: string;
-    ActiveStatus: boolean;
     RegionID: number;
-    ProfessionID?: number | null; // nullable field
+    ProfessionId: number ; // nullable field
     BusinessLicenseCode?: string | null; // nullable field
-    UserImage: string;
+    UserImage: string | null; // nullable field
     Email: string;
     Telephone: string;
+    UserPassword: string;
+    ActiveStatus: boolean;
     CreationDate: string;
 };
 

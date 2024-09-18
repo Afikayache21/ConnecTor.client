@@ -1,13 +1,59 @@
-import dbMock from '../mockDB/mock.json'; // Import the JSON mock data
-import { useNavigate } from 'react-router';
-// Define the types for the user and the database
-interface User {
+// Import the JSON mock data import dbMock from '../mockDB/mock.json'; 
+
+export interface ILoginUser {
     email: string;
     password: string;
 }
 
-// Login function that validates email and password
-export const login = async (user: User): Promise<any> => {
+export interface IUser {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    regionID: number;            // Made required
+    professionID: number;        // Made required and corrected naming
+    businessLicenseCode: string; // Required now
+    telephone: string;
+    userImage?: string | null;
+    creationDate?: string;       // Optional in case it's auto-generated server-side
+    activeStatus?: boolean;      // Optional in case it's set by the backend
+    userTypeID: number;          // Added this property
+}
+export const register = async (user: IUser): Promise<any> => {
+    try {
+        const response = await fetch('https://localhost:7198/api/Authentication/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: user.email,
+                password: user.password,      // Changed from userPassword to match Swagger
+                firstName: user.firstName,
+                lastName: user.lastName,
+                regionID: user.regionID,
+                professionID: user.professionID,  // Fixed name from professionId to professionID
+                businessLicenseCode: user.businessLicenseCode,
+                telephone: user.telephone,
+                userImage: user.userImage,
+                userTypeID: user.userTypeID       // Added to the payload
+            }), 
+        });
+
+        if (!response.ok) {
+            throw new Error('Registration failed.');
+        }
+
+        const data = await response.json();
+        alert('Registration successful');
+        return data;
+    } catch (error: any) {
+        alert('Registration failed: ' + error.message);
+    }
+}
+
+
+export const login = async (user: ILoginUser): Promise<any> => {
     try {
         const response = await fetch('https://localhost:7198/api/Authentication/login', {
             method: 'POST',
@@ -35,31 +81,4 @@ export const login = async (user: User): Promise<any> => {
     }
     return false;
 }
-// // Define the types for the user and the database
-// interface User {
-//     email: string;
-//     password: string;
-// }
 
-// interface MockUser {
-//     Email: string;
-//     UserPassword: string;
-//     [key: string]: any; // Add more properties if needed
-// }
-
-// // Define the structure of your mock database if needed
-// interface MockDB {
-//     users: MockUser[];
-// }
-
-// // Assuming `dbMock` matches the `MockDB` structure
-// const mockDB: MockDB = dbMock as MockDB; // Cast the imported mock data to the `MockDB` type
-
-// // Login function that validates email and password
-// const login = (user: User): MockUser | undefined => {
-//     const validUser = mockDB.users.find(u => u.Email === user.email && u.UserPassword === user.password);
-//     return validUser;
-// };
-
-// Exporting functions for use in other components
-// export { login };

@@ -13,7 +13,7 @@ function Navbar() {
             {/* Add the clock in the navbar */}
             <Clock />
 
-            <div className="nav-bar-icons">
+            { <div className="nav-bar-icons">
                 <img src="/search.svg" alt="search" />
                 <img src="/app.svg" alt="app" />
                 <img src="/expand.svg" alt="expand" />
@@ -29,7 +29,7 @@ function Navbar() {
                 </div>
 
                 <img src="settings.svg" alt="settings" />
-            </div>
+            </div>}
         </div>
     );
 }

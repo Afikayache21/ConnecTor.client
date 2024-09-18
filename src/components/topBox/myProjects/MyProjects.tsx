@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getLastProjectsByUserId, ProjectDto,getUsers10LastProjectsByUserId } from "../../../services/ProjectService";
+import { ProjectDto,getUsers10LastProjectsByUserId } from "../../../services/ProjectService";
 import './myProjects.scss';
 import { formatDate } from '../../../services/DateService';
 

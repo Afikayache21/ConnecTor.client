@@ -1,6 +1,8 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import { observer } from 'mobx-react-lite';
 import windowStore from '../../Store/windowStore'; // Adjust the import path as needed
+import authStore from '../../Store/AuthStore'; // Adjust the import path as needed
+import userStore from '../../Store/UserStore';
 import { login } from '../../services/AuthService';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -14,7 +16,6 @@ import {
     MDBIcon,
     MDBInput
 } from 'mdb-react-ui-kit';
-import userStore from '../../Store/UserStore';
 
 // Define the type for the user state
 interface User {
@@ -46,6 +47,7 @@ const Login: React.FC = observer(() => {
         if (res) {
             alert('Login successful');
             userStore.setCurrentUser(res);
+            authStore.login(user.email);
             navigate('/', { replace: true });
         } else {
             alert('Invalid credentials');
