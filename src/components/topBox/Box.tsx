@@ -1,4 +1,6 @@
 import './box.scss';
+import '../modals/modalBox.scss';
+
 import React, { useState } from 'react';
 import ModalBox from '../modals/ModalBox';
 

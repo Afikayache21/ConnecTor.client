@@ -22,11 +22,11 @@ function Menu() {
         <span className="title">PROJECTS</span>
         <Link to='/projects' className='list-item'>
         <img src="/home.svg" alt="" />
-        <span className="list-item-title">Home</span>
+        <span className="list-item-title">projects for me</span>
         </Link>
         <Link to='/projects' className='list-item'>
         <img src="/profile.svg" alt="" />
-        <span className="list-item-title">Profile</span>
+        <span className="list-item-title">My projects</span>
         </Link>
       </div>
 

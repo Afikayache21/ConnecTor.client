@@ -5,6 +5,7 @@ import Users from './pages/users/Users';
 import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
 import './styles/global.scss';
+import './components/modals/modalBox.scss'
 import Menu from './components/menu/Menu';
 import Login from './pages/login/Login';
 import ProtectedRoute from './components/ProtecedRoute';
@@ -12,16 +13,17 @@ import { observer } from 'mobx-react-lite';
 import Register from './pages/rgister/register';
 import Profile from './pages/profile/Profile';
 
+
 const App = observer(() => {
   const MainLayout = () => {
     return (
-      <div className="app-layout">
+      <div className="my-app-layout">
         <Navbar />
-        <div className="app-container">
-          <div className="menu-container">
+        <div className="my-app-container">
+          <div className="my-menu-container">
             <Menu />
           </div>
-          <div className="app-layout-content">
+          <div className="my-app-layout-content">
             <Outlet />
           </div>
         </div>
@@ -32,9 +34,9 @@ const App = observer(() => {
 
   const MinimalLayout = () => {
     return (
-      <div className="app-layout">
+      <div className="my-app-layout">
         <Navbar />
-        <div className="app-layout-content">
+        <div className="my-app-layout-content">
           <Outlet />
         </div>
         <Footer />

@@ -3,7 +3,8 @@ import { getLastChatsByUserId } from "../../../services/ChatsService";
 import './lastChats.scss';
 import { formatDate } from '../../../services/DateService';
 import ModalBox from '../../modals/ModalBox';
-import '.././box.scss';
+import '../../modals/modalBox.scss'
+import ChatWindow from './ChatWindow';
 
 type Chat = {
   Id: number;
@@ -73,10 +74,7 @@ function LastChats({ userId }: LastChatsProps) {
               </div>
             </div>
             <ModalBox isVisible={isModalVisible} onClose={() => toggleModal(chat)}>
-              <div >
-                <div >{selectedChat?.userName}</div>
-                <div >{selectedChat?.Content}</div>
-              </div>
+              <ChatWindow />
             </ModalBox>
           </div>
         ))

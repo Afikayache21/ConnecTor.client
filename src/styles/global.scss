@@ -12,29 +12,35 @@ a {
   color: inherit;
 }
 
-.app-layout {
+.my-app-layout {
   font-family: Regular;
   background-color: $main-bg-color;
   color: $main-color;
   min-height: 100vh;  /* Ensures the height of the app layout is always at least the height of the viewport */
   display: flex;      /* Use flexbox to structure the layout */
   flex-direction: column;
+  
 }
 
-.app-container {
+.my-app-container {
   width: 100%;
   display: flex;
-  flex-grow: 1;        /* Allows the container to grow and fill the remaining height */
+  flex-grow: 1;   
+       /* Allows the container to grow and fill the remaining height */
 }
-
-.menu-container {
+html, body {
+  height: 100%;
+  overflow-x: hidden;  /* Prevent horizontal overflow, but allow vertical */
+}
+.my-menu-container {
   width: 250px !important;
   padding: 5px 20px;
   border-right: 2px solid $soft-bg-color;
 }
 
-.app-layout-content {
+.my-app-layout-content {
   padding: 5px 20px;
   width: 100%;
-  flex-grow: 1;        /* Fills the remaining width of the layout */
+  flex-grow: 1;
+  overflow-y: auto;  /* Enable vertical scrolling if content overflows */
 }

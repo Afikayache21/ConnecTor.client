@@ -5,19 +5,17 @@ function Navbar() {
     return (
         <div className='navbar'>
             <div className="logo">
-            <span className='app-name'><span style={{color:'#ffae00'}}>Co</span>n<span style={{color:'#007ba8'}}>ne</span>c<span className='special-t' style={{color:'red'}}>T</span>or</span>
+                <span className='app-name'><span style={{ color: '#ffae00' }}>Co</span>n<span style={{ color: '#007ba8' }}>ne</span>c<span className='special-t' style={{ color: 'red' }}>T</span>or</span>
 
                 <img style={{ width: '30px', height: '30px' }} src="appLogo.svg" alt="app logo" />
             </div>
 
             {/* Add the clock in the navbar */}
             <Clock />
-
-            { <div className="nav-bar-icons">
+            {<div className="nav-bar-icons">
                 <img src="/search.svg" alt="search" />
-                <img src="/app.svg" alt="app" />
-                <img src="/expand.svg" alt="expand" />
-                
+
+
                 <div className="notification">
                     <img src="/notifications.svg" alt="notifications" />
                     <span>1</span>

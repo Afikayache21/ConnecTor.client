@@ -1,35 +1,42 @@
-.profile-page{
-    height: 1500px;
-    scroll-behavior: auto;
-      overflow-y: scroll;  
-      overflow: auto;  
+.profile-page {
+  min-height: 100vh;        // Ensure the page takes at least the viewport height
+  overflow-y: auto;         // Enable vertical scrolling if content overflows
+  display: flex;            // Flexbox layout to ensure proper structure
+  flex-direction: column;
+  
+  .update-user-from {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
 
-      /* Adds vertical scrolling if content overflows */
+    input {
+      border-radius: 10px;
+      padding: 8px;          // Slightly larger padding for better UX
+      margin: 5px 0;
+    }
 
-
-      .update-user-from{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-top: 20px;
-        
-
-        input{
-            border-radius: 10px;
-            padding: 2px;
-            margin: 5px 0;
-        }
-        button{
-            margin-top: 10px;
-            padding: 5px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        
-
-      }
-
+    button {
+      margin-top: 10px;
+      padding: 8px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  }
 }
+
+/* Additional styling to ensure scrolling works as expected */
+html, body {
+  height: 100%;
+  overflow-y: auto;         // Ensure the entire page can scroll if needed
+}
+
+.MDBContainer, .MDBCard {
+  height: auto;             // Ensure cards and containers grow with content
+  max-height: 100%;         // Prevent overflow without hidden scrolling
+  overflow-y: auto;    
+}
+
