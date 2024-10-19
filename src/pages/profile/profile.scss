@@ -1,0 +1,35 @@
+.profile-page{
+    height: 1500px;
+    scroll-behavior: auto;
+      overflow-y: scroll;  
+      overflow: auto;  
+
+      /* Adds vertical scrolling if content overflows */
+
+
+      .update-user-from{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 20px;
+        
+
+        input{
+            border-radius: 10px;
+            padding: 2px;
+            margin: 5px 0;
+        }
+        button{
+            margin-top: 10px;
+            padding: 5px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+
+      }
+
+}

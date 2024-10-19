@@ -10,6 +10,7 @@ import Login from './pages/login/Login';
 import ProtectedRoute from './components/ProtecedRoute';
 import { observer } from 'mobx-react-lite';
 import Register from './pages/rgister/register';
+import Profile from './pages/profile/Profile';
 
 const App = observer(() => {
   const MainLayout = () => {
@@ -49,6 +50,8 @@ const App = observer(() => {
           <Route index element={<Home />} />
           <Route path="projects" element={<Projects />} />
           <Route path="users" element={<Users />} />
+          <Route path="profile" element={<Profile />} />
+
         </Route>
       </Route>
 

@@ -1,23 +1,21 @@
 import './modalBox.scss';
 import React from 'react';
 
-function ModalBox({ isVisible, onClose, children }: { isVisible: boolean, onClose: () => void, children: React.ReactNode }) {
-  if (!isVisible) return null; // If the modal is not visible, return nothing
+function ModalBox({BackroundColor, isVisible, onClose, children }: {BackroundColor?:string, isVisible: boolean, onClose: () => void, children: React.ReactNode }) {
 
-  // Handle clicks on the overlay
+  if (!isVisible) return null; 
   const handleOverlayClick = () => {
-    onClose(); // Close modal when overlay is clicked
+    onClose(); 
   };
 
-  // Prevent clicks inside the modal from closing the modal
   const handleModalClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Stop the click event from propagating to the overlay
+    e.stopPropagation(); 
   };
 
   return (
-    <div className="my-modal-overlay" onClick={handleOverlayClick}> {/* Overlay behind the modal */}
-      <div className="my-modal" onClick={handleModalClick}> 
-        <button className="my-close-button" onClick={onClose}>X</button> {/* Close button */}
+    <div className="my-modal-overlay"  onClick={handleOverlayClick}> 
+      <div className="my-modal" style={{backgroundColor:BackroundColor}} onClick={handleModalClick}> 
+        <button className="my-close-button" style={{color:BackroundColor?'black':'white'}} onClick={onClose}>x</button> {/* Close button */}
         <div className="my-modal-content">
           {children} 
         </div>

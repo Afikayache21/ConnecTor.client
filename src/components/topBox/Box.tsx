@@ -73,7 +73,6 @@ function Box({
         {children}
       </div>
 
-
       {leftIcon && <ModalBox isVisible={isLeftModalVisible} onClose={toggleLeftModal}>
         {leftIconChildren}
       </ModalBox>}
