@@ -7,7 +7,7 @@ function Menu() {
   return (
     <div className='menu'>
       <div className="item">
-        <span className="title">MAIN</span>
+      <span className='app-name'><span style={{ color: '#ffae00' }}>Co</span>n<span style={{ color: '#007ba8' }}>ne</span>c<span className='special-t' style={{ color: 'red' }}>T</span>or</span>
         <Link to='/' className='list-item'>
         <img src="/home.svg" alt="" />
         <span className="list-item-title">Home</span>
@@ -21,7 +21,7 @@ function Menu() {
       <div className="item">
         <span className="title">PROJECTS</span>
         <Link to='/projects' className='list-item'>
-        <img src="/home.svg" alt="" />
+        <img src="/search.svg" alt="" />
         <span className="list-item-title">projects for me</span>
         </Link>
         <Link to='/projects' className='list-item'>
@@ -33,25 +33,18 @@ function Menu() {
       <div className="item">
         <span className="title">CHAT</span>
         <Link to='/' className='list-item'>
-        <img src="/home.svg" alt="" />
-        <span className="list-item-title">Home</span>
-        </Link>
-        <Link to='/' className='list-item'>
-        <img src="/profile.svg" alt="" />
-        <span className="list-item-title">Profile</span>
-        </Link>
+        <img src="/post.svg" alt="" />
+        <span className="list-item-title">My chats</span>
+        </Link>      
       </div>
 
       <div className="item">
-        <span className="title">CHAT</span>
+        <span className="title">Bids</span>
         <Link to='/' className='list-item'>
-        <img src="/home.svg" alt="" />
+        <img src="/post2.svg" alt="" />
         <span className="list-item-title">Home</span>
         </Link>
-        <Link to='/' className='list-item'>
-        <img src="/profile.svg" alt="" />
-        <span className="list-item-title">Profile</span>
-        </Link>
+        
       </div>
 
     </div>
