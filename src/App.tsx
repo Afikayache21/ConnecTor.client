@@ -13,6 +13,7 @@ import { observer } from 'mobx-react-lite';
 import Register from './pages/rgister/register';
 import Profile from './pages/profile/Profile';
 import BidsPage from './pages/bids/bidsPage';
+import LastChats from './components/topBox/lastChats/LastChats';
 
 
 const App = observer(() => {
@@ -55,6 +56,7 @@ const App = observer(() => {
           <Route path="users" element={<Users />} />
           <Route path="profile" element={<Profile />} />          
           <Route path="bids" element={<BidsPage />} />          
+          <Route path="chats" element={<LastChats userId={1}/>} />          
 
         </Route>
       </Route>

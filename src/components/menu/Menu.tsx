@@ -34,7 +34,7 @@ function Menu() {
 
       <div className="item">
         <span className="title">CHAT</span>
-        <Link to='/' className='list-item'>
+        <Link to='/chats' className='list-item'>
         <img src="/post.svg" alt="" />
         <span className="list-item-title">My chats</span>
         </Link>      
