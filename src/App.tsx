@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtecedRoute';
 import { observer } from 'mobx-react-lite';
 import Register from './pages/rgister/register';
 import Profile from './pages/profile/Profile';
+import BidsPage from './pages/bids/bidsPage';
 
 
 const App = observer(() => {
@@ -52,7 +53,8 @@ const App = observer(() => {
           <Route index element={<Home />} />
           <Route path="projects" element={<Projects />} />
           <Route path="users" element={<Users />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile" element={<Profile />} />          
+          <Route path="bids" element={<BidsPage />} />          
 
         </Route>
       </Route>

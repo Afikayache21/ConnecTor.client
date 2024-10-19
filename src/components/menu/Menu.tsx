@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom'
 function Menu() {
   return (
     <div className='menu'>
-      <div className="item">
       <span className='app-name'><span style={{ color: '#ffae00' }}>Co</span>n<span style={{ color: '#007ba8' }}>ne</span>c<span className='special-t' style={{ color: 'red' }}>T</span>or</span>
+
+      <div className="item">
+        <span className="title">Main</span>
         <Link to='/' className='list-item'>
         <img src="/home.svg" alt="" />
         <span className="list-item-title">Home</span>
@@ -40,9 +42,9 @@ function Menu() {
 
       <div className="item">
         <span className="title">Bids</span>
-        <Link to='/' className='list-item'>
+        <Link to='/bids' className='list-item'>
         <img src="/post2.svg" alt="" />
-        <span className="list-item-title">Home</span>
+        <span className="list-item-title">My bids</span>
         </Link>
         
       </div>
