@@ -1,4 +1,4 @@
-.modal-overlay {
+.my-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@
     z-index: 1000;
   }
   
-  .modal {
+  .my-modal {
     position: relative; /* Make sure the modal is positioned relative to the overlay */
     border: 2px white solid;
     padding: 20px;
@@ -22,11 +22,11 @@
     max-width: 90%;
   }
   
-  .modal-content {
+  .my-modal-content {
     margin: 10px 0;
   }
   
-  .close-button {
+  .my-close-button {
     background: none;
     border: none;
     font-size: 20px;

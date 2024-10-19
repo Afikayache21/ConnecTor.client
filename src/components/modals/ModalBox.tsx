@@ -15,10 +15,10 @@ function ModalBox({ isVisible, onClose, children }: { isVisible: boolean, onClos
   };
 
   return (
-    <div className="modal-overlay" onClick={handleOverlayClick}> {/* Overlay behind the modal */}
-      <div className="modal" onClick={handleModalClick}> 
-        <button className="close-button" onClick={onClose}>X</button> {/* Close button */}
-        <div className="modal-content">
+    <div className="my-modal-overlay" onClick={handleOverlayClick}> {/* Overlay behind the modal */}
+      <div className="my-modal" onClick={handleModalClick}> 
+        <button className="my-close-button" onClick={onClose}>X</button> {/* Close button */}
+        <div className="my-modal-content">
           {children} 
         </div>
       </div>

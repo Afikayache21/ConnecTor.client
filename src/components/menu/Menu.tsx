@@ -20,11 +20,11 @@ function Menu() {
 
       <div className="item">
         <span className="title">PROJECTS</span>
-        <Link to='/' className='list-item'>
+        <Link to='/projects' className='list-item'>
         <img src="/home.svg" alt="" />
         <span className="list-item-title">Home</span>
         </Link>
-        <Link to='/' className='list-item'>
+        <Link to='/projects' className='list-item'>
         <img src="/profile.svg" alt="" />
         <span className="list-item-title">Profile</span>
         </Link>

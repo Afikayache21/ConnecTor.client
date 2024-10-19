@@ -16,7 +16,7 @@ const App = observer(() => {
     return (
       <div className="app-layout">
         <Navbar />
-        <div className="container">
+        <div className="app-container">
           <div className="menu-container">
             <Menu />
           </div>

@@ -50,7 +50,7 @@ function MyProjects({ userId }: MyProjectsProps) {
           </div>
         ))
       ) : (
-        <p>No projects found.</p>
+        <p>No bids found.</p>
       )}
     </div>
   );
