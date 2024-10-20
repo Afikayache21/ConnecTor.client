@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import './clock.scss'
+import './clock.scss';
+
 const Clock: React.FC = () => {
   // State to store the current time
   const [time, setTime] = useState(new Date());
@@ -14,8 +15,12 @@ const Clock: React.FC = () => {
     return () => clearInterval(timerId);
   }, []);
 
-  // Format the time (you can customize this as you like)
-  const formattedTime = time.toLocaleTimeString();
+  // Format the time to display only hours and minutes (08:36)
+  const formattedTime = time.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false, // 24-hour format
+  });
 
   return (
     <div className="clock-container">
@@ -23,20 +28,5 @@ const Clock: React.FC = () => {
     </div>
   );
 };
-
-// Simple styles for the clock
-// const styles = {
-//   clockContainer: {
-//     display: "flex",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     backgroundColor: 'transparent',
-    
-//   },
-//   clock: {
-//     color: "#61dafb",
-//     fontFamily: "semi-bold",
-//   },
-// };
 
 export default Clock;

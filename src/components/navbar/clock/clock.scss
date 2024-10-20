@@ -2,12 +2,22 @@
 @import "../../../styles/fonts.scss";
 
 .clock-container {
-    display: "flex";
-    justify-content: "center";
-    align-items: "center";
+  isplay: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
     background-color: 'transparent';
     .clock {
-    color: $soft-color;
-    font-family: Sans-Bold;
-  }
+      color: #ffffff;
+      font-weight: 300;
+      background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+      background-clip: text;
+      -webkit-text-fill-color: transparent; // Text gradient effect
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease-in-out;
+    
+      &:hover {
+        transform: scale(1.05); // Slight zoom-in effect on hover
+      }
+    }
 }
