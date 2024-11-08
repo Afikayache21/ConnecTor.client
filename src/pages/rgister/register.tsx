@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 import './registerDesktop.scss';
-import './registerMobile.scss';
+// import './registerMobile.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { register, IUser } from '../../services/AuthService';
+import { getToken } from '../../Api/agent';
 
 interface IWorkingAreaOption {
   value: string;
@@ -28,7 +29,14 @@ const professionsList: IProfessionOption[] = [
 ];
 
 const Register: React.FC = () => {
+
   const navigate = useNavigate();
+
+  if (localStorage.getItem('isLoggedIn') == 'true') {
+    navigate('/')
+  }
+
+
   const [activeTab, setActiveTab] = useState<'customer' | 'constructor'>('customer');
   //const [selectedWorkingArea, setSelectedWorkingArea] = useState<IWorkingAreaOption | null>(null);
   const [selectedProfession, setSelectedProfession] = useState<IProfessionOption | null>(null);

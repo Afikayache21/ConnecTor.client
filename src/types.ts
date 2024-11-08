@@ -29,12 +29,11 @@ export type User = {
     FirstName: string;
     LastName: string;
     RegionID: number;
-    ProfessionId: number ; // nullable field
+    ProfessionId: number ; 
     BusinessLicenseCode?: string | null; // nullable field
     UserImage: string | null; // nullable field
     Email: string;
     Telephone: string;
-    UserPassword: string;
     ActiveStatus: boolean;
     CreationDate: string;
 };
@@ -51,13 +50,55 @@ export type Project = {
     RegionID: number;
     ProjectQuantities?: string | null;
     ConstructionPlans?: string | null;
-    ContractorID: number;
+    ContractorID?: number| null;
     ActualStartDate?: string | null;
     ActualEndDate?: string | null;
     ActualPayment?: number | null;
     ClientReview?: string | null;
     ContractorReview?: string | null;
 };
+// export type CreateProjectModel = {
+//     //ClientID: number;
+//     ProjectName: string;
+//     OpeningDate: string;
+//     Deadline: string;
+//     ProjectDescription: string;
+//     RegionID: number;
+//     ProjectQuantities?: File | null;  // Changed to File to reflect uploaded files
+//     ConstructionPlans?: File | null;   // 
+// };
+
+interface File {
+    fileName: string;
+    fileSize: number;
+    fileType: string;
+}
+
+export interface CreateProjectModel {
+    ClientId: number;
+    ProjectName: string;
+    ProjectFieldID: number;
+    OpeningDate: Date;
+    Deadline: Date;
+    ProjectDescription: string;
+    RegionID: number;
+    ProjectQuantities: File;
+    ConstructionPlans: File;
+    ContractorID?: number;
+    ActualStartDate?: Date;
+    ActualEndDate?: Date;
+    ActualPayment?: number;
+    ClientReview?: string;
+    ContractorReview?: string;
+    Images?: File[];
+}
+
+
+
+
+
+
+
 
 // Project Proposal Type
 export type ProjectProposal = {
@@ -105,7 +146,13 @@ export type Message = {
     ReceiverId: number;
     IsRead: boolean;
 };
-
+export type Chat ={
+     ChatId : number ;
+    FirstUserId : number ;
+     SecondUserId : number ;
+     LastSenderId : number ;
+     IsRead :boolean;
+}
 // Full Data Structure
 export type DataStructure = {
     regions: Region[];

@@ -1,58 +1,33 @@
-import { useState, useEffect } from 'react';
-import { getAllProjects } from "../../../services/ProjectService";
 import './allProjects.scss';
-import { formatDate } from '../../../services/DateService';
+import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { formatDateWithDateTime } from '../../../services/DateService';
+import { useStore } from '../../../Store/store';
 
 function AllProjects() {
-  const [projects, setProjects] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleClick = (project: any) => {
-    console.log(project);
-  }
+  const store = useStore();
+  const {projectStore} = store;
+  const { projects, loadAllProjects, loading } = projectStore;
+  
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const result = await getAllProjects();
-        if (result) {
-          setProjects(result);
-        }
-      } catch (err) {
-        setError('Failed to load projects.');
-      } finally {
-        setLoading(false);
-      }
-    };
+    if (projects.length === 0) loadAllProjects(); // Load projects if they haven't been loaded
+  }, [projects.length, loadAllProjects]);
 
-    fetchProjects();
-  }, []);
-
-  const displayedProjects = projects.slice(0, 10);
-
+  console.log(projects);
+  
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  // if (error) return <p>{error}</p>;
 
   return (
     <div className='recent-projects-list'>
-      {displayedProjects.length > 0 ? (
-        displayedProjects.map(project => (
-          <div 
-            onClick={() => handleClick(project)} 
-            className='list-item' 
-            key={project.projectID}
-          >
-            <span className='project-name'>
-              {project.projectName} ({project.projectFieldName})
-            </span>
-            <div dir="rtl" className="project-details">
+      {projects?.length > 0 ? (
+        projects.map((project) => (
+          <div className='list-item' key={`${project.projectID}`}>
+            <span className='project-name'>{project.projectName}</span>
+            <div dir="rtl" className="project-details">           
               <div className="project-description">{project.projectDescription}</div>
-              <span className="client-name">{project.clientName}</span>
-              <span className="project-region">{project.region}</span>
-              <span className="project-dates">
-                {formatDate(project.openingDate)} - {formatDate(project.deadline)}
-              </span>
+              <span className="project-dl">DL: {formatDateWithDateTime(project.deadline)}</span>
             </div>
           </div>
         ))
@@ -63,4 +38,4 @@ function AllProjects() {
   );
 }
 
-export default AllProjects;
+export default observer(AllProjects);

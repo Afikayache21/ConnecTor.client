@@ -1,8 +1,10 @@
+import { useStore } from '../../Store/store';
 import './modalBox.scss';
 import React from 'react';
 
 function ModalBox({BackroundColor, isVisible, onClose, children }: {BackroundColor?:string, isVisible: boolean, onClose: () => void, children: React.ReactNode }) {
-
+  const {windowStore} = useStore();
+  const {isMobile} = windowStore;
   if (!isVisible) return null; 
   const handleOverlayClick = () => {
     onClose(); 
@@ -13,9 +15,9 @@ function ModalBox({BackroundColor, isVisible, onClose, children }: {BackroundCol
   };
 
   return (
-    <div className="my-modal-overlay"  onClick={handleOverlayClick}> 
-      <div className="my-modal" style={{backgroundColor:BackroundColor}} onClick={handleModalClick}> 
-        <button className="my-close-button" style={{color:BackroundColor?'black':'white'}} onClick={onClose}>x</button> {/* Close button */}
+    <div className={isMobile?"my-modal-overlay-mobile":"my-modal-overlay"}  onClick={handleOverlayClick}> 
+      <div className={isMobile?"my-modal-mobile":"my-modal"} style={{backgroundColor:BackroundColor}} onClick={handleModalClick}> 
+        {/* <button className="my-close-button" style={{color:BackroundColor?'black':'white'}} onClick={onClose}>x</button> Close button */}
         <div className="my-modal-content">
           {children} 
         </div>

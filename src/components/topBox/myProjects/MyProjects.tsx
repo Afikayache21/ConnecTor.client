@@ -1,45 +1,32 @@
-import { useState, useEffect } from 'react';
-import { ProjectDto,getUsers10LastProjectsByUserId } from "../../../services/ProjectService";
+import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import './myProjects.scss';
-import { formatDate } from '../../../services/DateService';
+import { formatDateWithDateTime } from '../../../services/DateService';
+import { useStore } from '../../../Store/store';
 
-type MyProjectsProps = {
-  userId: number;
-};
-
-function MyProjects({ userId }: MyProjectsProps) {
-  const [projects, setProjects] = useState<ProjectDto[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+function MyProjects() {
+  const store = useStore();
+  const {projectStore} = store;
+  const { projectsByDeadline, loadProjects, loading } = projectStore;
+  
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const result = await getUsers10LastProjectsByUserId(userId);
-        setProjects(result);
-      } catch (err) {
-        setError('Failed to load projects.');
-      } finally {
-        setLoading(false);
-      }
-    };
+    if (projectsByDeadline.length === 0) loadProjects(); // Load projects if they haven't been loaded
+  }, [projectsByDeadline.length, loadProjects]);
 
-    fetchProjects();
-  }, [userId]);
-
-
+  
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  // if (error) return <p>{error}</p>;
 
   return (
     <div className='recent-projects-list'>
-      {projects.length > 0 ? (
-        projects.map(project => (
-          <div className='list-item' key={`${project.projectId}`}>
+      {projectsByDeadline?.length > 0 ? (
+        projectsByDeadline.map((project) => (
+          <div className='list-item' key={`${project.projectID}`}>
             <span className='project-name'>{project.projectName}</span>
             <div dir="rtl" className="project-details">           
               <div className="project-description">{project.projectDescription}</div>
-              <span className="project-dl">DL: {formatDate(project.deadline)}</span>
+              <span className="project-dl">DL: {formatDateWithDateTime(project.deadline)}</span>
             </div>
           </div>
         ))
@@ -50,4 +37,4 @@ function MyProjects({ userId }: MyProjectsProps) {
   );
 }
 
-export default MyProjects;
+export default observer(MyProjects);

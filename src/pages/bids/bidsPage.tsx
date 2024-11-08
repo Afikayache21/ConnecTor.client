@@ -1,53 +1,49 @@
+import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import './bids.scss';
+import { useStore } from '../../Store/store';
 
-function BidsPage() {
-  const bidsData = [
-    {
-      projectId: 1,
-      projectName: "Building Renovation",
-      bidAmount: "$50,000",
-      contractor: "ABC Construction",
-      status: "Pending",
-      deadline: "2024-11-01",
-    },
-    {
-      projectId: 2,
-      projectName: "Office Expansion",
-      bidAmount: "$75,000",
-      contractor: "XYZ Contractors",
-      status: "Accepted",
-      deadline: "2024-10-25",
-    },
-    {
-      projectId: 3,
-      projectName: "Residential Complex",
-      bidAmount: "$120,000",
-      contractor: "Prime Builders",
-      status: "Rejected",
-      deadline: "2024-11-10",
-    },
-  ];
+const BidsPage = () => {
+  const { bidsStore } = useStore();
+  const { bidRegistry, loadBids, loading, error,bidsSortedByProposalDate } = bidsStore;
+
+  // Load bids when the component mounts
+  useEffect(() => {
+    if (bidRegistry.size === 0) loadBids();
+  }, [bidRegistry.size, loadBids]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
+  // Sort bids by proposalDate
+
 
   return (
     <div className="bids-page">
       <h2>Project Bids</h2>
       <ul className="bids-list">
-        {bidsData.map((bid) => (
-          <li key={bid.projectId} className={`bid-item ${bid.status.toLowerCase()}`}>
-            <div className="bid-header">
-              <h3>{bid.projectName}</h3>
-              <span className={`status-label ${bid.status.toLowerCase()}`}>{bid.status}</span>
-            </div>
-            <div className="bid-details">
-              <p><strong>Contractor:</strong> {bid.contractor}</p>
-              <p><strong>Bid Amount:</strong> {bid.bidAmount}</p>
-              <p><strong>Deadline:</strong> {new Date(bid.deadline).toLocaleDateString()}</p>
-            </div>
-          </li>
-        ))}
+        {bidsSortedByProposalDate.length > 0 ? (
+          bidsSortedByProposalDate.map((bid) => (
+            <li key={bid.proposalID} className={`bid-item ${bid.acceptedStatus ? 'accepted' : 'pending'}`}>
+              <div className="bid-header">
+                <h3>{bid.projectName}</h3>
+                <span className={`status-label ${bid.acceptedStatus ? 'accepted' : 'pending'}`}>
+                  {bid.acceptedStatus ? 'Accepted' : 'Pending'}
+                </span>
+              </div>
+              <div className="bid-details">
+                <p><strong>Contractor:</strong> {bid.contractorName}</p>
+                <p><strong>Bid Amount:</strong> ${bid.proposalPrice.toFixed(2)}</p>
+                <p><strong>Proposal Date:</strong> {new Date(bid.proposalDate).toLocaleDateString()}</p>
+              </div>
+            </li>
+          ))
+        ) : (
+          <p>No bids found.</p>
+        )}
       </ul>
     </div>
   );
-}
+};
 
-export default BidsPage;
+export default observer(BidsPage);
