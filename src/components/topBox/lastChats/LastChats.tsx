@@ -36,9 +36,6 @@ const LastChats = observer(() => {
     }
   };
 
-  if (!chats.size) return <p>Loading chats...</p>;
-
-  
   return (
     <div className="recent-chats-list">
       {tenChatsSortedByTimestamp.length > -1 ? (
@@ -50,8 +47,7 @@ const LastChats = observer(() => {
                 <img
                   className="img"
                   src={"../../../../public/user.svg"} // Placeholder; replace with user profile image if available
-                  alt={`${chat.userName}'s avatar`} // Add alt text for accessibility
-                />
+                  alt={`${chat.userName}s avatar} // Add alt text for accessibility`}/>
                 <div dir="rtl" className="row-text">
                   <span className="chat-content">{chat.content}</span>
                 </div>
@@ -61,12 +57,9 @@ const LastChats = observer(() => {
               </div>
             </div>
           </div>
-        </div>
-      ))}
-      {isModalVisible && selectedChatId && (
-        <ModalBox isVisible={isModalVisible} onClose={() => toggleModal(null)}>
-          <ChatWindow ChatId={activeChatId ?? 0} />
-        </ModalBox>
+        ))
+      ) : (
+        <p>No chats found.</p>
       )}
 
       <ModalBox isVisible={isModalVisible} onClose={() => toggleModal(null)}>
