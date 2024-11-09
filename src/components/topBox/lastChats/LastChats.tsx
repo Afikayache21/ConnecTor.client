@@ -5,9 +5,12 @@ import { formatDate } from "../../../services/DateService";
 import ModalBox from "../../modals/ModalBox";
 import ChatWindow from "./ChatWindow";
 import { useStore } from "../../../Store/store";
+import { useNavigate } from "react-router";
 
 const LastChats = observer(() => {
-  const { chatsStore } = useStore();
+
+  const navigate = useNavigate();
+  const { chatsStore ,windowStore} = useStore();
   const {
     tenChatsSortedByTimestamp,
     loadChats,
@@ -16,6 +19,8 @@ const LastChats = observer(() => {
     loadChat,
     selectedChat,
   } = chatsStore;
+
+  const {isMobile} = windowStore;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -64,7 +69,10 @@ const LastChats = observer(() => {
 
       <ModalBox isVisible={isModalVisible} onClose={() => toggleModal(null)}>
         {selectedChat && <ChatWindow Chat={selectedChat} />}
-      </ModalBox>
+      </ModalBox>:
+      {isMobile && <div className="mobile-chat-button" onClick={() => navigate('/chat')}>
+        <img src={"../../../../public/chat.svg"} alt="Chat Icon" />
+      </div>}
     </div>
   );
 });
