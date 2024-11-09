@@ -70,9 +70,7 @@ const LastChats = observer(() => {
       <ModalBox isVisible={isModalVisible} onClose={() => toggleModal(null)}>
         {selectedChat && <ChatWindow Chat={selectedChat} />}
       </ModalBox>:
-      {isMobile && <div className="mobile-chat-button" onClick={() => navigate('/chat')}>
-        <img src={"../../../../public/chat.svg"} alt="Chat Icon" />
-      </div>}
+      
     </div>
   );
 });

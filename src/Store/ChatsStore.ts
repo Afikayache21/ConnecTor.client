@@ -58,7 +58,7 @@ export class ChatsStore {
     this.error = null;
 
     try {
-      const chats = await agent.Chats.list();
+      const chats = await agent.Chats.list();     
       
       runInAction(() => {
         chats.forEach(chat => this.setChat(chat));
@@ -79,6 +79,7 @@ export class ChatsStore {
     }
      else {
       this.loadingInitial = true;
+      this.selectedChat = chat;            
       this.error = null;
 
       try {
@@ -93,9 +94,8 @@ export class ChatsStore {
 
             }
                 this.setChat(chat);
-                this.selectedChat = chat;            
+                this.loadingInitial = false;
             });
-            this.loadingInitial = false;
       } catch (error) {
         runInAction(() => {
           this.error = 'Failed to load chat details.';

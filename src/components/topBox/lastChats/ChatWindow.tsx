@@ -23,7 +23,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ Chat }) => {
       }
     };
     loadMessages();
-  }, [Chat.chatId, chatsStore,messages]);
+  }, [Chat.chatId,messages]);
 
 
 
