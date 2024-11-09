@@ -6,7 +6,7 @@
   gap: 10px;
   max-height: 85vh;
   
-}
+
 
 .top-boxes {
   display: grid;
@@ -37,6 +37,7 @@
 }
 
 .box {
+  width: 100%;
   padding: 20px;
   border-radius: 10px;
   border: 1px solid $soft-bg-color;
@@ -86,3 +87,94 @@
 .box7 {
   grid-area: box7;
 }
+}
+.home-mobile {
+  width: 100%;
+     max-height: 85dvh;
+  .box {
+    width: 100%; // Ensure each box takes full width of the slider
+    display: flex;
+    justify-content: center;
+  }
+
+  .slick-slide {
+    display: flex;
+    justify-content: center;
+  }
+
+  .slick-list {
+    padding: 0 10px; // Optional padding
+  }
+
+
+  
+}
+.home-mobile .slick-list {
+  overflow: hidden;
+  width: 100%; // Ensure full width
+}
+
+.home-mobile .slick-track {
+  display: flex;
+  width: 100%; // Ensure full width of the track
+}
+
+.home-mobile .slick-dots {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+}
+
+.home-mobile .slick-dots li {
+  margin: 0 5px; // Space between dots
+}
+
+.home-mobile .slick-dots li button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc; // Default dot color
+  opacity: 0.8; // Dot transparency
+  transition: background-color 0.3s ease;
+}
+
+.home-mobile .slick-dots li.slick-active button {
+  background-color: #007bff; // Active dot color
+  opacity: 1; // Full opacity for active dot
+}
+// .home-mobile {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+//   max-height: 85dvh;
+
+
+
+  
+// .box {
+//   margin: 10px;
+//   padding: 20px;
+//   border-radius: 10px;
+//   border: 1px solid $soft-bg-color;
+//   background-color: $soft-bg-color;
+//   overflow: hidden; /* Prevent overflow outside the box */
+//   display: flex;
+//   flex-direction: column;
+//   max-height: 30dvh;
+
+//   .box-content {
+//     width: 100%;
+//     height: 100%;
+//     flex-grow: 1;
+//   }
+
+//   &:hover {
+//     background-color: $dark-bg-color;
+//     box-shadow: 10px 10px 10px rgb(41, 41, 41);
+//   }
+// }
+
+
+// }

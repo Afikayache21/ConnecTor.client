@@ -1,33 +1,90 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
+import { login, ILoginUser } from '../services/AuthService';
+import * as Jwt from 'jwt-decode';
 
-class AuthStore {
-  isLoggedIn: boolean = false;
+
+interface MyPayLoad extends Jwt.JwtPayload {
+  UserType: string;
+  UserId: string;
+  FirstName: string;
+  LastName: string;
+}
+
+export default class AuthStore {
+  isLoggedIn = false;
+  email: string | null = null;
+  loading = false;
+  userType: string | null = null;
+  userId: string | null = null;
 
   constructor() {
     makeAutoObservable(this);
-    this.checkLocalStorage(); // Initialize from localStorage on creation
+    this.initializeFromLocalStorage();
   }
 
-  // Check if user is logged in based on localStorage
-  checkLocalStorage() {
+  setLoading(userData: boolean) {
+    this.loading = userData;
+  }
+  // Initialize user information from localStorage
+  initializeFromLocalStorage() {
     const storedLogin = localStorage.getItem('isLoggedIn');
     this.isLoggedIn = storedLogin === 'true';
+    this.email = localStorage.getItem('email');
+    this.userType = localStorage.getItem('userType');
   }
 
   // Action to handle login
-  login(username: string) {
-    localStorage.setItem('isLoggedIn', 'true');
-    localStorage.setItem('username', username); // Save username or other user info
-    this.isLoggedIn = true;
+  async login(username: string, password: string) {
+    //this.setLoading(true);
+    try {
+      //this.loading = true;
+      const user: ILoginUser = { email: username, password };
+
+      const response = await login(user); // Call the login service
+      const res: MyPayLoad = Jwt.jwtDecode(response)
+
+
+      runInAction(() => {
+
+        // Persist to localStorage
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('email', username);
+        localStorage.setItem('userType', res.UserType);
+        localStorage.setItem('userId', res.UserId);
+        localStorage.setItem('firstName', res.FirstName);
+        localStorage.setItem('lastName', res.LastName);
+
+
+
+      });
+      return res.UserId;
+    } catch (error) {
+      //this.loading = false;
+      runInAction(() => {
+        //this.setLoading(false);
+
+        console.error("Login failed:", error);
+      });
+    }
+
   }
 
   // Action to handle logout
   logout() {
+    this.isLoggedIn = false;
+    this.email = null;
+    this.userType = null;
+
+    // Clear from localStorage
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('username');
-    this.isLoggedIn = false;
+    localStorage.removeItem('userType');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('lastName');
   }
+
+
 }
 
-const authStore = new AuthStore();
-export default authStore;
+

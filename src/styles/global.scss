@@ -12,6 +12,9 @@ a {
   color: inherit;
 }
 
+p{
+  color: azure;
+}
 .my-app-layout {
   font-family: Regular;
   background-color: $main-bg-color;
@@ -35,6 +38,11 @@ html, body {
 .my-menu-container {
   width: 250px !important;
   padding: 5px 20px;
+  border-right: 2px solid $soft-bg-color;
+}
+.my-menu-container-mobile {
+  width: 80px !important;
+    padding: 5px 20px;
   border-right: 2px solid $soft-bg-color;
 }
 

@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 
-class WindowStore {
+export default class WindowStore {
     isMobile: boolean = window.innerWidth < 781;
     isTablet: boolean = window.innerWidth > 780 && window.innerWidth < 1024;
     isDesktop: boolean = window.innerWidth >= 1024;
@@ -17,5 +17,3 @@ class WindowStore {
     };
 }
 
-const windowStore = new WindowStore();
-export default windowStore;

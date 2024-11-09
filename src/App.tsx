@@ -14,15 +14,21 @@ import Register from './pages/rgister/register';
 import Profile from './pages/profile/Profile';
 import BidsPage from './pages/bids/bidsPage';
 import LastChats from './components/topBox/lastChats/LastChats';
+import CreateProject from './pages/projects/CreateProject';
+import { useStore } from './Store/store';
 
 
 const App = observer(() => {
+
+const {windowStore} = useStore();
+const {isMobile } = windowStore;
+
   const MainLayout = () => {
     return (
       <div className="my-app-layout">
         <Navbar />
         <div className="my-app-container">
-          <div className="my-menu-container">
+          <div className={isMobile?"my-menu-container-mobile":"my-menu-container"}>
             <Menu />
           </div>
           <div className="my-app-layout-content">
@@ -53,10 +59,12 @@ const App = observer(() => {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="projects" element={<Projects />} />
+          <Route path="projects/createProject" element={<CreateProject />} />
+
           <Route path="users" element={<Users />} />
           <Route path="profile" element={<Profile />} />          
           <Route path="bids" element={<BidsPage />} />          
-          <Route path="chats" element={<LastChats userId={1}/>} />          
+          <Route path="chats" element={<LastChats/>} />          
 
         </Route>
       </Route>

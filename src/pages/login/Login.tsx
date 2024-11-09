@@ -1,10 +1,8 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import { observer } from 'mobx-react-lite';
-import windowStore from '../../Store/windowStore'; // Adjust the import path as needed
-import authStore from '../../Store/AuthStore'; // Adjust the import path as needed
-import userStore from '../../Store/UserStore';
-import { login } from '../../services/AuthService';
+// import userStore from '../../Store/UserStore';
 import { useNavigate } from 'react-router-dom';
+
 import {
     MDBBtn,
     MDBContainer,
@@ -16,6 +14,7 @@ import {
     MDBIcon,
     MDBInput
 } from 'mdb-react-ui-kit';
+import { useStore } from '../../Store/store';
 
 // Define the type for the user state
 interface User {
@@ -23,7 +22,12 @@ interface User {
     password: string;
 }
 
+
 const Login: React.FC = observer(() => {
+
+    const { authStore ,windowStore} = useStore();
+    const {login} = authStore;
+
     const { isMobile } = windowStore;
     const [user, setUser] = useState<User>({
         email: '',
@@ -39,15 +43,14 @@ const Login: React.FC = observer(() => {
     const onClick = async () => {
         let res: any = null;
         if (user) {
-            res = await login(user); // Make sure login is a promise if async
+            res = await login(user.email,user.password); 
 
             console.log(res);
+            
         }
 
-        if (res) {
+        if (res) {        
             alert('Login successful');
-            userStore.setCurrentUser(res);
-            authStore.login(user.email);
             navigate('/', { replace: true });
         } else {
             alert('Invalid credentials');

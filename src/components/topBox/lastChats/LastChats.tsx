@@ -1,88 +1,73 @@
-import { useState, useEffect } from 'react';
-import { getLastChatsByUserId } from "../../../services/ChatsService";
-import './lastChats.scss';
-import { formatDate } from '../../../services/DateService';
-import ModalBox from '../../modals/ModalBox';
-import '../../modals/modalBox.scss'
-import ChatWindow from './ChatWindow';
+import { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
+import "./lastChats.scss";
+import { formatDate } from "../../../services/DateService";
+import ModalBox from "../../modals/ModalBox";
+import ChatWindow from "./ChatWindow";
+import { useStore } from "../../../Store/store";
 
-type Chat = {
-  Id: number;
-  Content: string;
-  Timestamp: string;
-  userImgUrl: string;
-  userName: string;
-};
+const LastChats = observer(() => {
+  const { chatsStore } = useStore();
+  const {
+    tenChatsSortedByTimestamp,
+    loadChats,
+    loadingInitial,
+    error,
+    loadChat,
+    selectedChat,
+  } = chatsStore;
 
-type LastChatsProps = {
-  userId: number;
-};
-
-function LastChats({ userId }: LastChatsProps) {
-  const [lastChats, setLastChats] = useState<Chat[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-
   useEffect(() => {
-    const fetchChats = async () => {
-      try {
-        const result = await getLastChatsByUserId(userId);
-        setLastChats(result);
-      } catch (err) {
-        setError('Failed to load chats.');
-      } finally {
-        setLoading(false);
-      }
-    };
+    // Load chats when component mounts
+    if (tenChatsSortedByTimestamp.length === 0) loadChats();
+  }, [loadChats, tenChatsSortedByTimestamp.length]);
 
-    fetchChats();
-  }, [userId]);
-
-  const displayedChats = lastChats.slice(0, 10);
-
-
-  if (loading) return <p>Loading...</p>;
+  //if (loadingInitial) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
-  const toggleModal = (chat: Chat) => {
-    setSelectedChat(chat);
-    setIsModalVisible(!isModalVisible);
+  const toggleModal = (chatId: number | null) => {
+    if (chatId !== null) {
+      loadChat(chatId); // Set the selected chat in the store
+      setIsModalVisible(true); // Open the modal
+    } else {
+      setIsModalVisible(false); // Close the modal
+    }
   };
 
   return (
-    <div className='recent-chats-list'>
-      {displayedChats.length > 0 ? (
-        displayedChats.map(chat => (
-          <div className='list-item' onClick={() => toggleModal(chat)} key={chat.Id}>
-            <span className='chat-username'>{chat.userName}</span>
+    <div className="recent-chats-list">
+      {tenChatsSortedByTimestamp.length > -1 ? (
+        tenChatsSortedByTimestamp.map((chat) => (
+          <div className="list-item" onClick={() => toggleModal(chat.chatId)} key={chat.chatId}>
+            <span className="chat-username">{chat.userName}</span>
             <div className="chat">
-              <div className='message-info'>
+              <div className="message-info">
                 <img
-                  className='img'
-                  src={chat.userImgUrl || '../../../../public/user.svg'}
+                  className="img"
+                  src={"../../../../public/user.svg"} // Placeholder; replace with user profile image if available
                   alt={`${chat.userName}'s avatar`} // Add alt text for accessibility
                 />
-                <div dir="rtl" className='row-text'>
-                  <span className='chat-content'>{chat.Content}</span>
+                <div dir="rtl" className="row-text">
+                  <span className="chat-content">{chat.content}</span>
                 </div>
               </div>
-              <div className='message-timestamp'>
-                <span>{formatDate(chat.Timestamp)}</span>
+              <div className="message-timestamp">
+                <span>{formatDate(chat.timestamp)}</span>
               </div>
             </div>
-            <ModalBox isVisible={isModalVisible} onClose={() => toggleModal(chat)}>
-              <ChatWindow />
-            </ModalBox>
           </div>
         ))
       ) : (
         <p>No chats found.</p>
       )}
+
+      <ModalBox isVisible={isModalVisible} onClose={() => toggleModal(null)}>
+        {selectedChat && <ChatWindow Chat={selectedChat} />}
+      </ModalBox>
     </div>
   );
-}
+});
 
 export default LastChats;

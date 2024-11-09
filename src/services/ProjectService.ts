@@ -1,3 +1,4 @@
+import { getToken } from '../Api/agent';
 import dbMock from '../mockDB/mock.json'; // Import the JSON mock data
 import axios from 'axios';
 
@@ -18,11 +19,14 @@ export type Project = {
   ContractorReview: string | null;
 }
 
-export interface ProjectDto {
-  projectId: number;
+export interface HomePageProjectDto {
+  id:number;
+  projectID: number;
   projectName: string;
   projectDescription: string;
-  deadline: string;
+  projectFieldName:string
+  deadline: Date;//| string;
+  region: string;
 }
 export interface ProjectDto2 {
   projectID: number;
@@ -35,42 +39,49 @@ export interface ProjectDto2 {
   region:string
 }
 
-export async function getAllProjects(): Promise<ProjectDto2[]> {
-  try {
-    // Make an API call to the backend
-    const response = await axios.get(`https://localhost:7198/api/Projects`);
+// export async function getAllProjects(): Promise<HomePageProjectDto[]> {
+//   try {
+//     // Make an API call to the backend
+//     const response = await axios.get<HomePageProjectDto[]>('https://localhost:5000/api/Project/UserProjects', {
+//       headers: {
+//           'Authorization': `Bearer ${getToken()}`,
+//           'Content-Type': 'application/json'
+//       }
+//   });
 
-    // Assuming the response returns an array of ProjectDto
-    const projects: ProjectDto2[] = response.data;
-    console.log(projects);
+//     // Assuming the response returns an array of HomePageProjectDto
+//     const projects: HomePageProjectDto[] = response.data;
+//     console.log(projects);
     
-    return projects;
-  } catch (error) {
-    console.error('Error fetching last projects:', error);
-    return [];
-  }
-}
+//     return projects;
+//   } catch (error) {
+//     console.error('Error fetching last projects:', error);
+//     return [];
+//   }
+// }
 
 
-export async function getUsers10LastProjectsByUserId(userId: number): Promise<ProjectDto[]> {
-  try {
-    // Make an API call to the backend
-    const response = await axios.get(`https://localhost:7198/api/Projects/last?id=${userId}&amount=10`);
+// export async function getUsers10LastProjectsByUserId(): Promise<HomePageProjectDto[]> {
+//   try {
+//     // let userId = localStorage.getItem('userId')
+//     // Make an API call to the backend
+//     const response = await axios.get(`https://localhost:5000/api/Project/UserProjects`);
+//     console.log(response);
 
-    // Assuming the response returns an array of ProjectDto
-    const projects: ProjectDto[] = response.data;
+//     // Assuming the response returns an array of HomePageProjectDto
+//     const projects: HomePageProjectDto[] = response.data;
 
-    return projects;
-  } catch (error) {
-    console.error('Error fetching last projects:', error);
-    return [];
-  }
-}
+//     return projects;
+//   } catch (error) {
+//     console.error('Error fetching last getUsers10LastProjects:', error);
+//     return [];
+//   }
+// }
 
-export function getLastProjectsByUserId(userId: number): Project[] {
-  const projects = dbMock.projects.filter((p: Project) =>
-    p.ClientID === userId || p.ContractorID === userId
-  );
+// export function getLastProjectsByUserId(userId: number): Project[] {
+//   const projects = dbMock.projects.filter((p: Project) =>
+//     p.ClientID === userId || p.ContractorID === userId
+//   );
 
-  return projects;
-}
+//   return projects;
+// }

@@ -21,7 +21,7 @@ export interface IUser {
 }
 export const register = async (user: IUser): Promise<any> => {
     try {
-        const response = await fetch('https://localhost:7198/api/Authentication/register', {
+        const response = await fetch('https://localhost:5000/api/Auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -53,9 +53,10 @@ export const register = async (user: IUser): Promise<any> => {
 }
 
 
+
 export const login = async (user: ILoginUser): Promise<any> => {
     try {
-        const response = await fetch('https://localhost:7198/api/Authentication/login', {
+        const response = await fetch('https://localhost:5000/api/Auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -71,7 +72,7 @@ export const login = async (user: ILoginUser): Promise<any> => {
         const token = data.token;
 
         // Store the token in localStorage for future use
-        localStorage.setItem('authToken', token);
+        localStorage.setItem('userToken', token);
 
         // Navigate to the main page
         alert('Login successful');
