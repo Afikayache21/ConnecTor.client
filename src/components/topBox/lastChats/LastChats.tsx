@@ -36,6 +36,9 @@ const LastChats = observer(() => {
     }
   };
 
+  if (!chats.size) return <p>Loading chats...</p>;
+
+  
   return (
     <div className="recent-chats-list">
       {tenChatsSortedByTimestamp.length > -1 ? (
@@ -58,9 +61,12 @@ const LastChats = observer(() => {
               </div>
             </div>
           </div>
-        ))
-      ) : (
-        <p>No chats found.</p>
+        </div>
+      ))}
+      {isModalVisible && selectedChatId && (
+        <ModalBox isVisible={isModalVisible} onClose={() => toggleModal(null)}>
+          <ChatWindow ChatId={activeChatId ?? 0} />
+        </ModalBox>
       )}
 
       <ModalBox isVisible={isModalVisible} onClose={() => toggleModal(null)}>

@@ -1,6 +1,3 @@
-import { getToken } from '../Api/agent';
-import dbMock from '../mockDB/mock.json'; // Import the JSON mock data
-import axios from 'axios';
 
 export type Project = {
   ProjectID: number;
@@ -19,6 +16,9 @@ export type Project = {
   ContractorReview: string | null;
 }
 
+export interface HomePageProjectDto {
+  id:number;
+  projectID: number;
 export interface HomePageProjectDto {
   id:number;
   projectID: number;
