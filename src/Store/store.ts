@@ -5,6 +5,7 @@ import ProjectStore from "./projectsStore";
 import WindowStore from "./windowStore";
 import BidsStore from "./bidsStore";
 import { ChatsStore } from "./ChatsStore";
+import commonStore from "./CommonStore";
 
 interface IStore {
     authStore: AuthStore;
@@ -13,6 +14,7 @@ interface IStore {
     windowStore : WindowStore;
     bidsStore : BidsStore;
     chatsStore : ChatsStore;
+    CommonStore : commonStore;
 
 }
 
@@ -23,6 +25,8 @@ export const store: IStore = {
     windowStore: new WindowStore(), 
     bidsStore: new BidsStore(), 
     chatsStore: new ChatsStore(),  
+    CommonStore: new commonStore(),
+
 }
 
 export const StoreContext = createContext(store); 

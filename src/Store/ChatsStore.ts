@@ -91,7 +91,6 @@ export class ChatsStore {
             }
             else{
                 chat.messages = [];
-
             }
                 this.setChat(chat);
                 this.loadingInitial = false;
@@ -111,6 +110,7 @@ export class ChatsStore {
 
 
   sendMessage = async (message :IMessage) =>{
+    debugger;
     this.loading = true;
     this.error = null;
     try {
@@ -143,6 +143,10 @@ export class ChatsStore {
         this.loading = false;
       });
     }
+  }
+
+   getChatById(id: number) {
+    return this.chatRegistry.get(id);
   }
 
   private getChat(id: number) {

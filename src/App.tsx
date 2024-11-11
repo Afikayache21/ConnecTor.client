@@ -16,9 +16,35 @@ import BidsPage from './pages/bids/bidsPage';
 import LastChats from './components/topBox/lastChats/LastChats';
 import CreateProject from './pages/projects/CreateProject';
 import { useStore } from './Store/store';
+import { useEffect } from 'react';
+import signalRService from './services/signalRService';
 
 
 const App = observer(() => {
+
+  useEffect(() => {
+    // Start the SignalR connection when the component mounts
+    signalRService.startConnection();
+
+    // Define the callback function for received messages
+    const handleMessageReceived = (message: string) => {
+      alert(message);
+//place this in the chat if it is open
+
+
+
+    };
+
+    // Subscribe to the ReceiveMessage event
+    signalRService.onMessageReceived(handleMessageReceived);
+
+    // Cleanup when the component unmounts
+    return () => {
+      signalRService.offMessageReceived();
+      signalRService.stopConnection();
+    };
+  }, []);
+
 
 const {windowStore} = useStore();
 const {isMobile } = windowStore;

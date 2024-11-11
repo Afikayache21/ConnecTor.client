@@ -3,11 +3,13 @@ import { observer } from 'mobx-react-lite';
 import './myProjects.scss';
 import { formatDateWithDateTime } from '../../../services/DateService';
 import { useStore } from '../../../Store/store';
+import { useNavigate } from 'react-router';
 
 function MyProjects() {
   const store = useStore();
   const {projectStore} = store;
-  const { projectsByDeadline, loadProjects, loading } = projectStore;
+  const {projectsByDeadline, loadProjects, loading} = projectStore;
+  const navigate = useNavigate();
   
 
   useEffect(() => {
@@ -22,7 +24,7 @@ function MyProjects() {
     <div className='recent-projects-list'>
       {projectsByDeadline?.length > 0 ? (
         projectsByDeadline.map((project) => (
-          <div className='list-item' key={`${project.projectID}`}>
+          <div className='list-item'  key={`${project.projectID}`}>
             <span className='project-name'>{project.projectName}</span>
             <div dir="rtl" className="project-details">           
               <div className="project-description">{project.projectDescription}</div>

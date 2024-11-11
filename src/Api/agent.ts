@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { HomePageProjectDto } from '../services/ProjectService';
 import { BidDto } from '../Store/bidsStore';
 import { IChat, IMessage } from '../Store/ChatsStore';
+import { ISelectOption } from '../Store/CommonStore';
 axios.defaults.baseURL = 'https://localhost:5000/api';
 
 export const getToken = () => {
@@ -99,9 +100,6 @@ const Projects = {
     update: (project: HomePageProjectDto) => requests.put<HomePageProjectDto>(`/Project/${project.id}`, project),
     delete: (id: number) => requests.delete<void>(`/Project/${id}`)
 };
-
-
-
 const Chats = {
     list: () => requests.get<IChat[]>('/Chat/chats'),
     details: (id: number) => requests.get<IMessage[]>(`/Chat/GetChatMassegesByChatId?chatId=${id}`),
@@ -116,15 +114,16 @@ const Bids = {
     update: (project: BidDto) => requests.put<HomePageProjectDto>(`/Project/${project.proposalID}`, project),
     delete: (id: number) => requests.delete<void>(`/Project/${id}`)
 };
+const Common = {
+    proffesionsList: () => requests.get<ISelectOption[]>('/Proffesions') ,   
+    regionsList: () => requests.get<ISelectOption[]>('/Regions')    
+};
 
 const agent = {
     Chats,
     Projects,
     Bids,
-    //Users,
-    //Activities,
-    //Projects,
-    //Tasks,
+    Common,
 }
 export default agent;
 

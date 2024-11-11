@@ -5,30 +5,31 @@ import './registerDesktop.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { register, IUser } from '../../services/AuthService';
 import { getToken } from '../../Api/agent';
+import { ISelectOption } from '../../Store/CommonStore';
+import { useStore } from '../../Store/store';
 
-interface IWorkingAreaOption {
-  value: string;
-  label: string;
-}
 
-interface IProfessionOption {
-  value: number;
-  label: string;
-}
 
-const workingAreaOptions: IWorkingAreaOption[] = [
-  { value: '1', label: 'Area 1' },
-  { value: '2', label: 'Area 2' },
-  { value: '3', label: 'Area 3' },
-];
+// const workingAreaOptions: ISelectOption[] = [
+//   { value: 1, label: 'Area 1' },
+//   { value: 2, label: 'Area 2' },
+//   { value: 3, label: 'Area 3' },
+// ];
 
-const professionsList: IProfessionOption[] = [
-  { value: 1, label: 'Electrician' },
-  { value: 2, label: 'AC Tech' },
-  { value: 3, label: 'Plumber' },
-];
+// const professionsList: ISelectOption[] = [
+//   { value: 1, label: 'Electrician' },
+//   { value: 2, label: 'AC Tech' },
+//   { value: 3, label: 'Plumber' },
+// ];
 
 const Register: React.FC = () => {
+
+  const {CommonStore} = useStore();
+//   const{allProffesios,allRegions}=CommonStore
+
+// const [proffesions ,setProffesions]= useState()
+// const [reions ,setRegions]= useState()
+
 
   const navigate = useNavigate();
 
@@ -39,7 +40,7 @@ const Register: React.FC = () => {
 
   const [activeTab, setActiveTab] = useState<'customer' | 'constructor'>('customer');
   //const [selectedWorkingArea, setSelectedWorkingArea] = useState<IWorkingAreaOption | null>(null);
-  const [selectedProfession, setSelectedProfession] = useState<IProfessionOption | null>(null);
+  const [selectedProfession, setSelectedProfession] = useState<ISelectOption | null>(null);
 
   const [user, setUser] = useState<IUser>({
     email: '',
@@ -183,13 +184,13 @@ const Register: React.FC = () => {
                 onChange={setSelectedWorkingArea}
                 isClearable 
               /> */}
-              <Select
+              {/* <Select
                 options={professionsList}
                 placeholder="User profession"
                 value={selectedProfession}
                 onChange={setSelectedProfession}
                 isClearable
-              />
+              /> */}
             </>
           )}
           <input

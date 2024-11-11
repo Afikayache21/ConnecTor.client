@@ -33,14 +33,14 @@ const Home = () => {
             <Box
               title={'Last Chats'}
               className='chats-grid-layout'
-              leftIcon='./search.svg'
-              rightIcon='./order.svg'
-              leftIconTooltip='Search Chat'
-              rightIconTooltip='Order Projects'
-              leftIconAction={() => console.log('Left icon action triggered')}
-              leftIconChildren={<SearchChildren onSearch={(query) => console.log(query)} />}
-              rightIconAction={() => console.log('Right icon action triggered')}
-              rightIconChildren={<div>Right Icon Modal Content</div>}
+              // leftIcon='./search.svg'
+              // rightIcon='./order.svg'
+              // leftIconTooltip='Search Chat'
+              // rightIconTooltip='Order Projects'
+              // leftIconAction={() => console.log('Left icon action triggered')}
+              // leftIconChildren={<SearchChildren onSearch={(query) => console.log(query)} />}
+              // rightIconAction={() => console.log('Right icon action triggered')}
+              // rightIconChildren={<div>Right Icon Modal Content</div>}
             >
               <div className="box-content">
                 <LastChats />
@@ -52,11 +52,11 @@ const Home = () => {
             <Box
               title={'My Projects'}
               className='Projects-grid-layout'
-              leftIcon='./search.svg'
-              leftIconTooltip='Search Project'
-              rightIcon='./order.svg'
-              rightIconAction={() => console.log('Right icon action triggered')}
-              rightIconChildren={<div>Right Icon Modal Content</div>}
+              // leftIcon='./search.svg'
+              // leftIconTooltip='Search Project'
+              // rightIcon='./order.svg'
+              // rightIconAction={() => console.log('Right icon action triggered')}
+              // rightIconChildren={<div>Right Icon Modal Content</div>}
             >
               <div className="box-content">
                 <MyProjects />
@@ -68,9 +68,9 @@ const Home = () => {
             <Box
               title={'Last Bids'}
               className='Projects-grid-layout'
-              leftIcon='./search.svg'
-              leftIconTooltip='Search Project'
-              rightIcon='./order.svg'
+              // leftIcon='./search.svg'
+              // leftIconTooltip='Search Project'
+              // rightIcon='./order.svg'
             >
               <div className="box-content">
               <MyBids/>
@@ -116,14 +116,14 @@ const Home = () => {
           <Box
             title={'Last Chats'}
             className='chats-grid-layout'
-            leftIcon='./search.svg'
-            rightIcon='./order.svg'
-            leftIconTooltip='Search Chat'
-            rightIconTooltip='Order Projects'
-            leftIconAction={() => console.log('Left icon action triggered')}
-            leftIconChildren={<SearchChildren onSearch={(query) => console.log(query)} />}
-            rightIconAction={() => console.log('Right icon action triggered')}
-            rightIconChildren={<div>Right Icon Modal Content</div>}
+            // leftIcon='./search.svg'
+            // rightIcon='./order.svg'
+            // leftIconTooltip='Search Chat'
+            // rightIconTooltip='Order Projects'
+            // leftIconAction={() => console.log('Left icon action triggered')}
+            // leftIconChildren={<SearchChildren onSearch={(query) => console.log(query)} />}
+            // rightIconAction={() => console.log('Right icon action triggered')}
+            // rightIconChildren={<div>Right Icon Modal Content</div>}
           >
             <div className="box-content">
               <LastChats />
@@ -135,11 +135,11 @@ const Home = () => {
           <Box
             title={'My Projects'}
             className='Projects-grid-layout'
-            leftIcon='./search.svg'
-            leftIconTooltip='Search Project'
-            rightIcon='./order.svg'
-            rightIconAction={() => console.log('Right icon action triggered')}
-            rightIconChildren={<div>Right Icon Modal Content</div>}
+            // leftIcon='./search.svg'
+            // leftIconTooltip='Search Project'
+            // rightIcon='./order.svg'
+            // rightIconAction={() => console.log('Right icon action triggered')}
+            // rightIconChildren={<div>Right Icon Modal Content</div>}
           >
             <div className="box-content">
               <MyProjects  />
@@ -151,9 +151,9 @@ const Home = () => {
           <Box
             title={'Last Bids'}
             className='Projects-grid-layout'
-            leftIcon='./search.svg'
-            leftIconTooltip='Search Project'
-            rightIcon='./order.svg'
+            // leftIcon='./search.svg'
+            // leftIconTooltip='Search Project'
+            // rightIcon='./order.svg'
           >
             <div className="box-content">
               <MyBids/>
