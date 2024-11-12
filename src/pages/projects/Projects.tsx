@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
 import Box from '../../components/topBox/Box';
-import './projects.scss';
+//import './projects.scss';
 import AllProjects from './allProjects/AllProjects';
 const Projects = () => {
   const navigate = useNavigate();

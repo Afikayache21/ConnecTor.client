@@ -5,7 +5,7 @@ import ProjectStore from "./projectsStore";
 import WindowStore from "./windowStore";
 import BidsStore from "./bidsStore";
 import { ChatsStore } from "./ChatsStore";
-import commonStore from "./CommonStore";
+import commonStore from "./commonStore";
 
 interface IStore {
     authStore: AuthStore;

@@ -1,102 +1,87 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
-import './registerDesktop.scss';
-// import './registerMobile.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { register, IUser } from '../../services/AuthService';
-import { getToken } from '../../Api/agent';
-import { ISelectOption } from '../../Store/CommonStore';
 import { useStore } from '../../Store/store';
-
-
-
-// const workingAreaOptions: ISelectOption[] = [
-//   { value: 1, label: 'Area 1' },
-//   { value: 2, label: 'Area 2' },
-//   { value: 3, label: 'Area 3' },
-// ];
-
-// const professionsList: ISelectOption[] = [
-//   { value: 1, label: 'Electrician' },
-//   { value: 2, label: 'AC Tech' },
-//   { value: 3, label: 'Plumber' },
-// ];
+import './registerDesktop.scss';
+import { ISelectOption } from '../../Store/commonStore';
 
 const Register: React.FC = () => {
-
-  const {CommonStore} = useStore();
-//   const{allProffesios,allRegions}=CommonStore
-
-// const [proffesions ,setProffesions]= useState()
-// const [reions ,setRegions]= useState()
-
-
+  const { CommonStore } = useStore();
   const navigate = useNavigate();
 
-  if (localStorage.getItem('isLoggedIn') == 'true') {
-    navigate('/')
-  }
-
-
+  const [loadingProfessions, setLoadingProfessions] = useState(true);
+  const [loadingRegions, setLoadingRegions] = useState(true);
+  const [selectedProfessions, setSelectedProfessions] = useState<ISelectOption[]>([]);
+  const [selectedRegion, setSelectedRegion] = useState<{ value: number; label: string } | null>(null);
   const [activeTab, setActiveTab] = useState<'customer' | 'constructor'>('customer');
-  //const [selectedWorkingArea, setSelectedWorkingArea] = useState<IWorkingAreaOption | null>(null);
-  const [selectedProfession, setSelectedProfession] = useState<ISelectOption | null>(null);
 
-  const [user, setUser] = useState<IUser>({
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    regionID: 1,
-    professionID: 1, // Changed to professionID
-    businessLicenseCode: '0', // Added this property
-    telephone: '',
-    userImage: null, // Image initially set to null
-    creationDate: new Date().toISOString(),
-    activeStatus: true,
-    userTypeID: 1 // Added this property
-  });
+  const [user, setUser] = useState<IUser>({});
+
+  // Load professions and regions once on mount if not already loaded
+  useEffect(() => {
+    const loadOptions = async () => {
+      if (!CommonStore.allProffesios.size) {
+        setLoadingProfessions(true);
+        await CommonStore.loadProffesions();
+        setLoadingProfessions(false);
+      } else {
+        setLoadingProfessions(false);
+      }
+
+      if (!CommonStore.allRegions.size) {
+        setLoadingRegions(true);
+        await CommonStore.loadRegions();
+        setLoadingRegions(false);
+      } else {
+        setLoadingRegions(false);
+      }
+    };
+    loadOptions();
+  }, [CommonStore]);
+  useEffect(() => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      professionIDs: selectedProfessions.map((option) => option.value),
+    }));
+  }, [selectedProfessions]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
+    console.log(name, value);
+
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setUser((prevUser) => ({
-          ...prevUser,
-          userImage: reader.result as string, // Base64 image string
-        }));
-      };
-      reader.readAsDataURL(file); // Convert image to Base64 string
-    }
+  if (file) {
+    setUser((prevUser) => ({ ...prevUser, userImage: file }));
+  }
   };
 
   const handleRegisterClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    console.log(user.userPassword);
+    console.log(user.email);
+    console.log(user.firstName);
+    console.log(user.lastName);
+    console.log(user.telephone);
+    console.log(user.professionIDs);
 
-    if (!user.password || !user.email || !user.firstName || !user.lastName || !user.telephone) {
+
+    if (!user.userPassword || !user.email || !user.firstName || !user.lastName || !user.telephone) {
       alert('Please fill in all required fields.');
       return;
     }
-
-    //  if (activeTab === 'constructor' && (!selectedWorkingArea || !selectedProfession)) {
-    //   alert('Please select a working area and profession.');
-    //   return;
-    // }
+    activeTab == 'customer' ? user.userTypeID = 1 : user.userTypeID = 2;
 
     const userToRegister: IUser = {
       ...user,
-      // regionID: selectedWorkingArea ? parseInt(selectedWorkingArea.value) : user.regionID,
-      professionID: selectedProfession ? selectedProfession.value : user.professionID,
+      regionID: selectedRegion ? selectedRegion.value : user.regionID,
+      professionIDs: selectedProfessions.map((option) => option.value),
     };
+    console.log(userToRegister.professionIDs);
 
     try {
       const isSuccess = await register(userToRegister);
@@ -116,7 +101,10 @@ const Register: React.FC = () => {
       <div className='tab-bar'>
         <button
           className={`tab ${activeTab === 'customer' ? 'active' : ''}`}
-          onClick={() => setActiveTab('customer')}
+          onClick={() => {
+            setActiveTab('customer')
+
+          }}
         >
           I'm a customer
         </button>
@@ -130,81 +118,63 @@ const Register: React.FC = () => {
 
       <div className='register-card'>
         <h1>Register</h1>
-
         <div className='inputs-form'>
-          <input
-            type="text"
-            name="firstName"
-            placeholder='First name'
-            value={user.firstName}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="lastName"
-            placeholder='Last name'
-            value={user.lastName}
-            onChange={handleInputChange}
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder='Email'
-            value={user.email}
-            onChange={handleInputChange}
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder='Password'
-            value={user.password}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="telephone"
-            placeholder='Phone number'
-            value={user.telephone}
-            onChange={handleInputChange}
-          />
+          <input type="text" name="firstName" placeholder='First name' value={user.firstName} onChange={handleInputChange} />
+          <input type="text" name="lastName" placeholder='Last name' value={user.lastName} onChange={handleInputChange} />
+          <input type="email" name="email" placeholder='Email' value={user.email} onChange={handleInputChange} />
+          <input type="password" name="userPassword" placeholder='Password' value={user.userPassword} onChange={handleInputChange} />
+          <input type="text" name="telephone" placeholder='Phone number' value={user.telephone} onChange={handleInputChange} />
 
-          {activeTab === 'constructor' && (
-            <>
-              <input
-                type="text"
-                placeholder='License Code'
-                name="businessLicenseCode"
-                value={user.businessLicenseCode || ''}
-                onChange={handleInputChange}
-              />
-              {/* <Select
-                options={workingAreaOptions}
-                placeholder="Working area"
-                value={selectedWorkingArea}
-                onChange={setSelectedWorkingArea}
-                isClearable 
-              /> */}
-              {/* <Select
-                options={professionsList}
-                placeholder="User profession"
-                value={selectedProfession}
-                onChange={setSelectedProfession}
-                isClearable
-              /> */}
-            </>
+          {loadingRegions ? (
+            <p>Loading regions...</p>
+          ) : (
+            <Select
+              options={CommonStore.regions}
+              placeholder="Select Region"
+              value={selectedRegion}
+              onChange={(selectedOption) => setSelectedRegion(selectedOption as { value: number; label: string })}
+              isClearable
+              styles={{
+                option: (provided) => ({
+                  ...provided,
+                  color: 'black',
+                }),
+              }}
+            />
           )}
-          <input
-            type="file"
-            placeholder='Profile picture'
-            onChange={handleFileChange}
-          />
+
+          {loadingProfessions ? (
+            <p>Loading professions...</p>
+          ) : (
+            activeTab === 'constructor' && (
+              <>
+                <Select
+                  options={CommonStore.proffesions}
+                  placeholder="Select Profession"
+                  value={selectedProfessions}
+                  onChange={(selectedOption) => setSelectedProfessions(selectedOption as { value: number; label: string }[])}
+                  isClearable
+                  isMulti
+                  styles={{
+                    option: (provided) => ({
+                      ...provided,
+                      color: 'black',
+                    }),
+                  }}
+                />
+                <input
+                  type="text"
+                  name="businessLicenseCode"
+                  placeholder="Business License Code"
+                  onChange={handleInputChange}
+                />
+              </>
+            )
+          )}
+          <input type="file" placeholder='Profile picture' onChange={handleFileChange} />
         </div>
-        <Link to='/login'>
-          <span>Already have an account?</span>
-        </Link>
-        <button onClick={handleRegisterClick} className='register-button'>
-          Register
-        </button>
+        <Link to='/login'><span>Already have an account?</span></Link>
+        <button onClick={handleRegisterClick} className='register-button'>Register</button>
       </div>
     </div>
   );

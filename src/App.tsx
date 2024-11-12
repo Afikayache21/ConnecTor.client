@@ -18,26 +18,26 @@ import CreateProject from './pages/projects/CreateProject';
 import { useStore } from './Store/store';
 import { useEffect } from 'react';
 import signalRService from './services/signalRService';
+import { getUserId } from './Api/agent';
 
 
 const App = observer(() => {
 
+  const currentUserId = Number(getUserId());
+  const handleMessageReceived = async (message: any) => {
+    debugger;
+    if(currentUserId != message.value.senderId)
+    alert("You have New Message: " + message.value.content);
+        
+      };
+
+  
   useEffect(() => {
     // Start the SignalR connection when the component mounts
     signalRService.startConnection();
-
-    // Define the callback function for received messages
-    const handleMessageReceived = (message: string) => {
-      alert(message);
-//place this in the chat if it is open
-
-
-
-    };
-
-    // Subscribe to the ReceiveMessage event
     signalRService.onMessageReceived(handleMessageReceived);
 
+    
     // Cleanup when the component unmounts
     return () => {
       signalRService.offMessageReceived();

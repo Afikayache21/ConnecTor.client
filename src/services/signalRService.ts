@@ -12,23 +12,8 @@ class SignalRService {
     this.connection = new signalR.HubConnectionBuilder()
     .withUrl(`https://localhost:5000/hubs/ChatHub?customData=${customData}`) // Update the URL to match your backend
       .withAutomaticReconnect()
-      .build();
-      
-    
-    //   this.connection = new signalR.HubConnectionBuilder()
-    //   .withUrl(`https://localhost:5000/hubs/ChatHub?customData=${customData}`, {
-    //     accessTokenFactory: () => {
-    //       // Retrieve the token from local storage
-    //       return localStorage.getItem('userToken') || '';
-    //     },
-    //   })
-    //   .withAutomaticReconnect()
-    //   .build();
+      .build();      
 
-
-
-
-    // Handle connection close event
     this.connection.onclose(this.onConnectionClose);
   }
 

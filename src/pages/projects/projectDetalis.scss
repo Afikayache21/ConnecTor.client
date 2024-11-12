@@ -1,0 +1,123 @@
+.project-details-container {
+    padding: 20px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    max-height: 60dvh;
+    overflow: hidden;
+  }
+  
+  .project-details-container h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+    border-bottom: 2px solid #eaeaea;
+    padding-bottom: 10px;
+  }
+  
+  .project-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .project-info div {
+    flex: 1;
+    min-width: 220px;
+  }
+  
+  .project-info strong {
+    font-weight: 600;
+    color: #555;
+  }
+  
+  .project-info div {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  .project-dates, .project-payment {
+    margin-bottom: 20px;
+  }
+  
+  .project-dates div, .project-payment div {
+    margin-bottom: 10px;
+  }
+  
+  .description {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .description strong {
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .description p {
+    font-size: 1rem;
+    color: #444;
+    margin-top: 10px;
+  }
+  
+  .reviews {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reviews strong {
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .reviews p {
+    font-size: 1rem;
+    color: #444;
+    margin-top: 10px;
+  }
+  
+  .project-info .client-info, .project-info .contractor-info {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .project-dl {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  .project-dl span {
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  
+  @media (max-width: 768px) {
+    .project-details-container {
+      padding: 15px;
+    }
+  
+    .project-info div {
+      flex: 1 1 100%;
+    }
+  
+    .project-info {
+      gap: 10px;
+    }
+  
+    .description, .reviews {
+      margin-top: 10px;
+    }
+  }
+  

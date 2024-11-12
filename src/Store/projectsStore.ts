@@ -1,11 +1,11 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../Api/agent";
-import { HomePageProjectDto } from "../services/ProjectService";
+import { HomePageProjectDto, Project } from "../services/ProjectService";
 
 export default class ProjectStore {
     allProjectRegistry = new Map<number, HomePageProjectDto>();
     projectRegistry = new Map<number, HomePageProjectDto>();
-    selectedProject: HomePageProjectDto | undefined = undefined;
+    selectedProject: Project | undefined = undefined;
     editMode = false;
     loading = false;
     loadingInitial = true;
@@ -43,12 +43,12 @@ export default class ProjectStore {
         try {
             const result = await agent.Projects.userList();
             //console.log('API response:', result);
-       
-                runInAction(() => {
-                    result.forEach(project => this.setProject(project));
-                    this.loading = false;
-                });
-       
+
+            runInAction(() => {
+                result.forEach(project => this.setProject(project));
+                this.loading = false;
+            });
+
         } catch (err) {
             runInAction(() => {
                 this.error = 'Failed to load projects.';
@@ -66,12 +66,12 @@ export default class ProjectStore {
         try {
             const result = await agent.Projects.list();
             //console.log('API response:', result);
-       
-                runInAction(() => {
-                    result.forEach(project => this.setProject(project));
-                    this.loading = false;
-                });
-       
+
+            runInAction(() => {
+                result.forEach(project => this.setProject(project));
+                this.loading = false;
+            });
+
         } catch (err) {
             runInAction(() => {
                 this.error = 'Failed to load projects.';
@@ -81,18 +81,20 @@ export default class ProjectStore {
         }
     }
 
-    loadProject = async (id: number): Promise<HomePageProjectDto | undefined> => {
-        let project = this.getProject(id);
-        if (project) {
-            this.selectedProject = project;
-            return project;
-        } else {
+    loadProject = async (projectId: number): Promise<Project | undefined> => {
+        debugger;
+        console.log(this.projectsByDeadline)
+        let project = this.getProject(projectId);
+        let newProject: Project | undefined
+        if (!project) {
+            return;
+        }
+        else {
             this.setLoadingInitial(true);
             this.error = null;
             try {
-                project = await agent.Projects.details(id);
-                this.setProject(project);
-                runInAction(() => this.selectedProject = project);
+                newProject = await agent.Projects.details(projectId);
+                this.selectedProject = newProject;
             } catch (error) {
                 runInAction(() => {
                     this.error = 'Failed to load the project details.';
@@ -101,7 +103,7 @@ export default class ProjectStore {
             } finally {
                 this.setLoadingInitial(false);
             }
-            return project;
+            return newProject;
         }
     }
 
@@ -112,7 +114,7 @@ export default class ProjectStore {
             await agent.Projects.create(project);
             runInAction(() => {
                 this.setProject(project);
-                this.selectedProject = project;
+                //this.selectedProject = project;
                 this.editMode = false;
                 this.loading = false;
             });
@@ -132,7 +134,7 @@ export default class ProjectStore {
             await agent.Projects.update(project);
             runInAction(() => {
                 this.projectRegistry.set(project.id, project);
-                this.selectedProject = project;
+                //this.selectedProject = project;
                 this.editMode = false;
                 this.loading = false;
             });

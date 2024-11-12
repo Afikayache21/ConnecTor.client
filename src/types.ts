@@ -39,24 +39,24 @@ export type User = {
 };
 
 // Project Type
-export type Project = {
-    ProjectID: number;
-    ClientID: number;
-    ProjectName: string;
-    ProjectFieldID: number;
-    OpeningDate: string;
-    Deadline: string;
-    ProjectDescription: string;
-    RegionID: number;
-    ProjectQuantities?: string | null;
-    ConstructionPlans?: string | null;
-    ContractorID?: number| null;
-    ActualStartDate?: string | null;
-    ActualEndDate?: string | null;
-    ActualPayment?: number | null;
-    ClientReview?: string | null;
-    ContractorReview?: string | null;
-};
+// export type Project = {
+//     ProjectID: number;
+//     ClientID: number;
+//     ProjectName: string;
+//     ProjectFieldID: number;
+//     OpeningDate: string;
+//     Deadline: string;
+//     ProjectDescription: string;
+//     RegionID: number;
+//     ProjectQuantities?: string | null;
+//     ConstructionPlans?: string | null;
+//     ContractorID?: number| null;
+//     ActualStartDate?: string | null;
+//     ActualEndDate?: string | null;
+//     ActualPayment?: number | null;
+//     ClientReview?: string | null;
+//     ContractorReview?: string | null;
+// };
 // export type CreateProjectModel = {
 //     //ClientID: number;
 //     ProjectName: string;
@@ -154,16 +154,16 @@ export type Chat ={
      IsRead :boolean;
 }
 // Full Data Structure
-export type DataStructure = {
-    regions: Region[];
-    professions: Profession[];
-    project_fields: ProjectField[];
-    user_types: UserType[];
-    users: User[];
-    projects: Project[];
-    project_proposals: ProjectProposal[];
-    project_images: ProjectImage[];
-    ratings: Rating[];
-    log_table: LogEntry[];
-    messages: Message[];
-};
+// export type DataStructure = {
+//     regions: Region[];
+//     professions: Profession[];
+//     project_fields: ProjectField[];
+//     user_types: UserType[];
+//     users: User[];
+//     projects: Project[];
+//     project_proposals: ProjectProposal[];
+//     project_images: ProjectImage[];
+//     ratings: Rating[];
+//     log_table: LogEntry[];
+//     messages: Message[];
+// };

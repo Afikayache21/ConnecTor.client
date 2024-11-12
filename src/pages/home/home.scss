@@ -14,7 +14,7 @@
     "box1 box2 box3"
     "box1 box2 box3";
     gap: 20px;
-    max-height: 45vh; /* Limit the height of the bottom section */
+    height: 45vh; /* Limit the height of the bottom section */
     overflow: hidden; /* Prevent overflow if content exceeds */
     padding: 10px; /* Add padding for visual spacing */
     grid-auto-rows: min(180px, auto); /* Ensure rows have a minimum height */
@@ -28,7 +28,7 @@
    "box4 box5 box6"
    "box4 box5 box6";
   gap: 20px;
-  max-height: 45vh; /* Limit the height of the bottom section */
+  height: 45vh; /* Limit the height of the bottom section */
   overflow: hidden; /* Prevent overflow if content exceeds */
   padding: 10px; /* Add padding for visual spacing */
   grid-auto-rows: min(180px, auto); /* Ensure rows have a minimum height */

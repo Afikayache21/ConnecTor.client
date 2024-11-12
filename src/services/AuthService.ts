@@ -1,50 +1,38 @@
 // Import the JSON mock data import dbMock from '../mockDB/mock.json'; 
 
+import agent from "../Api/agent";
+
 export interface ILoginUser {
     email: string;
     password: string;
 }
-
+export interface IAuthResult
+{
+     success :boolean;
+     token :string; // Can be JWT or Session token
+     message :string;
+}
 export interface IUser {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    regionID: number;            // Made required
-    professionID: number;        // Made required and corrected naming
-    businessLicenseCode: string; // Required now
-    telephone: string;
-    userImage?: string | null;
-    creationDate?: string;       // Optional in case it's auto-generated server-side
-    activeStatus?: boolean;      // Optional in case it's set by the backend
-    userTypeID: number;          // Added this property
+    userTypeID?: number;  
+    userPassword?: string;
+    email?: string;
+    firstName?: string;
+    lastName?: string;
+    telephone?: string;
+    regionID?: number;           
+    userImage?: File; // Changed from string | null to File
+    businessLicenseCode?: string;
+    professionIDs?: number[];     
 }
 export const register = async (user: IUser): Promise<any> => {
-    try {
-        const response = await fetch('https://localhost:5000/api/Auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: user.email,
-                password: user.password,      // Changed from userPassword to match Swagger
-                firstName: user.firstName,
-                lastName: user.lastName,
-                regionID: user.regionID,
-                professionID: user.professionID,  // Fixed name from professionId to professionID
-                businessLicenseCode: user.businessLicenseCode,
-                telephone: user.telephone,
-                userImage: user.userImage,
-                userTypeID: user.userTypeID       // Added to the payload
-            }), 
-        });
+    try {       
+        const response =await agent.Auth.register(user);
 
-        if (!response.ok) {
+        if (!response) {
             throw new Error('Registration failed.');
         }
 
-        const data = await response.json();
+        const data = response.success
         alert('Registration successful');
         return data;
     } catch (error: any) {
@@ -61,7 +49,7 @@ export const login = async (user: ILoginUser): Promise<any> => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user), // Send user email and password
+            body: JSON.stringify(user),
         });
 
         if (!response.ok) {

@@ -2,7 +2,7 @@ import Box from '../../components/topBox/Box';
 import LastChats from '../../components/topBox/lastChats/LastChats';
 import MyProjects from '../../components/topBox/myProjects/MyProjects';
 import './home.scss';
-import SearchChildren from '../../components/modals/childrens/search/SearchChildren';
+//import SearchChildren from '../../components/modals/childrens/search/SearchChildren';
 import Chart from '../../components/chart/Chart';
 import { useStore } from '../../Store/store';
 import Slider from 'react-slick';

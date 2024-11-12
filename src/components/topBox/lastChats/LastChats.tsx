@@ -5,22 +5,20 @@ import { formatDate } from "../../../services/DateService";
 import ModalBox from "../../modals/ModalBox";
 import ChatWindow from "./ChatWindow";
 import { useStore } from "../../../Store/store";
-import { useNavigate } from "react-router";
+//import { useNavigate } from "react-router";
 
 const LastChats = observer(() => {
 
-  const navigate = useNavigate();
-  const { chatsStore ,windowStore} = useStore();
+  //const navigate = useNavigate();
+  const { chatsStore} = useStore();
   const {
     tenChatsSortedByTimestamp,
     loadChats,
-    loadingInitial,
     error,
     loadChat,
     selectedChat,
   } = chatsStore;
 
-  const {isMobile} = windowStore;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -32,12 +30,12 @@ const LastChats = observer(() => {
   //if (loadingInitial) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
-  const toggleModal = (chatId: number | null) => {
+  const toggleModal = async (chatId: number | null) => {
     if (chatId !== null) {
-      loadChat(chatId); // Set the selected chat in the store
-      setIsModalVisible(true); // Open the modal
+      await loadChat(chatId);
+      setIsModalVisible(true); 
     } else {
-      setIsModalVisible(false); // Close the modal
+      setIsModalVisible(false); 
     }
   };
 

@@ -1,8 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
-import { HomePageProjectDto } from '../services/ProjectService';
+import { HomePageProjectDto, Project } from '../services/ProjectService';
 import { BidDto } from '../Store/bidsStore';
 import { IChat, IMessage } from '../Store/ChatsStore';
-import { ISelectOption } from '../Store/CommonStore';
+import { ISelectOption } from '../Store/commonStore';
+import { IAuthResult, ILoginUser, IUser } from '../services/AuthService';
 axios.defaults.baseURL = 'https://localhost:5000/api';
 
 export const getToken = () => {
@@ -17,6 +18,8 @@ export const getUserTypeId = () => {
 export const getUserFirstName = () => {
     return localStorage.getItem('firstName'); // or however you store the token
 };
+
+
 // Add a request interceptor to include the token in the headers
 axios.interceptors.request.use(config => {
     const token = getToken();    
@@ -89,13 +92,10 @@ const requestsWithoutAuth = {
         axios.delete<T>(url).then(responseBody),
 };
 
-
-
-
 const Projects = {
     userList: () => requests.get<HomePageProjectDto[]>('/Project/UserProjects'),
     list: () => requests.get<HomePageProjectDto[]>('/Project/ProjectList'),
-    details: (id: number) => requests.get<HomePageProjectDto>(`/Project/${id}`),
+    details: (projectId: number) => requests.get<Project>(`/Project/${projectId}`),
     create: (project: HomePageProjectDto) => requests.post<HomePageProjectDto>('/Project', project),
     update: (project: HomePageProjectDto) => requests.put<HomePageProjectDto>(`/Project/${project.id}`, project),
     delete: (id: number) => requests.delete<void>(`/Project/${id}`)
@@ -116,14 +116,21 @@ const Bids = {
 };
 const Common = {
     proffesionsList: () => requests.get<ISelectOption[]>('/Proffesions') ,   
-    regionsList: () => requests.get<ISelectOption[]>('/Regions')    
+    regionsList: () => requests.get<ISelectOption[]>('/Regions'),    
+    projectFiledsList: () => requests.get<ISelectOption[]>('/ProjectFiledsConroller')    
 };
+const Auth = {
+    login: (user: ILoginUser) => requests.post<IAuthResult>(`/Auth/login`,user),
+    register: (user: IUser) => requests.post<IAuthResult>(`/Auth/register`,user),
+};
+
 
 const agent = {
     Chats,
     Projects,
     Bids,
     Common,
+    Auth
 }
 export default agent;
 
