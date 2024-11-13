@@ -30,17 +30,14 @@ function Profile() {
               <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
                 <div className="d-flex justify-content-end text-center py-1">
                   <div>
-                    <MDBCardText className="mb-1 h5">4</MDBCardText>
                     <MDBCardText className="small text-muted mb-0">Projects</MDBCardText>
+                    <MDBCardText className="mb-1 h5">4</MDBCardText>
                   </div>
                   <div className="px-3">
+                    <MDBCardText className="small text-muted mb-0">Bids</MDBCardText>
                     <MDBCardText className="mb-1 h5">26</MDBCardText>
-                    <MDBCardText className="small text-muted mb-0">Followers</MDBCardText>
                   </div>
-                  <div>
-                    <MDBCardText className="mb-1 h5">48</MDBCardText>
-                    <MDBCardText className="small text-muted mb-0">Following</MDBCardText>
-                  </div>
+                  
                 </div>
               </div>
               <MDBCardBody className="text-black p-4">
@@ -54,7 +51,6 @@ function Profile() {
                 </div>
                 <div className="d-flex justify-content-between align-items-center mb-4">
                   <MDBCardText className="lead fw-normal mb-0">Recent Projects</MDBCardText>
-                  <MDBCardText className="mb-0"><a href="#!" className="text-muted">Show all</a></MDBCardText>
                 </div>
                 <MDBRow>
                   <MDBCol className="mb-2">

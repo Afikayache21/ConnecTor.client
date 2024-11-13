@@ -2,11 +2,12 @@ import { useNavigate } from 'react-router';
 import Box from '../../components/topBox/Box';
 //import './projects.scss';
 import AllProjects from './allProjects/AllProjects';
+import MyProjects from '../../components/topBox/myProjects/MyProjects';
 const Projects = () => {
   const navigate = useNavigate();
   return (
     <Box
-    title={'All projects'}
+    title={'My Projects'}
     className='all-projects-grid-layout'
      leftIcon='./search.svg'
     leftIconTooltip='Search Chat'
@@ -17,7 +18,7 @@ const Projects = () => {
     
   >
     <div className="box-content">
-      <AllProjects/>
+      <MyProjects/>
     </div>
   </Box>
   )

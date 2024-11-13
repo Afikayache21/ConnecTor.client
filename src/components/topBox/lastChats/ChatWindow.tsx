@@ -131,18 +131,15 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ Chat }) => {
   // Reference for the messages container
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const loadMessages = async () => {
-    if (!selectedChat?.chatId) return;
-    const loadedChat = await chatsStore.loadChat(selectedChat.chatId);
-    if (loadedChat && loadedChat.messages) {
-      setMessages(loadedChat.messages);
-      //console.log(loadedChat.messages);
-    }
-  };
+  // const loadMessages = async () => {
+  //   if (!selectedChat?.chatId) return;
+  //   const loadedChat = await chatsStore.loadChat(selectedChat.chatId);
+  //   if (loadedChat && loadedChat.messages) {
+  //     setMessages(loadedChat.messages);
+  //     //console.log(loadedChat.messages);
+  //   }
+  // };
   const handleMessageReceived = async (message: any) => {
-debugger;
-// alert(message.value.chatId);
-    // await loadMessages();
 
     
     message.value.messageId = message.value.id
@@ -181,7 +178,7 @@ debugger;
 
   const sendMessage = async () => {
     if (newMessage.trim() === '') return;
-debugger;
+    
     const newMsg: IMessage = {
       chatId: Chat.chatId,
       content: newMessage,
