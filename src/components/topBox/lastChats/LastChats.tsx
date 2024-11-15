@@ -35,6 +35,7 @@ const LastChats = observer(() => {
       await loadChat(chatId);
       setIsModalVisible(true); 
     } else {
+      await loadChats();
       setIsModalVisible(false); 
     }
   };

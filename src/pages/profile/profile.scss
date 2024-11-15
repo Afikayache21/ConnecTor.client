@@ -4,7 +4,64 @@
   display: flex;            // Flexbox layout to ensure proper structure
   flex-direction: column;
   
-  .update-user-from {
+  .content-section {
+    background-color: #f8f9fa; // Light background color
+    padding: 1.5rem;           // Add padding for spacing
+    color: #333;               // Darker text color for contrast
+    border-radius: 8px;        // Add rounded corners for a modern look
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+
+    .stats {
+      display: flex;
+      justify-content: flex-end;
+      gap: 2rem;
+
+      .stat {
+        text-align: center;
+
+        .stat-label {
+          font-size: 0.9rem;
+          color: #6c757d; // Muted text color for labels
+        }
+
+        .stat-value {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #007bff; // Project's primary color for numbers
+        }
+      }
+    }
+  }
+
+  .about-section {
+    margin-top: 2rem;
+    background-color: #fff;      // White background for distinction
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+
+    p {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;               // Darker color for section heading
+      margin-bottom: 1rem;
+    }
+
+    .about-details {
+      background-color: #f8f9fa; // Light background for the inner container
+      padding: 1rem;
+      border-radius: 8px;
+
+      .detail {
+        font-size: 1rem;
+        font-style: italic;
+        color: #495057; // Slightly muted color for details
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  .update-user-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,17 +83,99 @@
       cursor: pointer;
     }
   }
-}
 
-/* Additional styling to ensure scrolling works as expected */
-html, body {
-  height: 100%;
-  overflow-y: auto;         // Ensure the entire page can scroll if needed
-}
 
-.MDBContainer, .MDBCard {
-  height: auto;             // Ensure cards and containers grow with content
-  max-height: 100%;         // Prevent overflow without hidden scrolling
-  overflow-y: auto;    
-}
+  .custom-tabs {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
 
+    .tab-button {
+      flex: 1;             // Make each button take up equal space
+      padding: 1rem 0;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+      background-color: #f8f9fa; // Default background color
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+
+      &.active {
+        background-color: #007bff; // Active background color matches project colors
+        color: #fff;               // Active text color
+      }
+
+      &:hover {
+        background-color: #0056b3; // Slightly darker shade on hover
+        color: #fff;
+      }
+
+      &:focus {
+        outline: none; // Remove focus outline for a cleaner look
+      }
+
+      &:first-child {
+        border-top-left-radius: 10px; // Rounded corner for the first button
+        border-bottom-left-radius: 10px; // Rounded corner for the first button
+      }
+
+      &:last-child {
+        border-top-right-radius: 10px; // Rounded corner for the last button
+        border-bottom-right-radius: 10px; // Rounded corner for the first button
+
+      }
+    }
+  }
+
+
+  // Hover effect for project images
+  .image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .image-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px; // Matches the rounded corners of the images
+      flex: 1 1 calc(50% - 1rem); // Responsive sizing for images (2 columns)
+
+      .image {
+        transition: transform 0.3s ease, filter 0.3s ease;
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5); // Faded grey background
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: inherit; // Ensures the overlay follows the image's rounded corners
+      }
+
+      .overlay-text {
+        color: #fff;
+        font-size: 1.25rem;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      &:hover .image {
+        transform: scale(1.05); // Slight zoom-in effect
+        filter: grayscale(100%); // Turns the image into grayscale
+      }
+
+      &:hover .overlay {
+        opacity: 1; // Makes the overlay visible on hover
+      }
+    }
+  }
+}

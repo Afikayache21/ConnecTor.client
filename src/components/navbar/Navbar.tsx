@@ -40,5 +40,4 @@ function Navbar() {
     );
 }
 
-// Wrap Navbar with observer to make it reactive
 export default observer(Navbar);

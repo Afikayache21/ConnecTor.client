@@ -82,7 +82,7 @@ export default class ProjectStore {
     }
 
     loadProject = async (projectId: number): Promise<Project | undefined> => {
-        debugger;
+        //debugger;
         console.log(this.projectsByDeadline)
         let project = this.getProject(projectId);
         let newProject: Project | undefined

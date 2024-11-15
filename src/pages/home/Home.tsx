@@ -164,35 +164,40 @@ const Home = () => {
 
       </div>
 
-      <div className="bottom-boxes">
-        <div className="box box4">
-          <Box
-            title={'Statistics'}
-            className='Projects-grid-layout'           
-          >
-            <div className="box-content">
-            <Chart/>
-            </div>
-          </Box>
-        </div>
-        <div className="box box5">
-          <Box title={'Recent Activity'}>
-            <div className="box-content">
-              {/* Insert box content here */}
-            </div>
-          </Box>
-        </div>
-
-        <div className="box box6">
-          <Box title={'Notifications'}>
-            <div className="box-content">
-            <LastChats  />
-            </div>
-          </Box>
-        </div>
-      </div>
+     
     </div>
   );
 };
 
 export default Home;
+
+
+
+
+{/* <div className="bottom-boxes">
+<div className="box box4">
+  <Box
+    title={'Statistics'}
+    className='Projects-grid-layout'           
+  >
+    <div className="box-content">
+    <Chart/>
+    </div>
+  </Box>
+</div>
+<div className="box box5">
+  <Box title={'Recent Activity'}>
+    <div className="box-content">
+      {/* Insert box content here */}
+//     </div>
+//   </Box>
+// </div>
+
+// <div className="box box6">
+//   <Box title={'Notifications'}>
+//     <div className="box-content">
+//     <LastChats  />
+//     </div>
+//   </Box>
+// </div>
+// </div> 

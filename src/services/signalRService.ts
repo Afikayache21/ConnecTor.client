@@ -46,7 +46,9 @@ class SignalRService {
 
   // Subscribe to the ReceiveMessage event
   public onMessageReceived = (callback: (message: string) => void): void => {
+   console.log("message before: ")
     this.connection.on('ReceiveMessage', callback);
+
   };
 
   // Unsubscribe from the ReceiveMessage event

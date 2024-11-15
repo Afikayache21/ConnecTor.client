@@ -6,7 +6,7 @@ function ModalBox({BackroundColor, isVisible, onClose, children }: {BackroundCol
   const {windowStore} = useStore();
   const {isMobile} = windowStore;
   if (!isVisible) return null; 
-  const handleOverlayClick = () => {
+  const handleOverlayClick = () => {    
     onClose(); 
   };
 
