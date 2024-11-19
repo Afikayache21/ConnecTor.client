@@ -25,7 +25,6 @@ const App = observer(() => {
 
   const currentUserId = Number(getUserId());
   const handleMessageReceived = async (message: any) => {
-   // debugger;
     if(currentUserId != message.value.senderId)
     alert("You have New Message: " + message.value.content);
         

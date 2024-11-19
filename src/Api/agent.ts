@@ -1,9 +1,11 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { HomePageProjectDto, Project } from '../services/ProjectService';
 import { BidDto } from '../Store/bidsStore';
 import { IChat, IMessage } from '../Store/ChatsStore';
 import { ISelectOption } from '../Store/commonStore';
-import { IAuthResult, ILoginUser, IUser } from '../services/AuthService';
+import { IAuthResult, ILoginUser } from '../services/AuthService';
+import { IUserStore } from '../Store/UserStore';
+import { configure } from 'mobx';
 axios.defaults.baseURL = 'https://localhost:5000/api';
 
 export const getToken = () => {
@@ -50,12 +52,22 @@ axios.interceptors.response.use(async response => {
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const requests = {
-    get: <T>(url: string) => axios.get<T>(url, {
+    
+    get: <T>(url: string,config?: AxiosRequestConfig) => axios.get<T>(url, {
         headers: {
             'Authorization': `Bearer ${getToken()}`,
             'Content-Type': 'application/json'
-        }
+        },
+        ...config,
     }).then(responseBody),
+    specialGet: <T>(url: string, config?: AxiosRequestConfig, returnFullResponse: boolean = false) =>
+        axios.get<T>(url, {
+            headers: {
+                'Authorization': `Bearer ${getToken()}`,
+                'Content-Type': 'application/json'
+            },
+            ...config,
+        }).then(response => returnFullResponse ? response : response.data),
     
     post: <T>(url: string, body: {}) => axios.post<T>(url, body, {
         headers: {
@@ -75,6 +87,11 @@ const requests = {
         headers: {
             'Authorization': `Bearer ${getToken()}`,
             'Content-Type': 'application/json'
+        }
+    }).then(responseBody),
+    postForm: <T>(url: string, formData: FormData) => axios.post<T>(url, formData, {
+        headers: {
+            'Authorization': `Bearer ${getToken()}`
         }
     }).then(responseBody),
 };
@@ -121,7 +138,18 @@ const Common = {
 };
 const Auth = {
     login: (user: ILoginUser) => requests.post<IAuthResult>(`/Auth/login`,user),
-    register: (user: IUser) => requests.post<IAuthResult>(`/Auth/register`,user),
+    register: (formData: FormData) =>
+        requests.postForm<IAuthResult>(`/Auth/register`, formData),
+};
+const Files = {
+    Upload: (user: ILoginUser) => requests.post<IAuthResult>(`/Auth/login`,user),
+    Download: (fileId: number) =>
+        requests.specialGet<AxiosResponse>(`/Files/download/${fileId}`, { responseType: 'blob' },true),
+    View: (fileId:number) =>
+        requests.get<IAuthResult>(`/Files/file?fileId=${fileId}`),
+};
+const Users = {
+    userDetails: (userId: number) => requests.get<IUserStore>(`/User/${userId}`),   
 };
 
 
@@ -130,7 +158,9 @@ const agent = {
     Projects,
     Bids,
     Common,
-    Auth
+    Auth,
+    Files,
+    Users
 }
 export default agent;
 

@@ -24,21 +24,61 @@ export interface IUser {
     businessLicenseCode?: string;
     professionIDs?: number[];     
 }
+// export const register = async (user: IUser): Promise<any> => {
+//     try {       
+//         const response =await agent.Auth.register(user);
+
+//         if (!response) {
+//             throw new Error('Registration failed.');
+//         }
+
+//         const data = response.success
+//         alert('Registration successful');
+//         return data;
+//     } catch (error: any) {
+//         alert('Registration failed: ' + error.message);
+//     }
+// }
 export const register = async (user: IUser): Promise<any> => {
-    try {       
-        const response =await agent.Auth.register(user);
+    try {
+        // Create a FormData object to handle multipart/form-data
+        const formData = new FormData();
+
+        // Append fields to FormData
+        if (user.userTypeID !== undefined) formData.append('UserTypeID', user.userTypeID.toString());
+        if (user.userPassword) formData.append('UserPassword', user.userPassword);
+        if (user.email) formData.append('Email', user.email);
+        if (user.firstName) formData.append('FirstName', user.firstName);
+        if (user.lastName) formData.append('LastName', user.lastName);
+        if (user.telephone) formData.append('Telephone', user.telephone);
+        if (user.regionID !== undefined) formData.append('RegionID', user.regionID.toString());
+        if (user.businessLicenseCode) formData.append('BusinessLicenseCode', user.businessLicenseCode);
+
+        // Append the file (if provided)
+        if (user.userImage) {
+            formData.append('UserImage', user.userImage);
+        }
+
+        // Append profession IDs as a JSON string (if provided)
+        if (user.professionIDs && user.professionIDs.length > 0) {
+            formData.append('ProfessionIDs', JSON.stringify(user.professionIDs));
+        }
+
+        // Send the request using the agent
+        const response = await agent.Auth.register(formData);
 
         if (!response) {
             throw new Error('Registration failed.');
         }
 
-        const data = response.success
+        const data = response.success;
         alert('Registration successful');
         return data;
     } catch (error: any) {
         alert('Registration failed: ' + error.message);
+        throw error; // Rethrow the error if further handling is needed
     }
-}
+};
 
 
 

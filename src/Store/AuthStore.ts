@@ -92,6 +92,8 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { login, ILoginUser } from '../services/AuthService';
 import { register, IUser } from '../services/AuthService'; // Assuming you will add a register service
 import * as Jwt from 'jwt-decode';
+import { useStore } from './store';
+
 
 interface MyPayLoad extends Jwt.JwtPayload {
   UserType: string;
@@ -133,6 +135,7 @@ export default class AuthStore {
 
       runInAction(() => {
         // Persist to localStorage
+        //== userStore.setUser()
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('email', username);
         localStorage.setItem('userType', res.UserType);

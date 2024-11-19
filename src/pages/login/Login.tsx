@@ -25,7 +25,7 @@ interface User {
 
 const Login: React.FC = observer(() => {
 
-    const { authStore ,windowStore} = useStore();
+    const { authStore ,windowStore,userStore} = useStore();
     const {login} = authStore;
 
     const { isMobile } = windowStore;
@@ -44,6 +44,8 @@ const Login: React.FC = observer(() => {
         let res: any = null;
         if (user) {
             res = await login(user.email,user.password); 
+             let temp = await userStore.setUser();
+
 
             console.log(res);
             

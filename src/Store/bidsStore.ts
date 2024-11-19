@@ -10,6 +10,8 @@ export interface BidDto {
     proposalDate: Date;
     suggestedStartDate: Date;
     acceptedStatus: boolean | null;
+    projectRandomImage? : string;
+    comment? : string;
 }
 export default class BidsStore {
     allBidRegistry = new Map<number, BidDto>();
@@ -173,6 +175,16 @@ export default class BidsStore {
                 this.loading = false;
             });
         }
+    }
+
+    setSelectedBid = (id: number) =>{
+        this.selectedBid = this.bidRegistry.get(id);
+    }
+
+     getBidById = (id: number) =>{
+        this.selectedBid = this.bidRegistry.get(id);
+        return this.bidRegistry.get(id);
+
     }
 
     private getBid(id: number) {

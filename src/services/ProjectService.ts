@@ -16,8 +16,8 @@ export interface Project {
   actualPayment: number|null;
   clientReview: string|null;
   contractorReview: string |null;
-   // ProjectQuantities?: string | null;
-  // ConstructionPlans?: string | null;
+  projectQuantitiesFileId: number;
+  constructionPlansFileId: number;
 }
 export interface HomePageProjectDto {
   id:number;
@@ -27,4 +27,5 @@ export interface HomePageProjectDto {
   projectFieldName:string
   deadline: Date;//| string;
   region: string;
+  projectImage?: string;
 }

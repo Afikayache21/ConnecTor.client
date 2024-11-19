@@ -7,6 +7,15 @@ import { getUserFirstName } from '../../Api/agent';
 function Navbar() {
     const { userStore, authStore,windowStore } = useStore();
     const {isMobile} = windowStore
+
+    console.log(userStore.user?.userImage);
+
+    if (!userStore.user?.userImage) {
+        userStore.setUser();
+    } else {
+        console.log('User image does not exist');
+    }
+    
     return (
         <div className='navbar'>
             <div className="logo">
@@ -27,8 +36,8 @@ function Navbar() {
 
                 <div className="user">
                 <span>{getUserFirstName() || "User"}</span>
-                    {userStore.userImageBase64 ? (
-                        <img src={userStore.userImageBase64} alt="User" />
+                    {userStore.user?.userImage ? (
+                        <img src={userStore.user?.userImage} alt="User" />
                     ) : (
                         <img src="https://caricom.org/wp-content/uploads/Floyd-Morris-Remake-1024x879-1.jpg" alt="https://caricom.org/wp-content/uploads/Floyd-Morris-Remake-1024x879-1.jpg" />
                     )}

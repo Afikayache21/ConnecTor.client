@@ -62,18 +62,12 @@ const Register: React.FC = () => {
 
   const handleRegisterClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(user.userPassword);
-    console.log(user.email);
-    console.log(user.firstName);
-    console.log(user.lastName);
-    console.log(user.telephone);
-    console.log(user.professionIDs);
-
 
     if (!user.userPassword || !user.email || !user.firstName || !user.lastName || !user.telephone) {
       alert('Please fill in all required fields.');
       return;
     }
+
     activeTab == 'customer' ? user.userTypeID = 1 : user.userTypeID = 2;
 
     const userToRegister: IUser = {
@@ -82,6 +76,7 @@ const Register: React.FC = () => {
       professionIDs: selectedProfessions.map((option) => option.value),
     };
     console.log(userToRegister.professionIDs);
+    console.log(userToRegister);
 
     try {
       const isSuccess = await register(userToRegister);

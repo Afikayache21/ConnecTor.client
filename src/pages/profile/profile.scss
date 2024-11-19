@@ -1,3 +1,7 @@
+
+.mdb-column {
+  background-color: lightblue !important;
+}
 .profile-page {
   min-height: 100vh;        // Ensure the page takes at least the viewport height
   overflow-y: auto;         // Enable vertical scrolling if content overflows
@@ -33,6 +37,10 @@
     }
   }
 
+
+
+
+  
   .about-section {
     margin-top: 2rem;
     background-color: #fff;      // White background for distinction
