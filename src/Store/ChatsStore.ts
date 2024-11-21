@@ -72,6 +72,30 @@ export class ChatsStore {
     }
   }
 
+  
+  createChat = async (otherUserId:number) => {
+    debugger
+    // this.loadingInitial = true;
+     this.error = null;
+
+    try {
+      const chat = await agent.Chats.create(otherUserId);
+
+      runInAction(() => {
+        this.setChat(chat);
+        this.selectedChat = chat;
+        this.loadingInitial = false;
+      });
+      return chat.chatId;
+    } catch (error) {
+      runInAction(() => {
+        this.error = 'Failed to load chats.';
+        //this.loadingInitial = false;
+      });
+    }
+  }
+
+
   loadChat = async (id: number) => {
     let chat = this.getChat(id);
     if (!chat) {

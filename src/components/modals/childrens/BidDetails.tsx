@@ -1,5 +1,7 @@
 import React from 'react';
 import './bidDetails.scss';
+import agent from '../../../Api/agent';
+import { useStore } from '../../../Store/store';
 
 export interface BidDto {
   proposalID: number;
@@ -17,10 +19,41 @@ export interface BidDto {
 
 interface BidDetailsProps {
   bid: BidDto | null;
+  onChatStart?: (chatId: number) => void;
 }
 
-const BidDetails: React.FC<BidDetailsProps> = ({ bid }) => {
+const BidDetails: React.FC<BidDetailsProps> = ({ bid, onChatStart }) => {
+
   if (!bid) return null;
+
+
+  const { chatsStore ,userStore} = useStore();
+
+  const { createChat } = chatsStore
+  const { user } = userStore
+
+
+
+  const onClick = async () => {
+    const chatid = await createChat(bid.contractorID)
+    if (chatid) {
+      if (onChatStart) {
+        onChatStart(chatid)
+      }
+    }
+
+  }
+
+  
+  const AcceptBid = async () => {
+    const chatid = await createChat(bid.proposalID)
+    if (chatid) {
+      if (onChatStart) {
+        onChatStart(chatid)
+      }
+    }
+
+  }
 
   return (
     <div className="bid-details-container">
@@ -38,8 +71,8 @@ const BidDetails: React.FC<BidDetailsProps> = ({ bid }) => {
           <div className="info-item">
             <span className="info-label">Project ID:</span> {bid.projectID}
           </div>
-          <div className="info-item">
-            <span className="info-label">Contractor:</span> {bid.contractorName}
+          <div className="clickable-info-item">
+            <span className="info-label">Contractor:</span> <div onClick={()=>{}} className='clickable-info-item'>{bid.contractorName}</div>
           </div>
           <div className="info-item">
             <span className="info-label">Proposal Price:</span> ${bid.proposalPrice.toLocaleString()}
@@ -57,8 +90,8 @@ const BidDetails: React.FC<BidDetailsProps> = ({ bid }) => {
             {bid.acceptedStatus === null
               ? 'Pending'
               : bid.acceptedStatus
-              ? 'Accepted'
-              : 'Rejected'}
+                ? 'Accepted'
+                : 'Pending'}
           </div>
           {bid.comment && (
             <div className="comment">
@@ -66,6 +99,20 @@ const BidDetails: React.FC<BidDetailsProps> = ({ bid }) => {
             </div>
           )}
         </div>
+        {user?.userTypeID==1 &&
+         <div className="file-item">
+          <button
+            onClick={onClick}
+          >
+            Start to chat
+          </button>
+          <button
+            onClick={AcceptBid}
+          >
+            Accept bid
+          </button>
+        </div>
+        }
       </div>
     </div>
   );

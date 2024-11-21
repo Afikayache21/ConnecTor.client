@@ -29,7 +29,6 @@ function MyProjects() {
   };
 
   if (loading) return "loading";
-  console.log(projectsByDeadline);
   
   return (
     <div className='recent-projects-list'>

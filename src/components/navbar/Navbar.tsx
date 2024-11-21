@@ -2,49 +2,47 @@ import './navbar.scss';
 import { observer } from 'mobx-react';
 import Clock from './clock/clock';
 import { useStore } from '../../Store/store';
-import { getUserFirstName } from '../../Api/agent';
+import { useNavigate } from 'react-router';
 
 function Navbar() {
-    const { userStore, authStore,windowStore } = useStore();
-    const {isMobile} = windowStore
+    const navigate = useNavigate();
+    const { userStore, authStore, windowStore } = useStore();
+    const { isMobile } = windowStore
 
-    console.log(userStore.user?.userImage);
 
     if (!userStore.user?.userImage) {
         userStore.setUser();
     } else {
         console.log('User image does not exist');
     }
-    
+
     return (
         <div className='navbar'>
             <div className="logo">
                 <span className='app-name'>
-               <img style={{ width: '30px', height: '30px' }} src="appLogo.svg" alt="app logo" />
+                    <img style={{ width: '30px', height: '30px' }} src="appLogo.svg" alt="app logo" />
                     <span style={{ color: '#ffae00' }}>Co</span>n<span style={{ color: '#007ba8' }}>ne</span>c<span className='special-t' style={{ color: 'red' }}>T</span>or
                 </span>
             </div>
 
             {authStore.isLoggedIn && <div className="nav-bar-icons">
-                
+
 
                 {/* <div className="nav-bar-icons navbar-icon notification">
                     <img src="/notifications.svg" alt="notifications" />
                     <span>1</span>
                 </div> */}
-                {!isMobile&&<Clock />}
+                {!isMobile && <Clock />}
 
-                <div className="user">
-                <span>{getUserFirstName() || "User"}</span>
-                    {userStore.user?.userImage ? (
-                        <img src={userStore.user?.userImage} alt="User" />
-                    ) : (
-                        <img src="https://caricom.org/wp-content/uploads/Floyd-Morris-Remake-1024x879-1.jpg" alt="https://caricom.org/wp-content/uploads/Floyd-Morris-Remake-1024x879-1.jpg" />
-                    )}
-                    
-                </div>
+                {userStore.user && <div className="user">
+                    <span>{userStore.user?.firstName || "User"}</span>
+
+                        <img onClick={()=>{navigate('/profile')}} src={userStore.user?.userImage?userStore.user?.userImage:'./noavatar.png'} alt="User" />
+                   
+
+                </div>}
                 {/* <img className='navbar-icon' src="settings.svg" alt="settings" /> */}
-            </div>}              
+            </div>}
         </div>
     );
 }

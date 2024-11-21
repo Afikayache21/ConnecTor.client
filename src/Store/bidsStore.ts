@@ -10,8 +10,17 @@ export interface BidDto {
     proposalDate: Date;
     suggestedStartDate: Date;
     acceptedStatus: boolean | null;
-    projectRandomImage? : string;
-    comment? : string;
+    projectRandomImage?: string;
+    comment?: string;
+}
+export interface CreateBidDto {
+    projectID: number;
+    proposalDate: Date;
+    contractorID: number;
+    suggestedStartDate: Date;
+    expectedEndDate: Date;
+    comment: string;
+    proposalPrice: number;
 }
 export default class BidsStore {
     allBidRegistry = new Map<number, BidDto>();
@@ -47,6 +56,25 @@ export default class BidsStore {
             bids[createdDate] = bids[createdDate] ? [...bids[createdDate], bid] : [bid];
             return bids;
         }, {} as { [key: string]: BidDto[] }));
+    }
+
+    createBid = async (bid: CreateBidDto) => {
+        debugger
+        try {
+            const result = await agent.Bids.create(bid);
+            runInAction(() => {
+                console.log(result);
+
+                //this.setBid(result);
+                this.editMode = false;
+            });
+        } catch (err) {
+            runInAction(() => {
+                this.error = 'Failed to create bid.';
+                console.error(err);
+            });
+        }
+
     }
 
     setLoadingInitial(load: boolean) {
@@ -177,11 +205,11 @@ export default class BidsStore {
         }
     }
 
-    setSelectedBid = (id: number) =>{
+    setSelectedBid = (id: number) => {
         this.selectedBid = this.bidRegistry.get(id);
     }
 
-     getBidById = (id: number) =>{
+    getBidById = (id: number) => {
         this.selectedBid = this.bidRegistry.get(id);
         return this.bidRegistry.get(id);
 

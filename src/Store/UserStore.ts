@@ -1,5 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent, { getUserId } from "../Api/agent";
+import { Project } from "../services/ProjectService";
 
 interface IKeyValue {
   value: number;
@@ -22,8 +23,10 @@ export interface IUserStore {
   professions?: Array<IKeyValue>;
 }
 
+
 export default class UserStore {
   user: IUserStore | null = null; // Current user state
+  selectedUser: IUserStore | null = null; // Current user state
   loading: boolean = false; // Track API loading state
   error: string | null = null; // Store error messages
 
@@ -56,6 +59,38 @@ export default class UserStore {
       console.error("Failed to fetch user details:", error);
     }
   }
+
+
+  setSelectedUser = async (userId: number | null) => {
+    if (userId) {
+
+
+      this.loading = true;
+      this.error = null;
+
+      try {
+        if (isNaN(userId)) throw new Error("Invalid user ID");
+
+        const userDetails = await agent.Users.userDetails(userId);
+
+        runInAction(() => {
+          this.selectedUser = userDetails;
+          this.loading = false;
+        });
+      } catch (error) {
+        runInAction(() => {
+          this.error = error instanceof Error ? error.message : "An unexpected error occurred";
+          this.loading = false;
+        });
+        console.error("Failed to fetch selected User details:", error);
+      }
+    }
+    else{
+      this.selectedUser = null;
+    }
+
+  }
+
 
   // Clear the user state
   clearUser() {

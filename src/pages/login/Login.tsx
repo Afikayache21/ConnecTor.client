@@ -44,11 +44,7 @@ const Login: React.FC = observer(() => {
         let res: any = null;
         if (user) {
             res = await login(user.email,user.password); 
-             let temp = await userStore.setUser();
-
-
-            console.log(res);
-            
+              await userStore.setUser();            
         }
 
         if (res) {        

@@ -75,7 +75,6 @@ interface File {
 }
 
 export interface CreateProjectModel {
-    ClientId: number;
     ProjectName: string;
     ProjectFieldID: number;
     OpeningDate: Date;
@@ -83,19 +82,32 @@ export interface CreateProjectModel {
     ProjectDescription: string;
     RegionID: number;
     ProjectQuantities: File;
-    ConstructionPlans: File;
-    ContractorID?: number;
-    ActualStartDate?: Date;
-    ActualEndDate?: Date;
-    ActualPayment?: number;
-    ClientReview?: string;
-    ContractorReview?: string;
-    Images?: File[];
+    ConstructionPlans: File;    
+    Image: File;
 }
 
 
 
 
+
+// export interface CreateProjectModel {
+//     ClientId: number;
+//     ProjectName: string;
+//     ProjectFieldID: number;
+//     OpeningDate: Date;
+//     Deadline: Date;
+//     ProjectDescription: string;
+//     RegionID: number;
+//     ProjectQuantities: File;
+//     ConstructionPlans: File;
+//     ContractorID?: number;
+//     ActualStartDate?: Date;
+//     ActualEndDate?: Date;
+//     ActualPayment?: number;
+//     ClientReview?: string;
+//     ContractorReview?: string;
+//     Images?: File[];
+// }
 
 
 

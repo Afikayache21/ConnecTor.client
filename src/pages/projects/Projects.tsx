@@ -9,12 +9,12 @@ const Projects = () => {
     <Box
     title={'My Projects'}
     className='all-projects-grid-layout'
-     leftIcon='./search.svg'
+     leftIcon='./add.svg'
     leftIconTooltip='Search Chat'
     leftIconAction={() =>navigate('createProject')}  
-    rightIcon='./search.svg' 
-    rightIconAction={() =>navigate('createProject')}
-    rightIconTooltip='Create Project'
+    // rightIcon='./search.svg' 
+    // rightIconAction={() =>navigate('createProject')}
+    // rightIconTooltip='Create Project'
     
   >
     <div className="box-content">

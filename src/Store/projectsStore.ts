@@ -5,7 +5,9 @@ import { HomePageProjectDto, Project } from "../services/ProjectService";
 export default class ProjectStore {
     allProjectRegistry = new Map<number, HomePageProjectDto>();
     projectRegistry = new Map<number, HomePageProjectDto>();
+    selectedUserProjectRegistry = new Map<number, HomePageProjectDto>();
     selectedProject: Project | undefined = undefined;
+    selectedProjectForBid: Project | undefined = undefined;
     editMode = false;
     loading = false;
     loadingInitial = true;
@@ -13,6 +15,11 @@ export default class ProjectStore {
 
     constructor() {
         makeAutoObservable(this);
+    }
+    get selectedUserProjectsByDeadline() {
+        return Array.from(this.selectedUserProjectRegistry.values()).sort(
+            (a, b) => Date.parse(a.deadline.toString()) - Date.parse(b.deadline.toString())
+        );
     }
 
     get projectsByDeadline() {
@@ -22,8 +29,12 @@ export default class ProjectStore {
     }
 
     get projects() {
+        const now = new Date(); 
         return Array.from(this.allProjectRegistry.values())
+            .filter(project => Date.parse(project.deadline.toString()) >= now.getTime())
+            .sort((a, b) => Date.parse(a.deadline.toString()) - Date.parse(b.deadline.toString())); 
     }
+    
     get groupedProjects() {
         return Object.entries(this.projectsByDeadline.reduce((projects, project) => {
             const deadline = project.deadline.toString().split('T')[0];
@@ -34,6 +45,9 @@ export default class ProjectStore {
 
     setLoadingInitial(load: boolean) {
         this.loadingInitial = load;
+    }
+    setSelectedProjectForBid = async () => {
+        this.selectedProjectForBid = this.selectedProject
     }
 
     loadProjects = async () => {
@@ -58,8 +72,32 @@ export default class ProjectStore {
         }
     }
 
+    loadSelectedUserProjects = async (userId:number) => {
+
+        this.loading = true;
+        this.error = null;
+
+        try {
+            const result = await agent.Projects.selectedUserList(userId);
+            //console.log('API response:', result);
+
+            runInAction(() => {
+                result.forEach(project => this.setSelectedUserProject(project));
+                this.loading = false;
+            });
+
+        } catch (err) {
+            runInAction(() => {
+                this.error = 'Failed to load projects.';
+                console.error(err);
+                this.loading = false;
+            });
+        }
+    }
+
     //TODO: Add the region id to the token to get the user region
     loadAllProjects = async () => {
+        debugger
         this.loading = true;
         this.error = null;
 
@@ -68,7 +106,7 @@ export default class ProjectStore {
             //console.log('API response:', result);
 
             runInAction(() => {
-                result.forEach(project => this.setProject(project));
+                result.forEach(project => this.setAllProject(project));
                 this.loading = false;
             });
 
@@ -82,37 +120,33 @@ export default class ProjectStore {
     }
 
     loadProject = async (projectId: number): Promise<Project | undefined> => {
-        console.log(this.projectsByDeadline)
-        let project = this.getProject(projectId);
         let newProject: Project | undefined
-        if (!project) {
-            return;
+
+        this.setLoadingInitial(true);
+        this.error = null;
+        try {
+            newProject = await agent.Projects.details(projectId);
+            this.selectedProject = newProject;
+        } catch (error) {
+            runInAction(() => {
+                this.error = 'Failed to load the project details.';
+                console.error(error);
+            });
+        } finally {
+            this.setLoadingInitial(false);
         }
-        else {
-            this.setLoadingInitial(true);
-            this.error = null;
-            try {
-                newProject = await agent.Projects.details(projectId);
-                this.selectedProject = newProject;
-            } catch (error) {
-                runInAction(() => {
-                    this.error = 'Failed to load the project details.';
-                    console.error(error);
-                });
-            } finally {
-                this.setLoadingInitial(false);
-            }
-            return newProject;
-        }
+        return newProject;
+
     }
 
-    createProject = async (project: HomePageProjectDto) => {
+    createProject = async (project: FormData) => {
         this.loading = true;
         this.error = null;
         try {
-            await agent.Projects.create(project);
+            var res = await agent.Projects.create(project);
             runInAction(() => {
-                this.setProject(project);
+                this.setProject(res);
+
                 //this.selectedProject = project;
                 this.editMode = false;
                 this.loading = false;
@@ -127,7 +161,7 @@ export default class ProjectStore {
     }
 
     updateProject = async (project: HomePageProjectDto) => {
-        this.loading = true;
+        //this.loading = true;
         this.error = null;
         try {
             await agent.Projects.update(project);
@@ -171,6 +205,13 @@ export default class ProjectStore {
     private setProject(proj: HomePageProjectDto) {
         proj.deadline = new Date(proj.deadline);
         this.projectRegistry.set(proj.projectID, proj);
+    }
+    private setAllProject(proj: HomePageProjectDto) {
+        proj.deadline = new Date(proj.deadline);
         this.allProjectRegistry.set(proj.projectID, proj);
+    }
+    private setSelectedUserProject(proj: HomePageProjectDto) {
+        proj.deadline = new Date(proj.deadline);
+        this.selectedUserProjectRegistry.set(proj.projectID, proj);
     }
 }

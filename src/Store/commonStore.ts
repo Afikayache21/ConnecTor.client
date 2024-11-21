@@ -17,7 +17,7 @@ export default class commonStore {
         makeAutoObservable(this);
     }
 
-    //proffesions
+    //************************proffesions************************
     loadProffesions = async () => {
         try {
             const result = await agent.Common.proffesionsList();
@@ -51,6 +51,19 @@ export default class commonStore {
     get projectFileds(): ISelectOption[] {
         return Array.from(this.allProjectFileds.entries()).map(([value, label]) => ({ value, label }));
     }
+
+
+
+
+
+
+
+
+
+
+
+    
+        //************************regions************************
     //regions
     loadRegions = async () => {
         try {
@@ -79,10 +92,19 @@ export default class commonStore {
         this.allRegions.set(option.value, option.label);
     }
 
+
+
+
+
+
+
+    //************************projectsFileds************************
     //projectsFileds
     loadProjectsFileds = async () => {
         try {
             const result = await agent.Common.projectFiledsList();
+            console.log(result);
+            
             runInAction(() => {
                 result.forEach(region => this.setProjectsFiled(region));
             });
@@ -95,7 +117,7 @@ export default class commonStore {
         }
     }
 
-    getProjectsFiledsById(id: number) {
+     getProjectsFiledsById = (id: number) => {
         return this.allProjectFileds.get(id);
     }
 

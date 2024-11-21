@@ -19,6 +19,8 @@ import { useStore } from './Store/store';
 import { useEffect } from 'react';
 import signalRService from './services/signalRService';
 import { getUserId } from './Api/agent';
+import ViewProfile from './pages/profile/ViewProfile';
+import AllProjectsPage from './pages/projects/AllProjectsPage';
 
 
 const App = observer(() => {
@@ -84,10 +86,12 @@ const {isMobile } = windowStore;
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="projects" element={<Projects />} />
+          <Route path="allProjects" element={<AllProjectsPage />} />
           <Route path="projects/createProject" element={<CreateProject />} />
 
           <Route path="users" element={<Users />} />
           <Route path="profile" element={<Profile />} />          
+          <Route path="view" element={<ViewProfile />} />          
           <Route path="bids" element={<BidsPage />} />          
           <Route path="chats" element={<LastChats/>} />          
 

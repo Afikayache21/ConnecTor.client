@@ -39,6 +39,8 @@ const Register: React.FC = () => {
     };
     loadOptions();
   }, [CommonStore]);
+
+  
   useEffect(() => {
     setUser((prevUser) => ({
       ...prevUser,

@@ -31,7 +31,7 @@ if (isMobile) {
       <div className="item">
 
         {userType =='2'&&
-        <Link to='/projects' className='list-item'>
+        <Link to='/allProjects' className='list-item'>
         <img src="/search.svg" alt="" />
         </Link>}
 
@@ -78,7 +78,7 @@ if (isMobile) {
         <span className="title">PROJECTS</span>
 
         {userType =='2'&&
-        <Link to='/projects' className='list-item'>
+        <Link to='/allProjects' className='list-item'>
         <img src="/search.svg" alt="" />
         <span className="list-item-title">projects for me</span>
         </Link>}

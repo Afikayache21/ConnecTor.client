@@ -29,6 +29,23 @@
     flex-direction: column;
     gap: 15px;
   }
+  .clickable-info-item {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #0b049e;
+    line-height: 1.5;
+
+    .info-label {
+      font-weight: 600;
+      color: #555;
+      margin-right: 10px;
+      flex-shrink: 0;
+      width: 150px;
+    }
+  }
+
 
   .info-item {
     display: flex;
