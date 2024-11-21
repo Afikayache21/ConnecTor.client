@@ -18,13 +18,15 @@ import BidDetails from '../../components/modals/childrens/BidDetails';
 import ChatWindow from '../../components/topBox/lastChats/ChatWindow';
 import { CreateBidDto } from '../../Store/bidsStore';
 import CreateBidForm from '../../components/modals/childrens/CreateBidForm';
+import UserProfileForm from '../../components/modals/UserProfileForm';
 
 const Profile: React.FC = () => {
-  const { userStore, projectStore, bidsStore, chatsStore } = useStore();
+  const { userStore, projectStore, bidsStore, chatsStore, commonStore } = useStore();
   const { projectsByDeadline, loadProject, selectedProject, loadProjects } = projectStore;
   const { selectedChat, loadChat } = chatsStore;
   const { user, setUser } = userStore;
   const { bidsSortedByProposalDate, loadBids, setSelectedBid, selectedBid } = bidsStore;
+  const {regions} = commonStore
 
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [isProjectModalVisible, setIsProjectModalVisible] = useState<boolean>(false);
@@ -240,7 +242,7 @@ const Profile: React.FC = () => {
         isVisible={isModalVisible}
         onClose={toggleModal}
       >
-        <div className="update-user-form">
+        {/* <div className="update-user-form">
           <input placeholder="Email" type="text" />
           <input placeholder="Region" type="text" />
           <input placeholder="First Name" type="text" />
@@ -250,7 +252,8 @@ const Profile: React.FC = () => {
           <input placeholder="Phone Number" type="text" />
           <input placeholder="Profile Picture" type="file" />
           <button>Submit</button>
-        </div>
+        </div> */}
+        <UserProfileForm regions={regions} onSubmit={()=>{}}/>
       </ModalBox>
 
 

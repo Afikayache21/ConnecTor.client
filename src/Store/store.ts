@@ -14,7 +14,7 @@ interface IStore {
     windowStore : WindowStore;
     bidsStore : BidsStore;
     chatsStore : ChatsStore;
-    CommonStore : commonStore;
+    commonStore : commonStore;
 
 }
 
@@ -25,7 +25,7 @@ export const store: IStore = {
     windowStore: new WindowStore(), 
     bidsStore: new BidsStore(), 
     chatsStore: new ChatsStore(),  
-    CommonStore: new commonStore(),
+    commonStore: new commonStore(),
 
 }
 

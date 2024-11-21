@@ -7,7 +7,7 @@ import './registerDesktop.scss';
 import { ISelectOption } from '../../Store/commonStore';
 
 const Register: React.FC = () => {
-  const { CommonStore } = useStore();
+  const { commonStore } = useStore();
   const navigate = useNavigate();
 
   const [loadingProfessions, setLoadingProfessions] = useState(true);
@@ -21,26 +21,24 @@ const Register: React.FC = () => {
   // Load professions and regions once on mount if not already loaded
   useEffect(() => {
     const loadOptions = async () => {
-      if (!CommonStore.allProffesios.size) {
+      if (!commonStore.allProffesios.size) {
         setLoadingProfessions(true);
-        await CommonStore.loadProffesions();
+        await commonStore.loadProffesions();
         setLoadingProfessions(false);
       } else {
         setLoadingProfessions(false);
       }
 
-      if (!CommonStore.allRegions.size) {
+      if (!commonStore.allRegions.size) {
         setLoadingRegions(true);
-        await CommonStore.loadRegions();
+        await commonStore.loadRegions();
         setLoadingRegions(false);
       } else {
         setLoadingRegions(false);
       }
     };
     loadOptions();
-  }, [CommonStore]);
-
-  
+  }, [commonStore]);
   useEffect(() => {
     setUser((prevUser) => ({
       ...prevUser,
@@ -126,7 +124,7 @@ const Register: React.FC = () => {
             <p>Loading regions...</p>
           ) : (
             <Select
-              options={CommonStore.regions}
+              options={commonStore.regions}
               placeholder="Select Region"
               value={selectedRegion}
               onChange={(selectedOption) => setSelectedRegion(selectedOption as { value: number; label: string })}
@@ -146,7 +144,7 @@ const Register: React.FC = () => {
             activeTab === 'constructor' && (
               <>
                 <Select
-                  options={CommonStore.proffesions}
+                  options={commonStore.proffesions}
                   placeholder="Select Profession"
                   value={selectedProfessions}
                   onChange={(selectedOption) => setSelectedProfessions(selectedOption as { value: number; label: string }[])}

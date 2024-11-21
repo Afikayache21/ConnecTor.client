@@ -55,6 +55,19 @@ class SignalRService {
   public offMessageReceived = (): void => {
     this.connection.off('ReceiveMessage');
   };
+
+
+  public onNotificationReceived = (callback: (message: string) => void): void => {
+    console.log("Notification before: ")
+     this.connection.on('ReceiveNotification', callback);
+ 
+   };
+ 
+   // Unsubscribe from the ReceiveMessage event
+   public offNotificationReceived = (): void => {
+     this.connection.off('ReceiveNotification');
+   };
+
 }
 
 export default new SignalRService();

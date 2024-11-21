@@ -27,35 +27,51 @@ const App = observer(() => {
 
   const currentUserId = Number(getUserId());
   const handleMessageReceived = async (message: any) => {
-    if(currentUserId != message.value.senderId)
-    alert("You have New Message: " + message.value.content);
-        
-      };
+    if (currentUserId != message.value.senderId)
+      alert("You have New Message: " + message.value.content);
 
-  
+  };
+
+  const handleNotificationReceived = async (message: any) => {
+
+    console.log(message);
+
+    if (message)
+      alert("Notification: " + message.value.label);
+
+  };
+
+
+
   useEffect(() => {
     // Start the SignalR connection when the component mounts
-    signalRService.startConnection();
-    signalRService.onMessageReceived(handleMessageReceived);
 
-    
+    const connect = () => {
+      signalRService.startConnection();
+      signalRService.onMessageReceived(handleMessageReceived);
+      signalRService.onNotificationReceived(handleNotificationReceived);
+
+    }
+
+    connect();
     // Cleanup when the component unmounts
     return () => {
       signalRService.offMessageReceived();
+      signalRService.offNotificationReceived();
       signalRService.stopConnection();
     };
   }, []);
 
 
-const {windowStore} = useStore();
-const {isMobile } = windowStore;
+  const { windowStore } = useStore();
+  const { isMobile } = windowStore;
 
   const MainLayout = () => {
     return (
       <div className="my-app-layout">
         <Navbar />
         <div className="my-app-container">
-          <div className={isMobile?"my-menu-container-mobile":"my-menu-container"}>
+          <div className={isMobile ? "my-menu-container-mobile" : "my-menu-container"}>
             <Menu />
           </div>
           <div className="my-app-layout-content">
@@ -90,10 +106,10 @@ const {isMobile } = windowStore;
           <Route path="projects/createProject" element={<CreateProject />} />
 
           <Route path="users" element={<Users />} />
-          <Route path="profile" element={<Profile />} />          
-          <Route path="view" element={<ViewProfile />} />          
-          <Route path="bids" element={<BidsPage />} />          
-          <Route path="chats" element={<LastChats/>} />          
+          <Route path="profile" element={<Profile />} />
+          <Route path="view" element={<ViewProfile />} />
+          <Route path="bids" element={<BidsPage />} />
+          <Route path="chats" element={<LastChats />} />
 
         </Route>
       </Route>
@@ -103,7 +119,7 @@ const {isMobile } = windowStore;
         <Route index element={<Login />} />
       </Route>
       <Route path="/register" element={<MinimalLayout />}>
-        <Route index element={<Register/>} />
+        <Route index element={<Register />} />
       </Route>
 
       {/* 404 Not Found Route */}

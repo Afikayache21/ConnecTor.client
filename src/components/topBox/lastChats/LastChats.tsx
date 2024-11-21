@@ -5,6 +5,7 @@ import { formatDate } from "../../../services/DateService";
 import ModalBox from "../../modals/ModalBox";
 import ChatWindow from "./ChatWindow";
 import { useStore } from "../../../Store/store";
+import signalRService from "../../../services/signalRService";
 //import { useNavigate } from "react-router";
 
 const LastChats = observer(() => {
@@ -39,6 +40,26 @@ const LastChats = observer(() => {
       setIsModalVisible(false); 
     }
   };
+
+
+  const handleMessageReceived = async () => {
+    if(!isModalVisible)
+    {
+      loadChats();
+    }
+  };
+
+
+
+  useEffect(() => {
+
+    signalRService.onMessageReceived(handleMessageReceived);
+
+
+    return () => {
+      signalRService.offMessageReceived();
+    };
+  }, []);
 
   return (
     <div className="recent-chats-list">

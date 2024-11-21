@@ -73,7 +73,7 @@ export default class ProjectStore {
     }
 
     loadSelectedUserProjects = async (userId:number) => {
-
+        debugger
         this.loading = true;
         this.error = null;
 

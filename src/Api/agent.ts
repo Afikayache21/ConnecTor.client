@@ -103,23 +103,9 @@ const requests = {
         }
     }).then(responseBody),
 };
-const requestsWithoutAuth = {
-    get: <T>(url: string,) =>
-        axios.get<T>(url).then(responseBody),
-
-    post: <T>(url: string, body: {}) =>
-        axios.post<T>(url, body).then(responseBody),
-
-    put: <T>(url: string, body: {}) =>
-        axios.put<T>(url, body).then(responseBody),
-
-    delete: <T>(url: string) =>
-        axios.delete<T>(url).then(responseBody),
-};
-
 const Projects = {
     userList: () => requests.get<HomePageProjectDto[]>('/Project/UserProjects'),
-    selectedUserList: (userId: number) => requests.get<HomePageProjectDto[]>(`/Project/SelectedUserProjects/${userId}`),
+    selectedUserList: (userId: number) => requests.get<HomePageProjectDto[]>(`/Project/SelectedUserProjects?userId=${userId}`),
     list: () => requests.get<HomePageProjectDto[]>('/Project/ProjectList'),
     details: (projectId: number) => requests.get<Project>(`/Project/${projectId}`),
     create: (formData: FormData) => requests.postForm<HomePageProjectDto>('/Project/Create', formData),
@@ -140,6 +126,7 @@ const Bids = {
     userList: () => requests.get<BidDto[]>('/Bids/UserBids'),
     details: (id: number) => requests.get<BidDto>(`/Project/${id}`),
     create: (bid: CreateBidDto) => requests.put<HomePageProjectDto>('/Bids/Create', bid),
+    accept: (bidId: number) => requests.put<string>(`/Bids/Accept?bidId=${bidId}`,{}),
     update: (project: BidDto) => requests.put<HomePageProjectDto>(`/Project/${project.proposalID}`, project),
     delete: (id: number) => requests.delete<void>(`/Project/${id}`)
 };

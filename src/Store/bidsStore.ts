@@ -77,6 +77,31 @@ export default class BidsStore {
 
     }
 
+
+    acceptBid = async (bid: number) => {
+        debugger
+        try {
+            const result = await agent.Bids.accept(bid);
+            runInAction(() => {
+                if(result){
+                    this.loadBids()
+                }
+
+                //this.setBid(result);
+                this.editMode = false;
+            });
+            return result;
+        } catch (err) {
+            runInAction(() => {
+                this.error = 'Failed to create bid.';
+                console.error(err);
+            });
+            
+        }
+
+    }
+
+
     setLoadingInitial(load: boolean) {
         this.loadingInitial = load;
     }
