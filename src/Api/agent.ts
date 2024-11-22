@@ -5,6 +5,7 @@ import { IChat, IMessage } from '../Store/ChatsStore';
 import { ISelectOption } from '../Store/commonStore';
 import { IAuthResult, ILoginUser } from '../services/AuthService';
 import { IUserStore } from '../Store/UserStore';
+import { UserProfileDto } from '../components/modals/UserProfileForm';
 axios.defaults.baseURL = 'https://localhost:5000/api';
 
 export const getToken = () => {
@@ -155,6 +156,7 @@ const Files = {
 const Users = {
     userDetails: (userId: number) => requests.get<IUserStore>(`/User/${userId}`),
     selectedUserDetails: (userId: number) => requests.get<IUserStore>(`/User/${userId}`),
+    update: (user: FormData) => requests.postForm<string>(`/User/update`, user)
 };
 
 

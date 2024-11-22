@@ -1,358 +1,13 @@
-// import React from 'react';
-// import { useForm, SubmitHandler } from 'react-hook-form';
-// import { yupResolver } from '@hookform/resolvers/yup';
-// import * as yup from 'yup';
-// import { CreateProjectModel } from '../../types'; // Ensure this imports the correct types
-// import './allProjects/createProjectPage.scss';
-// import { getToken, getUserId } from '../../Api/agent';
-// import Select from 'react-select';
-// import { useStore } from '../../Store/store';
-// //import axios from 'axios';
-
-// // Adjust the schema to specify file types for ProjectQuantities and ConstructionPlans
-// const schema: yup.ObjectSchema<CreateProjectModel> = yup.object({
-//   ProjectName: yup.string()
-//     .required("Project name is required")
-//     .max(255, "Project name cannot exceed 255 characters"),
-//   OpeningDate: yup.string().required("Opening date is required"),
-//   Deadline: yup.string().required("Deadline is required"),
-//   ProjectDescription: yup.string()
-//     .required("Project description is required")
-//     .min(10, "Description must be at least 10 characters long"),
-//   RegionID: yup.number().required("Region ID is required"),
-//   ProjectQuantities: yup.mixed<File>().nullable(), // Specify File type
-//   ConstructionPlans: yup.mixed<File>().nullable(),  // Specify File type
-// });
-
-// const CreateProject: React.FC = () => {
-//   const  {CommonStore} = useStore()
-
-
-//   const { register, handleSubmit, formState: { errors } } = useForm<CreateProjectModel>({
-//     resolver: yupResolver(schema),
-//   });
-
-//   const onSubmit: SubmitHandler<CreateProjectModel> = async (data) => {
-
-//     const projectData: CreateProjectModel = {
-//         ProjectName: data.ProjectName,
-//         OpeningDate: data.OpeningDate,
-//         Deadline: data.Deadline,
-//         ProjectDescription: data.ProjectDescription,
-//         RegionID: data.RegionID,
-//         ProjectQuantities: data.ProjectQuantities, 
-//         ConstructionPlans: data.ConstructionPlans, 
-//         ProjectFieldID: 1,
-//         ContractorID: undefined, // TODO: Replace with actual contractor ID        
-//         ActualStartDate: undefined,
-//         ActualEndDate: undefined,
-//         ActualPayment: undefined,
-//         ClientReview: undefined,
-//         ContractorReview: undefined,
-//         Images:undefined,
-//         ClientId: Number(getUserId()) // TODO: Replace with actual client ID
-//     };
-
-
-//     try {
-//         const response = await fetch('https://localhost:5000/api/Project/Create', {
-//             method: 'POST',
-//             headers: {
-//                 'Authorization': `${getToken()}`, // or the specific header you want, e.g., 'token': getToken()
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(projectData), // Send the project data as JSON
-//         });
-
-//         if (!response.ok) {
-//             throw new Error("Failed to create project");
-//         }
-//         alert("Project created successfully!");
-
-//     } catch (error) {
-//         console.error(error);
-//         alert("Error creating project: " + error); // Use error.message for better clarity
-//     }
-// };
-
-//   return (
-//     <div className="create-project-page">
-//       <h1>Create New Project</h1>
-//       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-//         <div>
-//           <label>Project Name</label>
-//           <input type="text" {...register("ProjectName")} />
-//           <p>{errors.ProjectName?.message}</p>
-//         </div>
-
-//         <div>
-//           <label>Project Description</label>
-//           <textarea {...register("ProjectDescription")} />
-//           <p>{errors.ProjectDescription?.message}</p>
-//         </div>
-       
-//         <div>
-//           <label>Region ID</label>
-//           <input type="number" {...register("RegionID")} />
-//           <p>{errors.RegionID?.message}</p>
-//         </div>
-
-//         <div>
-//           <label>Opening Date</label>
-//           <input type="date" {...register("OpeningDate")} />
-//           <p>{errors.OpeningDate?.message}</p>
-//         </div>
-
-//         <div>
-//           <label>Deadline</label>
-//           <input type="date" {...register("Deadline")} />
-//           <p>{errors.Deadline?.message}</p>
-//         </div>
-//         <div>
-//         <Select
-//                   options={CommonStore.proffesions}
-//                   placeholder="Select Profession"
-//                   value={selectedProfessions}
-//                   onChange={(selectedOption) => setSelectedProfessions(selectedOption as { value: number; label: string }[])}
-//                   isClearable
-//                   isMulti
-//                   styles={{
-//                     option: (provided) => ({
-//                       ...provided,
-//                       color: 'black',
-//                     }),
-//                   }}
-//                 />
-//         </div>
-//         <div>
-//           <label>Project Quantities (File)</label>
-//           <input type="file" {...register("ProjectQuantities")} />
-//           <p>{errors.ProjectQuantities?.message}</p>
-//         </div>
-
-//         <div>
-//           <label>Construction Plans (File)</label>
-//           <input type="file" {...register("ConstructionPlans")} />
-//           <p>{errors.ConstructionPlans?.message}</p>
-//         </div>
-
-//         <button type="submit">Create Project</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default CreateProject;
-
-// import React, { useEffect, useState } from 'react';
-// import { useForm, SubmitHandler } from 'react-hook-form';
-// import { yupResolver } from '@hookform/resolvers/yup';
-// import * as yup from 'yup';
-// import { CreateProjectModel } from '../../types';
-// import './allProjects/createProjectPage.scss';
-// import Select from 'react-select';
-// import { useStore } from '../../Store/store';
-// import agent from '../../Api/agent'; // Import the API agent
-// import { observer } from 'mobx-react';
-
-// // Schema with validation
-// const schema: yup.ObjectSchema<any> = yup.object({
-//   ProjectName: yup.string()
-//     .required('Project name is required')
-//     .max(255, 'Project name cannot exceed 255 characters'),
-//   OpeningDate: yup.date().required('Opening date is required'),
-//   Deadline: yup.date().required('Deadline is required'),
-//   ProjectDescription: yup.string()
-//     .required('Project description is required')
-//     .min(10, 'Description must be at least 10 characters long'),
-//   RegionID: yup.number().required('Region ID is required'),
-//   ProjectFieldID: yup.number().required('Project field is required'),
-//   ProjectQuantities: yup.mixed<File>(),
-//   ConstructionPlans: yup.mixed<File>(),
-//   Image: yup.mixed<File>(),
-// });
-
-// const CreateProject: React.FC = () => {
-
-//   const { CommonStore } = useStore();
-//   const {projectFileds,loadProjectsFileds} = CommonStore;
-//   const [selectedField, setSelectedField] = useState<{ value: number; label: string } | null>(null);
-
-//   const { register, handleSubmit, formState: { errors }, setValue } = useForm<CreateProjectModel>({
-//     resolver: yupResolver(schema),
-//   });
-
-
-//   const handleFieldChange = (selectedOption: { value: number; label: string } | null) => {
-//     setSelectedField(selectedOption);
-//     setValue('ProjectFieldID', selectedOption ? selectedOption.value : 0);
-//   };
-
-//   const onSubmit: SubmitHandler<any> = async (data) => {
-//     const formData = new FormData();
-//     formData.append('ProjectName', data.ProjectName);
-//     formData.append('OpeningDate', data.OpeningDate.toISOString());
-//     formData.append('Deadline', data.Deadline.toISOString());
-//     formData.append('ProjectDescription', data.ProjectDescription);
-//     formData.append('RegionID', data.RegionID.toString());
-//     formData.append('ProjectFieldID', selectedField ? selectedField.value.toString() : '0');
-//     if (data.ProjectQuantities) formData.append('ProjectQuantities', data.ProjectQuantities[0]);
-//     if (data.ConstructionPlans) formData.append('ConstructionPlans', data.ConstructionPlans);
-//     if (data.Image) formData.append('Image', data.Image);
-
-//     try {
-//       await agent.Projects.create(formData); 
-//       alert('Project created successfully!');
-//     } catch (error) {
-//       console.error(error);
-//       alert('Error creating project: ' + error);
-//     }
-//   };
-
-
-//   if (projectFileds.length <= 0) loadProjectsFileds();
-
-  
-//   return (
-//     <div className="create-project-page">
-//       <h1>Create New Project</h1>
-//       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-//         <div>
-//           <label>Project Name</label>
-//           <input type="text" {...register('ProjectName')} />
-//           <p>{errors.ProjectName?.message}</p>
-//         </div>
-
-//         <div>
-//           <label>Project Description</label>
-//           <textarea {...register('ProjectDescription')} />
-//           <p>{errors.ProjectDescription?.message}</p>
-//         </div>
-
-//         <div>
-//           <label>Region ID</label>
-//           <input type="number" {...register('RegionID')} />
-//           <p>{errors.RegionID?.message}</p>
-//         </div>
-
-//         <div>
-//           <label>Opening Date</label>
-//           <input type="date" {...register('OpeningDate')} />
-//           <p>{errors.OpeningDate?.message}</p>
-//         </div>
-
-//         <div>
-//           <label>Deadline</label>
-//           <input type="date" {...register('Deadline')} />
-//           <p>{errors.Deadline?.message}</p>
-//         </div>
-
-//         <div>
-//           <label>Project Field</label>
-//           <Select
-//             options={projectFileds.map((field: any) => ({
-//               value: field.value,
-//               label: field.label,
-//             }))}
-//             placeholder="Select Project Field"
-//             value={selectedField}
-//             onChange={handleFieldChange}
-//             isClearable
-//             styles={{
-//               option: (provided) => ({
-//                 ...provided,
-//                 color: 'black',
-//               }),
-//             }}
-//           />
-//           <p>{errors.ProjectFieldID?.message}</p>
-//         </div>
-
-//         <div>
-//           <label>Project Quantities (File)</label>
-//           <input
-//             type="file"
-//             {...register('ProjectQuantities')}
-//           />
-//           <p>{errors.ProjectQuantities?.message}</p>
-//         </div>
-
-//         <div>
-//           <label>Construction Plans (File)</label>
-//           <input
-//             type="file"
-//             {...register('ConstructionPlans')}
-//           />
-//           <p>{errors.ConstructionPlans?.message}</p>
-//         </div>
-
-//         <div>
-//           <label>Image (File)</label>
-//           <input
-//             type="file"
-//             {...register('Image')}
-//           />
-//           <p>{errors.Image?.message}</p>
-//         </div>
-
-//         <button type="submit">Create Project</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default observer (CreateProject);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useStore } from '../../Store/store';
 import './allProjects/createProjectPage.scss';
-import agent from '../../Api/agent';
+//import agent from '../../Api/agent';
 import { useNavigate } from 'react-router';
 
 const CreateProject: React.FC = () => {
   const navigate = useNavigate();
-  const { CommonStore,projectStore } = useStore();
+  const { commonStore,projectStore } = useStore();
   const { loadProjects ,createProject} = projectStore;
 
   const [loadingFields, setLoadingFields] = useState(true);
@@ -376,17 +31,17 @@ const CreateProject: React.FC = () => {
   // Load regions and fields on mount
   useEffect(() => {
     const loadOptions = async () => {
-      if (!CommonStore.allRegions.size) {
+      if (!commonStore.allRegions.size) {
         setLoadingRegions(true);
-        await CommonStore.loadRegions();
+        await commonStore.loadRegions();
         setLoadingRegions(false);
       } else {
         setLoadingRegions(false);
       }
 
-      if (!CommonStore.projectFileds.length) {
+      if (!commonStore.projectFileds.length) {
         setLoadingFields(true);
-        await CommonStore.loadProjectsFileds();
+        await commonStore.loadProjectsFileds();
         setLoadingFields(false);
       } else {
         setLoadingFields(false);
@@ -394,7 +49,7 @@ const CreateProject: React.FC = () => {
     };
 
     loadOptions();
-  }, [CommonStore]);
+  }, [commonStore]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -458,9 +113,8 @@ const CreateProject: React.FC = () => {
 
     try {
       await createProject(formData)
-      //await agent.Projects.create(formData);
       alert('Project created successfully!');
-
+      loadProjects();
       navigate('/projects')
 
     } catch (error) {
@@ -500,7 +154,7 @@ const CreateProject: React.FC = () => {
             <p>Loading regions...</p>
           ) : (
             <Select
-              options={CommonStore.regions}
+              options={commonStore.regions}
               value={selectedRegion}
               onChange={handleRegionChange}
               placeholder="Select region"
@@ -541,7 +195,7 @@ const CreateProject: React.FC = () => {
             <p>Loading fields...</p>
           ) : (
             <Select
-              options={CommonStore.projectFileds.map((field) => ({
+              options={commonStore.projectFileds.map((field) => ({
                 value: field.value,
                 label: field.label,
               }))}

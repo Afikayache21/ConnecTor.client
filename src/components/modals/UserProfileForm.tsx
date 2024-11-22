@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MDBInput, MDBBtn, MDBFile } from 'mdb-react-ui-kit';
 import Select from 'react-select';
-//import './UserProfileForm.scss';
-//import { useStore } from '../../Store/store';
-import { getUserId } from '../../Api/agent';
+import './UserProfileForm.scss'; // Assuming the styles are in this file
+import { useStore } from '../../Store/store';
+import { observer } from 'mobx-react';
 
-interface UserProfileFormProps {
-    regions: { value: number; label: string }[];
-    onSubmit: (formData: UserProfileDto) => void;
+interface Props{
+    onSubmit: (any :any) => void;
 }
-
-export interface UserProfileDto {   
-    userTypeId : number; 
+export interface UserProfileDto {
     email: string;
     region: number | null;
     password: string;
@@ -21,15 +18,11 @@ export interface UserProfileDto {
     profilePicture: File | null;
 }
 
-const UserProfileForm: React.FC<UserProfileFormProps> = ({ regions, onSubmit }) => {
-
-    // const {userStore}= useStore();
-    // const {user}= userStore;
-
-
-
+const UserProfileForm: React.FC<Props> = ({onSubmit}) => {
+    const {commonStore,userStore} = useStore();
+    const { regions ,loadRegions} = commonStore;
+    const { UpdateUser } = userStore;
     const [formData, setFormData] = useState<UserProfileDto>({
-        userTypeId: Number(getUserId()),
         email: '',
         region: null,
         password: '',
@@ -56,7 +49,7 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ regions, onSubmit }) 
         setFormData((prevData) => ({ ...prevData, region: selectedOption ? selectedOption.value : null }));
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!formData.email || !formData.password || !formData.phoneNumber) {
             alert('Please fill in all required fields.');
             return;
@@ -65,12 +58,20 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ regions, onSubmit }) 
             alert('New password and verification do not match.');
             return;
         }
-        onSubmit(formData);
+        await UpdateUser(formData)
+        onSubmit(null)
+
     };
 
+
+
+    useEffect(() => {
+        loadRegions()
+      }, [commonStore]);
+
     return (
-        <div className="user-profile-form">
-            <h1>Update Profile</h1>
+        <div className="create-bid-form">
+            <h3>Update Profile</h3>
             <div className="form-fields">
                 <MDBInput
                     name="email"
@@ -126,11 +127,13 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ regions, onSubmit }) 
                     className="mb-3"
                 />
             </div>
-            <MDBBtn color="primary" onClick={handleSubmit} className="mb-3">
-                Submit
-            </MDBBtn>
+            <div className="actions">
+                <MDBBtn color="primary" onClick={handleSubmit} className="btn btn-primary">
+                    Submit
+                </MDBBtn>
+            </div>
         </div>
     );
 };
 
-export default UserProfileForm;
+export default observer(UserProfileForm);

@@ -42,24 +42,24 @@ const LastChats = observer(() => {
   };
 
 
-  const handleMessageReceived = async () => {
-    if(!isModalVisible)
-    {
-      loadChats();
-    }
-  };
+  // const handleMessageReceived = async () => {
+  //   if(!isModalVisible)
+  //   {
+  //     loadChats();
+  //   }
+  // };
 
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    signalRService.onMessageReceived(handleMessageReceived);
+  //   //signalRService.onMessageReceived(handleMessageReceived);
 
 
-    return () => {
-      signalRService.offMessageReceived();
-    };
-  }, []);
+  //   return () => {
+  //     //signalRService.offMessageReceived();
+  //   };
+  // }, []);
 
   return (
     <div className="recent-chats-list">

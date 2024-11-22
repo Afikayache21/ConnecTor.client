@@ -26,7 +26,7 @@ const Profile: React.FC = () => {
   const { selectedChat, loadChat } = chatsStore;
   const { user, setUser } = userStore;
   const { bidsSortedByProposalDate, loadBids, setSelectedBid, selectedBid } = bidsStore;
-  const {regions} = commonStore
+
 
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [isProjectModalVisible, setIsProjectModalVisible] = useState<boolean>(false);
@@ -237,23 +237,8 @@ const Profile: React.FC = () => {
       </MDBCol>
 
 
-      <ModalBox
-        BackroundColor="white"
-        isVisible={isModalVisible}
-        onClose={toggleModal}
-      >
-        {/* <div className="update-user-form">
-          <input placeholder="Email" type="text" />
-          <input placeholder="Region" type="text" />
-          <input placeholder="First Name" type="text" />
-          <input placeholder="Last Name" type="text" />
-          <input placeholder="Password" type="password" />
-          <input placeholder="Confirm Password" type="password" />
-          <input placeholder="Phone Number" type="text" />
-          <input placeholder="Profile Picture" type="file" />
-          <button>Submit</button>
-        </div> */}
-        <UserProfileForm regions={regions} onSubmit={()=>{}}/>
+      <ModalBox BackroundColor="white" isVisible={isModalVisible} onClose={toggleModal}>
+        <UserProfileForm onSubmit={()=>{toggleModal()}}/>
       </ModalBox>
 
 

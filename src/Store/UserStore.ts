@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent, { getUserId } from "../Api/agent";
 import { Project } from "../services/ProjectService";
+import { UserProfileDto } from "../components/modals/UserProfileForm";
 
 interface IKeyValue {
   value: number;
@@ -35,6 +36,42 @@ export default class UserStore {
     this.setUser = this.setUser.bind(this);
 
   }
+
+
+  async UpdateUser(user: UserProfileDto) {
+    debugger
+    //this.loading = true;
+   // this.error = null;
+
+    try {
+        // Transform the profile picture to a format suitable for API submission
+        const formData = new FormData();
+        formData.append('Email', user.email);
+        formData.append('UserPassword', user.password);
+        formData.append('NewPassword', user.newPassword);
+        formData.append('Telephone', user.phoneNumber);
+        formData.append('RegionID', user.region?.toString() || '1'); 
+        if (user.profilePicture) {
+            formData.append('UserImage', user.profilePicture);
+        }
+
+        // Call the API with the transformed data
+         await agent.Users.update(formData);
+
+        runInAction(() => {
+           this.setUser();
+            this.loading = false;
+        });
+    } catch (error) {
+        runInAction(() => {
+            this.error ='An unexpected error occurred';
+            this.loading = false;
+        });
+        console.error('Failed to update user profile:', error);
+    }
+}
+
+
 
   // Fetch and set user details
   async setUser() {

@@ -49,7 +49,7 @@ const App = observer(() => {
     const connect = () => {
       signalRService.startConnection();
       signalRService.onMessageReceived(handleMessageReceived);
-      signalRService.onNotificationReceived(handleNotificationReceived);
+      //signalRService.onNotificationReceived(handleNotificationReceived);
 
     }
 
@@ -57,7 +57,7 @@ const App = observer(() => {
     // Cleanup when the component unmounts
     return () => {
       signalRService.offMessageReceived();
-      signalRService.offNotificationReceived();
+      //signalRService.offNotificationReceived();
       signalRService.stopConnection();
     };
   }, []);
