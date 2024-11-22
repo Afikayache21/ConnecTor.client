@@ -68,6 +68,7 @@ import ModalBox from '../../components/modals/ModalBox';
 import BidDetails from '../../components/modals/childrens/BidDetails';
 import ChatWindow from '../../components/topBox/lastChats/ChatWindow';
 import { BidDto } from '../../Store/bidsStore';
+import Box from '../../components/topBox/Box';
 
 const BidsPage = () => {
   const { bidsStore, chatsStore } = useStore();
@@ -104,6 +105,11 @@ const BidsPage = () => {
   if (error) return <p>{error}</p>;
 
   return (
+
+    <Box
+     title={'Bids Page'}
+    className='all-projects-grid-layout'
+    >
     <div className="bids-page">
       <ul className="bids-list">
         {bidsSortedByProposalDate.length > 0 ? (
@@ -139,6 +145,7 @@ const BidsPage = () => {
         {selectedChat && isChatModalVisible && <ChatWindow Chat={selectedChat} />}
       </ModalBox>
     </div>
+    </Box>
   );
 };
 

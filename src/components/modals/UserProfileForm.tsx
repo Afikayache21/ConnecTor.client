@@ -58,7 +58,8 @@ const UserProfileForm: React.FC<Props> = ({onSubmit}) => {
             alert('New password and verification do not match.');
             return;
         }
-        await UpdateUser(formData)
+       const res = await UpdateUser(formData)
+       alert(res)
         onSubmit(null)
 
     };

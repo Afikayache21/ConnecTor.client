@@ -21,6 +21,7 @@ import signalRService from './services/signalRService';
 import { getUserId } from './Api/agent';
 import ViewProfile from './pages/profile/ViewProfile';
 import AllProjectsPage from './pages/projects/AllProjectsPage';
+import ChatsPage from './pages/chats/ChatsPage';
 
 
 const App = observer(() => {
@@ -109,7 +110,7 @@ const App = observer(() => {
           <Route path="profile" element={<Profile />} />
           <Route path="view" element={<ViewProfile />} />
           <Route path="bids" element={<BidsPage />} />
-          <Route path="chats" element={<LastChats />} />
+          <Route path="chats" element={<ChatsPage />} />
 
         </Route>
       </Route>

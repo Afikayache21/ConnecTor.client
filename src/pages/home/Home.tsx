@@ -32,15 +32,7 @@ const Home = () => {
           <div className="box">
             <Box
               title={'Last Chats'}
-              className='chats-grid-layout'
-              // leftIcon='./search.svg'
-              // rightIcon='./order.svg'
-              // leftIconTooltip='Search Chat'
-              // rightIconTooltip='Order Projects'
-              // leftIconAction={() => console.log('Left icon action triggered')}
-              // leftIconChildren={<SearchChildren onSearch={(query) => console.log(query)} />}
-              // rightIconAction={() => console.log('Right icon action triggered')}
-              // rightIconChildren={<div>Right Icon Modal Content</div>}
+              className='chats-grid-layout'            
             >
               <div className="box-content">
                 <LastChats />
@@ -51,12 +43,7 @@ const Home = () => {
           <div className="box">
             <Box
               title={'My Projects'}
-              className='Projects-grid-layout'
-              // leftIcon='./search.svg'
-              // leftIconTooltip='Search Project'
-              // rightIcon='./order.svg'
-              // rightIconAction={() => console.log('Right icon action triggered')}
-              // rightIconChildren={<div>Right Icon Modal Content</div>}
+              className='Projects-grid-layout'          
             >
               <div className="box-content">
                 <MyProjects />
@@ -67,43 +54,14 @@ const Home = () => {
           <div className="box">
             <Box
               title={'Last Bids'}
-              className='Projects-grid-layout'
-              // leftIcon='./search.svg'
-              // leftIconTooltip='Search Project'
-              // rightIcon='./order.svg'
+              className='Projects-grid-layout'             
             >
               <div className="box-content">
               <MyBids/>
               </div>
             </Box>
           </div>
-
-          <div className="box">
-            <Box
-              title={'Statistics'}
-              className='Projects-grid-layout'
-            >
-              <div className="box-content">
-                <Chart />
-              </div>
-            </Box>
-          </div>
-
-          <div className="box">
-            <Box title={'Recent Activity'}>
-              <div className="box-content">
-                {/* Insert box content here */}
-              </div>
-            </Box>
-          </div>
-
-          <div className="box">
-            <Box title={'Notifications'}>
-              <div className="box-content">
-                <LastChats />
-              </div>
-            </Box>
-          </div>
+         
         </Slider>
       </div>
     );

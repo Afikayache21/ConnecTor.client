@@ -35,11 +35,9 @@ function Box({
   rightIconChildren,
 }: BoxProps) {
 
-  // State for modal visibility
   const [isLeftModalVisible, setLeftModalVisible] = useState(false);
   const [isRightModalVisible, setRightModalVisible] = useState(false);
 
-  // Toggle functions
   const toggleLeftModal = () => setLeftModalVisible(!isLeftModalVisible);
   const toggleRightModal = () => setRightModalVisible(!isRightModalVisible);
 

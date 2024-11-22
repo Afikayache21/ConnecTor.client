@@ -56,18 +56,20 @@ export default class UserStore {
         }
 
         // Call the API with the transformed data
-         await agent.Users.update(formData);
+         const res = await agent.Users.update(formData);
 
         runInAction(() => {
            this.setUser();
             this.loading = false;
         });
+        return res;
     } catch (error) {
         runInAction(() => {
             this.error ='An unexpected error occurred';
             this.loading = false;
         });
         console.error('Failed to update user profile:', error);
+        return error
     }
 }
 
